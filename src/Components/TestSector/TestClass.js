@@ -15,7 +15,7 @@ class TextClass extends React.Component {
   };
 
   sanitizeConf = {
-    allowedTags: ["b", "i", "em", "strong", "a", "p", "h1", "u"],
+    allowedTags: ["b", "i", "em", "strong", "a", "p", "h4", "h5", "h6", "u"],
     allowedAttributes: { a: ["href"] },
   };
 

@@ -116,3 +116,14 @@
     border-bottom: 4px solid #000;
 
 }
+.pictograms-cancel-icon{
+    visibility: hidden;
+     width: 20px;
+     cursor: pointer;
+ }
+ .pictograms-img:hover .pictograms-cancel-icon{
+    visibility: visible;
+ }
+ .pictograms-img{
+     cursor: all-scroll;
+ }
