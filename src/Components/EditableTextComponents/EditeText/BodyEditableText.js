@@ -110,7 +110,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
 
   return (
     <div
-      style={{ textAlign: `${disEnableHeaderText}` }}
+      // style={{ textAlign: `${disEnableHeaderText}` }}
       className={classes.text}
     >
       <TextControls

@@ -40,7 +40,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     fontWeight: textData.fontWeight || "normal",
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
-    textAlign: textData.textData || "center",
+    // textAlign: textData.textData || "center",
     text: textData.text || `Default Text one`,
     color: textData.color || "black",
   });
