@@ -15,13 +15,13 @@
 }
 .text-header-title:hover{
     background: #0DA0CF;
-}
-.text-header-title h2, h4, p{
-    margin-bottom: 0 !important;
-}
-.text-header-title button:hover{
     color: #fff;
 }
+.text-header-title h2,h3, h4, p{
+    margin-bottom: 0 !important;
+   
+}
+
 
 .text-h4{
     height: 84px;

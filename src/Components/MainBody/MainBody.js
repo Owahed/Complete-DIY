@@ -1,9 +1,39 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Draggable from "react-draggable";
 import TestClass from "../TestSector/TestClass";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import "./MainBody.css";
+import HeadingText from "../EditableText/HeadingText";
+import SubHeading from "../EditableText/SubHeadingText";
+import BodyText from "../EditableText/BodyText";
+import styled from "styled-components";
+import { Rnd } from "react-rnd";
+import HeaderEditableText from "../EditableTextComponents/EditeText/HeaderEditableText";
+import SubHeaderEditableText from "../EditableTextComponents/EditeText/SubHeaderEditableText";
+import BodyEditableText from "../EditableTextComponents/EditeText/BodyEditableText";
+
+const StyledRnd = styled(Rnd)`
+  .sc-bdfBQB {
+    width: 120px !important;
+    height: 200px !important;
+  }
+  &:hover {
+    border: 1px solid blue;
+  }
+  &:hover .show {
+    visibility: visible;
+  }
+`;
+
+const Container = styled.div`
+  width: 200px;
+  height: 300px;
+  // border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const MainBody = ({
   selectedPictogramsImg,
@@ -18,6 +48,12 @@ const MainBody = ({
   isEditable,
   handleOnDoubleDraggable,
   domNode,
+  headerText,
+  disEnableHeaderText,
+  subHeaderText,
+  disEnableSubHeaderText,
+  disEnableBodyText,
+  bodyText,
 }) => {
   let { id, item } = selectedImg;
   const idImage = id;
@@ -32,6 +68,50 @@ const MainBody = ({
       pdf.save("download.pdf");
     });
   };
+
+  // --------------------img-------------
+  const [position, setPosition] = useState({
+    x: 0,
+    y: 0,
+    width: 200,
+    height: 200,
+  });
+
+  function onResize(event, direction, ref, delta) {
+    const { width, height } = ref.style;
+
+    setPosition((prevPosition) => ({
+      ...prevPosition,
+      width,
+      height,
+    }));
+  }
+
+  function onDragStop(e, d) {
+    const { x, y } = d;
+    setPosition((prevPosition) => ({
+      ...prevPosition,
+      x,
+      y,
+    }));
+  }
+
+  const Image = styled.div`
+    width: 100%;
+    height: 100%;
+
+    background-image: url(${selectedPictogramsImg.img});
+    background-size: 100% 100%;
+  `;
+  // --------------crose-----------
+  const [expanded, setExpanded] = useState(true);
+
+  // editAbleText------
+  let texts = { id: "unique-1" };
+  let textsTwo = { id: "unique-2" };
+  let textsThree = { id: "unique-3" };
+  const textRef = React.useRef();
+
   return (
     <div>
       <div className="template">
@@ -120,7 +200,7 @@ const MainBody = ({
               >
                 <div className="second-templates-body">
                   <div>
-                    <Draggable>
+                    {/* <Draggable>
                       <div className="d-flex pictograms-img">
                         <img
                           width="90px"
@@ -149,51 +229,96 @@ const MainBody = ({
                           </div>
                         )}
                       </div>
-                    </Draggable>
+                    </Draggable> */}
+                    <div>
+                      <Container>
+                        {expanded && (
+                          <StyledRnd
+                            className="d-flex"
+                            default={position}
+                            onResize={onResize}
+                            onDragStop={onDragStop}
+                            bounds="parent"
+                            lockAspectRatio={true}
+                          >
+                            <Image>{JSON.stringify}</Image>
+                            <div>
+                              {selectedPictogramsImg.img == null || (
+                                <div
+                                  className="pictograms-cancel-icon show"
+                                  onClick={pictogramImgDataCancel}
+                                  // onClick={() => setExpanded(!expanded)}
+                                  aria-expanded={expanded}
+                                >
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                  >
+                                    <path
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M6 18L18 6M6 6l12 12"
+                                    />
+                                  </svg>
+                                </div>
+                              )}
+                            </div>
+                          </StyledRnd>
+                        )}
+                      </Container>
+                    </div>
                     <Draggable>
                       <img width="100px" src={imgState.file} alt="" />
                     </Draggable>
                   </div>
                 </div>
-                <div>
-                  <div className="templates-footer">
-                    <div
-                      // onMouseLeave={handleOnBlurDraggable}
-                      onDoubleClick={handleOnDoubleDraggable}
-                      raf={domNode}
-                    >
-                      {isEditable == true && (
-                        <Draggable>
-                          <div>
-                            <TestClass
-                              fontSizeName={fontSizeName}
-                              bgColor={bgColor}
-                              fontName={fontName}
-                              currentRadioFormatValue={currentRadioFormatValue}
-                              textColor={textColor}
-                            />
-                          </div>
-                          {/* <h6>WRITE PENALTY PROVISIONS</h6> */}
-                        </Draggable>
-                      )}
 
-                      {isEditable == false && (
-                        <div>
-                          <TestClass
-                            fontSizeName={fontSizeName}
-                            bgColor={bgColor}
-                            fontName={fontName}
-                            currentRadioFormatValue={currentRadioFormatValue}
-                            textColor={textColor}
-                          />
-                          {/* <h6>WRITE PENALTY PROVISIONS</h6> */}
-                        </div>
-                      )}
+                <div className="templates-footer">
+                  {headerText && (
+                    <div>
+                      <HeaderEditableText
+                        textData={texts}
+                        onUpdate={() => {}}
+                        ref={textRef}
+                        disEnableHeaderText={disEnableHeaderText}
+                      />
                     </div>
-                    <Draggable>
-                      <h6>WRITE PENALTY PROVISIONS</h6>
-                    </Draggable>
-                  </div>
+                  )}
+                  {subHeaderText && (
+                    <div style={{ marginTop: "100px" }}>
+                      <SubHeaderEditableText
+                        textData={textsTwo}
+                        onUpdate={() => {}}
+                        ref={textRef}
+                        disEnableHeaderText={disEnableSubHeaderText}
+                        currentRadioFormatValue={currentRadioFormatValue}
+                      />
+                    </div>
+                  )}
+                  {bodyText && (
+                    <div style={{ marginTop: "170px" }}>
+                      <BodyEditableText
+                        textData={textsThree}
+                        onUpdate={() => {}}
+                        ref={textRef}
+                        disEnableHeaderText={disEnableBodyText}
+                      />
+                    </div>
+                  )}
+
+                  {/* <div>
+                    <TestClass
+                      fontSizeName={fontSizeName}
+                      bgColor={bgColor}
+                      fontName={fontName}
+                      currentRadioFormatValue={currentRadioFormatValue}
+                      textColor={textColor}
+                    />
+                  </div> */}
                 </div>
               </div>
             </div>

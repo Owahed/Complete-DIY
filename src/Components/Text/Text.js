@@ -8,6 +8,9 @@ const Text = ({
   fontSizeChange,
   handleRadioFormatChange,
   setTextColor,
+  enableHeaderText,
+  enableSubHeaderText,
+  enableBodyText,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
   return (
@@ -16,14 +19,29 @@ const Text = ({
         <h4 className="pictograms-h4">Text</h4>
       </div>
       <div className="text-container-body">
-        <div className="text-header-title text-h4">
-          <EditButton cmd="formatBlock" arg="h4" name="Add a Heading" />
+        <div className=" ">
+          <button
+            className="btn text-header-title text-h4"
+            onClick={enableHeaderText}
+          >
+            <h2> Add a Heading</h2>
+          </button>
         </div>
-        <div className="text-header-title text-h5">
-          <EditButton cmd="formatBlock" arg="h5" name="Add a Sub-Heading" />
+        <div className="">
+          <button
+            className="btn text-header-title text-h5"
+            onClick={enableSubHeaderText}
+          >
+            <h5> Add a Sub-Heading</h5>
+          </button>
         </div>
-        <div className="text-header-title text-h6">
-          <EditButton cmd="formatBlock" arg="h6" name="Add Body Text" />
+        <div className="">
+          <button
+            className="btn text-header-title text-h6"
+            onClick={enableBodyText}
+          >
+            <p> Add Body Text</p>
+          </button>
         </div>
       </div>
       <div className="my-3 d-flex justify-content-center">
@@ -81,11 +99,13 @@ const Text = ({
             aria-label="Basic checkbox radio toggle button group"
           >
             <input
+              defaultChecked
               type="radio"
               class="btn-check"
               name="btnradio"
               id="btnradio1"
               autocomplete="off"
+              value="start"
               onChange={handleRadioFormatChange}
             />
             <label class="btn btn-outline-primary" for="btnradio1">
@@ -112,6 +132,7 @@ const Text = ({
               name="btnradio"
               id="btnradio2"
               autocomplete="off"
+              value="center"
               onChange={handleRadioFormatChange}
             />
             <label class="btn btn-outline-primary" for="btnradio2">
@@ -138,6 +159,7 @@ const Text = ({
               name="btnradio"
               id="btnradio3"
               autocomplete="off"
+              value="end"
               onChange={handleRadioFormatChange}
             />
             <label class="btn btn-outline-primary" for="btnradio3">

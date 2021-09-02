@@ -78,7 +78,7 @@
 }
 .templates-footer{
     height: 106px;
-    border-radius: 0 0px 8px 8px;
+    width: 250px;
 }
 .templates-footer h4{
     line-height: 30px;
@@ -126,4 +126,8 @@
  }
  .pictograms-img{
      cursor: all-scroll;
+ }
+ .editable-text-cancel{
+     position: absolute;
+     margin: 0px 0px 0px 300px;
  }

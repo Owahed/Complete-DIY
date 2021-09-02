@@ -51,7 +51,6 @@ const DiyHomeOne = () => {
     img: img00101,
   });
 
-  console.log(showPanel);
   const containerPictogramsLeft =
     showPanel ||
     showToggleTemplates ||
@@ -129,6 +128,31 @@ const DiyHomeOne = () => {
     );
   }
 
+  //-------------------- Headers----------------
+  const [headerText, setHeaderText] = useState(false);
+  const enableHeaderText = () => {
+    setHeaderText(true);
+  };
+  const disEnableHeaderText = () => {
+    setHeaderText(false);
+  };
+  // ------
+  const [subHeaderText, setSubHeaderText] = useState(false);
+  const enableSubHeaderText = () => {
+    setSubHeaderText(true);
+  };
+  const disEnableSubHeaderText = () => {
+    setSubHeaderText(false);
+  };
+  // -------
+  const [bodyText, setBodyText] = useState(false);
+  const enableBodyText = () => {
+    setBodyText(true);
+  };
+  const disEnableBodyText = () => {
+    setBodyText(false);
+  };
+
   // ----------------font text---------------------
   const [fontName, setFontName] = useState("Open Sans");
   const fontChange = (e) => {
@@ -140,23 +164,22 @@ const DiyHomeOne = () => {
     setFontSizeName(e.target.value);
   };
   // ----------------font size text---------------------
-  const [currentRadioFormatValue, setCurrentRadioFormatValue] = useState();
+  const [currentRadioFormatValue, setCurrentRadioFormatValue] = useState("");
 
   const handleRadioFormatChange = (e) => {
     setCurrentRadioFormatValue(e.target.value);
   };
-  console.log(currentRadioFormatValue);
 
   // color text
   const [textColor, setTextColor] = useState("#000");
-  console.log(textColor);
+
   // color bg
   const [color, setColor] = useState("#fff");
 
   // -------------------draguble click-------------------
 
   const [isEditable, setIsEditable] = useState(true);
-  console.log(isEditable);
+
   const handleOnDoubleDraggable = () => {
     setIsEditable(false);
     console.log("Double");
@@ -186,6 +209,9 @@ const DiyHomeOne = () => {
             {showPanel && <Pictograms pictogramImgData={pictogramImgData} />}
             {showTextPanel && (
               <Text
+                enableHeaderText={enableHeaderText}
+                enableSubHeaderText={enableSubHeaderText}
+                enableBodyText={enableBodyText}
                 fontSizeChange={fontSizeChange}
                 fontChange={fontChange}
                 EditButton={EditButton}
@@ -230,6 +256,12 @@ const DiyHomeOne = () => {
                 textColor={textColor}
                 isEditable={isEditable}
                 handleOnDoubleDraggable={handleOnDoubleDraggable}
+                headerText={headerText}
+                disEnableHeaderText={disEnableHeaderText}
+                subHeaderText={subHeaderText}
+                disEnableSubHeaderText={disEnableSubHeaderText}
+                bodyText={bodyText}
+                disEnableBodyText={disEnableBodyText}
                 // domNode={domNode}
               />
               {/* <Test EditButton={EditButton} /> */}

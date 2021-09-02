@@ -2,11 +2,11 @@ import React from "react";
 import ContentEditable from "react-contenteditable";
 import sanitizeHtml from "sanitize-html";
 
-class TextClass extends React.Component {
+class BodyText extends React.Component {
   constructor() {
     super();
     this.state = {
-      html: `<p>Hello World !</p><p>Paragraph 2</p>`,
+      html: `<p>Hello World </p>`,
       editable: true,
     };
   }
@@ -15,7 +15,19 @@ class TextClass extends React.Component {
   };
 
   sanitizeConf = {
-    allowedTags: ["b", "i", "em", "strong", "a", "p", "h4", "h5", "h6", "u"],
+    allowedTags: [
+      "b",
+      "i",
+      "em",
+      "strong",
+      "a",
+      "p",
+      "h4",
+      "h3",
+      "h5",
+      "h6",
+      "u",
+    ],
     allowedAttributes: { a: ["href"] },
   };
 
@@ -47,4 +59,4 @@ class TextClass extends React.Component {
   }
 }
 
-export default TextClass;
+export default BodyText;
