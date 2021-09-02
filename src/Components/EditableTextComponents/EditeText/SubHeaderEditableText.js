@@ -3,7 +3,7 @@ import BaseText from "../basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
-import { useEffect } from "react";
+
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
 };
@@ -18,8 +18,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 });
 
 const SubHeaderEditableText = React.forwardRef((props, ref) => {
-  const { textData, onUpdate, disEnableHeaderText, currentRadioFormatValue } =
-    props;
+  const { textData, onUpdate, disEnableHeaderText } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
       "Text id is required. Please add a Text id i.e { id: unique-id, ...}"
@@ -43,7 +42,7 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
     display: textData.display || "flex",
-    textAlign: textData.textData || `end`,
+    // textAlign: textData.textData || `${currentRadioFormatValue}`,
     text: textData.text || `Default Sub Header`,
     color: textData.color || "black",
   });
@@ -154,7 +153,6 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
         textData={theTextData}
         edit={edit}
         disEnableHeaderText={disEnableHeaderText}
-        currentRadioFormatValue={currentRadioFormatValue}
       />
       <Border
         edit={edit}

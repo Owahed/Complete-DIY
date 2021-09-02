@@ -279,7 +279,7 @@ const MainBody = ({
 
                 <div className="templates-footer">
                   {headerText && (
-                    <div>
+                    <div style={{ textAlign: `${currentRadioFormatValue}` }}>
                       <HeaderEditableText
                         textData={texts}
                         onUpdate={() => {}}
@@ -289,18 +289,27 @@ const MainBody = ({
                     </div>
                   )}
                   {subHeaderText && (
-                    <div style={{ marginTop: "100px" }}>
+                    <div
+                      style={{
+                        marginTop: "100px",
+                        textAlign: `${currentRadioFormatValue}`,
+                      }}
+                    >
                       <SubHeaderEditableText
                         textData={textsTwo}
                         onUpdate={() => {}}
                         ref={textRef}
                         disEnableHeaderText={disEnableSubHeaderText}
-                        currentRadioFormatValue={currentRadioFormatValue}
                       />
                     </div>
                   )}
                   {bodyText && (
-                    <div style={{ marginTop: "170px" }}>
+                    <div
+                      style={{
+                        marginTop: "170px",
+                        textAlign: `${currentRadioFormatValue}`,
+                      }}
+                    >
                       <BodyEditableText
                         textData={textsThree}
                         onUpdate={() => {}}

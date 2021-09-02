@@ -40,7 +40,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     fontWeight: textData.fontWeight || "normal",
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
-    textAlign: textData.textData || "center",
+    // textAlign: textData.textData || "center",
     text: textData.text || `Default Text one`,
     color: textData.color || "black",
   });
@@ -109,7 +109,10 @@ const BodyEditableText = React.forwardRef((props, ref) => {
   });
 
   return (
-    <div className={classes.text}>
+    <div
+      style={{ textAlign: `${disEnableHeaderText}` }}
+      className={classes.text}
+    >
       <TextControls
         onBoldClick={() => {
           setTextData({

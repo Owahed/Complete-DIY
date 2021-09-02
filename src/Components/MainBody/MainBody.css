@@ -120,6 +120,7 @@
     visibility: hidden;
      width: 20px;
      cursor: pointer;
+     position: absolute;
  }
  .pictograms-img:hover .pictograms-cancel-icon{
     visibility: visible;

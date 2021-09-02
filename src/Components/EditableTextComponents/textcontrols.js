@@ -21,9 +21,8 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 });
 
 const TextControls = (props) => {
-  const { textData, edit, disEnableHeaderText, currentRadioFormatValue } =
-    props;
-  console.log(currentRadioFormatValue);
+  const { textData, edit, disEnableHeaderText } = props;
+
   const classes = useStyles({ textData });
 
   const textCancel = {
@@ -35,8 +34,6 @@ const TextControls = (props) => {
     <div
       style={{
         backgroundColor: "#f6f6f6",
-        // display: "flex",
-        textAlign: `${currentRadioFormatValue}`,
       }}
       className={clsx(
         classes.textControls,
