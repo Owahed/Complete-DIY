@@ -103,6 +103,21 @@ const MainBody = ({
     background-image: url(${selectedPictogramsImg.img});
     background-size: 100% 100%;
   `;
+  const ImageOne = styled.div`
+    width: 100%;
+    height: 100%;
+
+    background-image: url(${imgState.file});
+    background-size: 100% 100%;
+  `;
+
+  //------------cancelImg-------------
+  const [cancelImage, setCancelImage] = useState(true);
+
+  const CancelPictogramImage = () => {
+    setCancelImage(false);
+  };
+
   // --------------crose-----------
   const [expanded, setExpanded] = useState(true);
 
@@ -200,54 +215,25 @@ const MainBody = ({
               >
                 <div className="second-templates-body">
                   <div>
-                    {/* <Draggable>
-                      <div className="d-flex pictograms-img">
-                        <img
-                          width="90px"
-                          src={selectedPictogramsImg.img}
-                          alt=""
-                        />
-                        {selectedPictogramsImg.img == null || (
-                          <div
-                            className="pictograms-cancel-icon"
-                            onClick={pictogramImgDataCancel}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="h-6 w-6"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
+                    {cancelImage && (
+                      <div>
+                        <Container>
+                          {expanded && (
+                            <StyledRnd
+                              className="d-flex"
+                              default={position}
+                              onResize={onResize}
+                              onDragStop={onDragStop}
+                              bounds="parent"
+                              lockAspectRatio={true}
                             >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"
-                              />
-                            </svg>
-                          </div>
-                        )}
-                      </div>
-                    </Draggable> */}
-                    <div>
-                      <Container>
-                        {expanded && (
-                          <StyledRnd
-                            className="d-flex"
-                            default={position}
-                            onResize={onResize}
-                            onDragStop={onDragStop}
-                            bounds="parent"
-                            lockAspectRatio={true}
-                          >
-                            <Image>{JSON.stringify}</Image>
-                            <div>
-                              {selectedPictogramsImg.img == null || (
+                              <Image>{JSON.stringify}</Image>
+                              <div>
+                                {/* {selectedPictogramsImg.img == null || ( */}
                                 <div
                                   className="pictograms-cancel-icon show"
-                                  onClick={pictogramImgDataCancel}
-                                  // onClick={() => setExpanded(!expanded)}
+                                  // onClick={pictogramImgDataCancel}
+                                  onClick={CancelPictogramImage}
                                   aria-expanded={expanded}
                                 >
                                   <svg
@@ -265,15 +251,56 @@ const MainBody = ({
                                     />
                                   </svg>
                                 </div>
-                              )}
-                            </div>
-                          </StyledRnd>
-                        )}
-                      </Container>
-                    </div>
-                    <Draggable>
-                      <img width="100px" src={imgState.file} alt="" />
-                    </Draggable>
+                                {/* )} */}
+                              </div>
+                            </StyledRnd>
+                          )}
+                        </Container>
+                      </div>
+                    )}
+                    {/* ---------- */}
+                    {imgState.file == null || (
+                      <div>
+                        <Container>
+                          {expanded && (
+                            <StyledRnd
+                              className="d-flex"
+                              default={position}
+                              onResize={onResize}
+                              onDragStop={onDragStop}
+                              bounds="parent"
+                              lockAspectRatio={true}
+                            >
+                              <ImageOne>{JSON.stringify}</ImageOne>
+                              <div>
+                                {imgState.file == null || (
+                                  <div
+                                    className="pictograms-cancel-icon show"
+                                    onClick={pictogramImgDataCancel}
+                                    aria-expanded={expanded}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="h-6 w-6"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                      />
+                                    </svg>
+                                  </div>
+                                )}
+                              </div>
+                            </StyledRnd>
+                          )}
+                        </Container>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -417,52 +444,146 @@ const MainBody = ({
                     className="templates-body"
                   >
                     <div className="pictograms-img">
-                      <Draggable>
-                        {/* <img src={selectedPictogramsImg.img} alt="" /> */}
-                        <div className="d-flex pictograms-img">
-                          <img
-                            width="90px"
-                            src={selectedPictogramsImg.img}
-                            alt=""
-                          />
-                          {selectedPictogramsImg.img == null || (
-                            <div
-                              className="pictograms-cancel-icon"
-                              onClick={pictogramImgDataCancel}
-                            >
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-6 w-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
-                            </div>
-                          )}
-                        </div>
-                      </Draggable>
-                      <Draggable>
-                        <img width="100px" src={imgState.file} alt="" />
-                      </Draggable>
+                      <div>
+                        {cancelImage && (
+                          <div>
+                            <Container>
+                              {expanded && (
+                                <StyledRnd
+                                  className="d-flex"
+                                  default={position}
+                                  onResize={onResize}
+                                  onDragStop={onDragStop}
+                                  bounds="parent"
+                                  lockAspectRatio={true}
+                                >
+                                  <Image>{JSON.stringify}</Image>
+                                  <div>
+                                    {/* {selectedPictogramsImg.img == null || ( */}
+                                    <div
+                                      className="pictograms-cancel-icon show"
+                                      // onClick={pictogramImgDataCancel}
+                                      onClick={CancelPictogramImage}
+                                      aria-expanded={expanded}
+                                    >
+                                      <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        class="h-6 w-6"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="currentColor"
+                                      >
+                                        <path
+                                          stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M6 18L18 6M6 6l12 12"
+                                        />
+                                      </svg>
+                                    </div>
+                                    {/* )} */}
+                                  </div>
+                                </StyledRnd>
+                              )}
+                            </Container>
+                          </div>
+                        )}
+                        {/* ---------- */}
+                        {imgState.file == null || (
+                          <div>
+                            <Container>
+                              {expanded && (
+                                <StyledRnd
+                                  className="d-flex"
+                                  default={position}
+                                  onResize={onResize}
+                                  onDragStop={onDragStop}
+                                  bounds="parent"
+                                  lockAspectRatio={true}
+                                >
+                                  <ImageOne>{JSON.stringify}</ImageOne>
+                                  <div>
+                                    {imgState.file == null || (
+                                      <div
+                                        className="pictograms-cancel-icon show"
+                                        onClick={pictogramImgDataCancel}
+                                        aria-expanded={expanded}
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          class="h-6 w-6"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M6 18L18 6M6 6l12 12"
+                                          />
+                                        </svg>
+                                      </div>
+                                    )}
+                                  </div>
+                                </StyledRnd>
+                              )}
+                            </Container>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div
                     style={{ backgroundColor: bgColor }}
                     className="templates-footer"
                   >
-                    <Draggable>
+                    {headerText && (
+                      <div style={{ textAlign: `${currentRadioFormatValue}` }}>
+                        <HeaderEditableText
+                          textData={texts}
+                          onUpdate={() => {}}
+                          ref={textRef}
+                          disEnableHeaderText={disEnableHeaderText}
+                        />
+                      </div>
+                    )}
+                    {subHeaderText && (
+                      <div
+                        style={{
+                          // marginTop: "10px",
+                          textAlign: `${currentRadioFormatValue}`,
+                        }}
+                      >
+                        <SubHeaderEditableText
+                          textData={textsTwo}
+                          onUpdate={() => {}}
+                          ref={textRef}
+                          disEnableHeaderText={disEnableSubHeaderText}
+                        />
+                      </div>
+                    )}
+                    {bodyText && (
+                      <div
+                        style={{
+                          // marginTop: "170px",
+                          textAlign: `${currentRadioFormatValue}`,
+                        }}
+                      >
+                        <BodyEditableText
+                          textData={textsThree}
+                          onUpdate={() => {}}
+                          ref={textRef}
+                          disEnableHeaderText={disEnableBodyText}
+                        />
+                      </div>
+                    )}
+                    {/* <Draggable>
                       <h5>WRITE CONSEQUENCES OF NOT FOLLOWING </h5>
                     </Draggable>
                     <Draggable>
                       <h6>WRITE PENALTY PROVISIONS</h6>
-                    </Draggable>
+                    </Draggable> */}
                   </div>
                 </div>
               </div>

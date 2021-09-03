@@ -1,6 +1,6 @@
 import React from "react";
 
-const Logo = () => {
+const Logo = ({ handleLogAndImgChange }) => {
   return (
     <div>
       <div className="mt-5 pb-2">
@@ -10,7 +10,12 @@ const Logo = () => {
         <div>
           <p className="mb-4 text-center">Upload your Brand Logo</p>
 
-          <input type="file" id="file" />
+          <input
+            accept="image/png, image/jpeg"
+            onChange={(event) => handleLogAndImgChange(event)}
+            type="file"
+            id="file"
+          />
           <label for="file">
             <svg
               xmlns="http://www.w3.org/2000/svg"

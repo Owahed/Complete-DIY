@@ -13,10 +13,11 @@
     font-family: monospace, monospace;
   }
   
-  button {
+  /* button {
     min-width: 70px;
     padding: 5px;
     margin: 5px;
+    position: absolute;
   }
-  
+   */
   

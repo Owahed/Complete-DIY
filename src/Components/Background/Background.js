@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CirclePicker, ChromePicker } from "react-color";
 import "./Background.css";
 
-const Background = ({ setColor }) => {
+const Background = ({ setColor, handleLogAndImgChange }) => {
   const [showColorPicker, setColorPicker] = useState(false);
   // console.log(color);
 
@@ -84,7 +84,12 @@ const Background = ({ setColor }) => {
             <div>
               <p className="mb-4 text-center">Upload your Brand Logo</p>
 
-              <input type="file" id="file" />
+              <input
+                accept="image/png, image/jpeg"
+                onChange={(event) => handleLogAndImgChange(event)}
+                type="file"
+                id="file"
+              />
               <label for="file">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

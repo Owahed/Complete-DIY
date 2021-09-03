@@ -110,7 +110,9 @@ const DiyHomeOne = () => {
     setImgState({
       file: URL.createObjectURL(event.target.files[0]),
     });
+    console.log(event);
   }
+  console.log(imgState);
 
   // --------------text
   function EditButton(props) {

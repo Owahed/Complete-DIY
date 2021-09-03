@@ -2,7 +2,7 @@ import React from "react";
 import "./Upload.css";
 import "../File.css";
 
-const Upload = () => {
+const Upload = ({ handleLogAndImgChange }) => {
   return (
     <div>
       <div className="mt-5 pb-2">
@@ -14,7 +14,12 @@ const Upload = () => {
             Upload your Pictures, <br /> Pictogram and Symbols
           </p>
 
-          <input type="file" id="file" />
+          <input
+            accept="image/png, image/jpeg"
+            onChange={(event) => handleLogAndImgChange(event)}
+            type="file"
+            id="file"
+          />
           <label for="file">
             <svg
               xmlns="http://www.w3.org/2000/svg"

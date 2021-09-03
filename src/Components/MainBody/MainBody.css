@@ -78,7 +78,8 @@
 }
 .templates-footer{
     height: 106px;
-    width: 250px;
+    width: 253px;
+    border-radius: 0px 0px 8px 8px;
 }
 .templates-footer h4{
     line-height: 30px;
