@@ -538,46 +538,50 @@ const MainBody = ({
                     style={{ backgroundColor: bgColor }}
                     className="templates-footer"
                   >
-                    {headerText && (
-                      <div style={{ textAlign: `${currentRadioFormatValue}` }}>
-                        <HeaderEditableText
-                          textData={texts}
-                          onUpdate={() => {}}
-                          ref={textRef}
-                          disEnableHeaderText={disEnableHeaderText}
-                        />
-                      </div>
-                    )}
-                    {subHeaderText && (
-                      <div
-                        style={{
-                          // marginTop: "10px",
-                          textAlign: `${currentRadioFormatValue}`,
-                        }}
-                      >
-                        <SubHeaderEditableText
-                          textData={textsTwo}
-                          onUpdate={() => {}}
-                          ref={textRef}
-                          disEnableHeaderText={disEnableSubHeaderText}
-                        />
-                      </div>
-                    )}
-                    {bodyText && (
-                      <div
-                        style={{
-                          // marginTop: "170px",
-                          textAlign: `${currentRadioFormatValue}`,
-                        }}
-                      >
-                        <BodyEditableText
-                          textData={textsThree}
-                          onUpdate={() => {}}
-                          ref={textRef}
-                          disEnableHeaderText={disEnableBodyText}
-                        />
-                      </div>
-                    )}
+                    <div>
+                      {headerText && (
+                        <div
+                          style={{ textAlign: `${currentRadioFormatValue}` }}
+                        >
+                          <HeaderEditableText
+                            textData={texts}
+                            onUpdate={() => {}}
+                            ref={textRef}
+                            disEnableHeaderText={disEnableHeaderText}
+                          />
+                        </div>
+                      )}
+                      {subHeaderText && (
+                        <div
+                          style={{
+                            paddingTop: "45px",
+                            textAlign: `${currentRadioFormatValue}`,
+                          }}
+                        >
+                          <SubHeaderEditableText
+                            textData={textsTwo}
+                            onUpdate={() => {}}
+                            ref={textRef}
+                            disEnableHeaderText={disEnableSubHeaderText}
+                          />
+                        </div>
+                      )}
+                      {bodyText && (
+                        <div
+                          style={{
+                            paddingTop: "30px",
+                            textAlign: `${currentRadioFormatValue}`,
+                          }}
+                        >
+                          <BodyEditableText
+                            textData={textsThree}
+                            onUpdate={() => {}}
+                            ref={textRef}
+                            disEnableHeaderText={disEnableBodyText}
+                          />
+                        </div>
+                      )}
+                    </div>
                     {/* <Draggable>
                       <h5>WRITE CONSEQUENCES OF NOT FOLLOWING </h5>
                     </Draggable>
