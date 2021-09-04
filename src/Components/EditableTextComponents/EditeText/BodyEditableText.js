@@ -41,7 +41,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
     // textAlign: textData.textData || "center",
-    text: textData.text || `Default Text one`,
+    text: textData.text || `Default Body Text one`,
     color: textData.color || "black",
   });
   const classes = useStyles(theTextData);

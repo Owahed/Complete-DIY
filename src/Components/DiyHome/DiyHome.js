@@ -131,7 +131,7 @@ const DiyHomeOne = () => {
   }
 
   //-------------------- Headers----------------
-  const [headerText, setHeaderText] = useState(false);
+  const [headerText, setHeaderText] = useState(true);
   const enableHeaderText = () => {
     setHeaderText(true);
   };
