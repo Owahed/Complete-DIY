@@ -266,7 +266,7 @@ const DiyHomeOne = () => {
         >
           <div className="diy-body">
             <div>
-              {/* <MainBody
+              <MainBody
                 imgState={imgState}
                 selectedPictogramsImg={selectedPictogramsImg}
                 CancelPictogramImageFan={CancelPictogramImageFan}
@@ -288,8 +288,8 @@ const DiyHomeOne = () => {
                 bodyText={bodyText}
                 disEnableBodyText={disEnableBodyText}
                 // domNode={domNode}
-              /> */}
-              <Test EditButton={EditButton} />
+              />
+              {/* <Test EditButton={EditButton} /> */}
               {/* <TestClass EditButton={EditButton} /> */}
             </div>
           </div>
