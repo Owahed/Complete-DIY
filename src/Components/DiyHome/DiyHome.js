@@ -50,6 +50,23 @@ const DiyHomeOne = () => {
     id: "00101",
     img: img00101,
   });
+  const [imgState, setImgState] = useState({ file: null });
+
+  //------------cancelPictogramsImg-------------
+  const [cancelPictogramsImage, setCancelPictogramsImage] = useState(true);
+
+  const CancelPictogramImageFan = () => {
+    setCancelPictogramsImage(false);
+  };
+  //------------cancelLogoImg-------------
+  const [cancelLogoImage, setCancelLogoImage] = useState(false);
+
+  const CancelLogoImageFan = () => {
+    // setCancelLogoImage(false);
+    setImgState({
+      file: null,
+    });
+  };
 
   const containerPictogramsLeft =
     showPanel ||
@@ -97,21 +114,25 @@ const DiyHomeOne = () => {
   const pictogramImgData = (imgId) => {
     var pictogramsData = PictogramsAllData.find((data) => data.id == imgId);
     setSelectedPictogramsImg(pictogramsData);
+    setCancelPictogramsImage(true);
   };
-  const pictogramImgDataCancel = () => {
-    setSelectedPictogramsImg({
-      id: "",
-      img: null,
-    });
-  };
-  const [imgState, setImgState] = useState({ file: null });
+
+  // logo Upload
 
   function handleLogAndImgChange(event) {
     setImgState({
       file: URL.createObjectURL(event.target.files[0]),
     });
-    console.log(event);
+    // setCancelLogoImage(true);
   }
+
+  // useEffect(() => {
+
+  //   if (imgState != null) {
+  //     setCancelLogoImage(true);
+  //   }
+  // }, [imgState]);
+
   console.log(imgState);
 
   // --------------text
@@ -130,7 +151,7 @@ const DiyHomeOne = () => {
     );
   }
 
-  //-------------------- Headers----------------
+  //-------------------- Headers text----------------
   const [headerText, setHeaderText] = useState(true);
   const enableHeaderText = () => {
     setHeaderText(true);
@@ -184,7 +205,6 @@ const DiyHomeOne = () => {
 
   const handleOnDoubleDraggable = () => {
     setIsEditable(false);
-    console.log("Double");
   };
 
   // let domNode = useClickOutside(() => {
@@ -246,10 +266,13 @@ const DiyHomeOne = () => {
         >
           <div className="diy-body">
             <div>
-              <MainBody
+              {/* <MainBody
                 imgState={imgState}
                 selectedPictogramsImg={selectedPictogramsImg}
-                pictogramImgDataCancel={pictogramImgDataCancel}
+                CancelPictogramImageFan={CancelPictogramImageFan}
+                cancelLogoImage={cancelLogoImage}
+                CancelLogoImageFan={CancelLogoImageFan}
+                cancelPictogramsImage={cancelPictogramsImage}
                 selectedImg={selectedImg}
                 color={color}
                 fontName={fontName}
@@ -265,8 +288,8 @@ const DiyHomeOne = () => {
                 bodyText={bodyText}
                 disEnableBodyText={disEnableBodyText}
                 // domNode={domNode}
-              />
-              {/* <Test EditButton={EditButton} /> */}
+              /> */}
+              <Test EditButton={EditButton} />
               {/* <TestClass EditButton={EditButton} /> */}
             </div>
           </div>

@@ -3,6 +3,7 @@ import BaseText from "../basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
+
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
 };

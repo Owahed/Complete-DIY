@@ -8,9 +8,10 @@ const Test = () => {
     html: `<p>Hello <b>World</b> !</p><p>Paragraph 2</p>`,
     editable: true,
   });
+  console.log(state.editable);
 
   const handleChange = (evt) => {
-    setState({ html: evt.target.value });
+    setState({ html: evt.target.value, editable: true });
   };
 
   const sanitizeConf = {
@@ -19,12 +20,15 @@ const Test = () => {
   };
 
   const sanitize = () => {
-    setState({ html: sanitizeHtml(state.html, sanitizeConf) });
+    setState({ html: sanitizeHtml(state.html, sanitizeConf), editable: true });
   };
 
   const toggleEditable = () => {
     setState({ editable: state.editable });
   };
+
+  const htm = "<strong>hello world</strong>";
+  console.log(sanitizeHtml(htm));
   return (
     <div>
       <h3>editable contents</h3>
@@ -43,6 +47,7 @@ const Test = () => {
         onChange={handleChange}
         onBlur={sanitize}
       /> */}
+      {htm}
       <h3>actions</h3>
       {/* <EditButton cmd="italic" /> */}
       {/* <EditButton cmd="bold" />

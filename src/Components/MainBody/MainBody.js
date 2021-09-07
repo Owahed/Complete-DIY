@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 import TestClass from "../TestSector/TestClass";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import "./MainBody.css";
-import HeadingText from "../EditableText/HeadingText";
-import SubHeading from "../EditableText/SubHeadingText";
-import BodyText from "../EditableText/BodyText";
+// import HeadingText from "../EditableText/HeadingText";
+// import SubHeading from "../EditableText/SubHeadingText";
+// import BodyText from "../EditableText/BodyText";
 import styled from "styled-components";
 import { Rnd } from "react-rnd";
 import HeaderEditableText from "../EditableTextComponents/EditeText/HeaderEditableText";
@@ -40,7 +40,10 @@ const MainBody = ({
   imgState,
   selectedImg,
   color,
-  pictogramImgDataCancel,
+  CancelPictogramImageFan,
+  cancelPictogramsImage,
+  CancelLogoImageFan,
+  cancelLogoImage,
   fontName,
   fontSizeName,
   currentRadioFormatValue,
@@ -56,6 +59,7 @@ const MainBody = ({
   bodyText,
 }) => {
   let { id, item } = selectedImg;
+
   const idImage = id;
   const bgColor = color;
 
@@ -112,14 +116,14 @@ const MainBody = ({
   `;
 
   //------------cancelImg-------------
-  const [cancelImage, setCancelImage] = useState(true);
+  // const [cancelImage, setCancelImage] = useState(true);
 
-  const CancelPictogramImage = () => {
-    setCancelImage(false);
-  };
+  // const CancelPictogramImage = () => {
+  //   setCancelImage(false);
+  // };
 
   // --------------crose-----------
-  const [expanded, setExpanded] = useState(true);
+  // const [expanded, setExpanded] = useState(true);
 
   // editAbleText------
   let texts = { id: "unique-1" };
@@ -215,92 +219,82 @@ const MainBody = ({
               >
                 <div className="second-templates-body">
                   <div>
-                    {cancelImage && (
-                      <div>
-                        <Container>
-                          {expanded && (
-                            <StyledRnd
-                              className="d-flex"
-                              default={position}
-                              onResize={onResize}
-                              onDragStop={onDragStop}
-                              bounds="parent"
-                              lockAspectRatio={true}
-                            >
-                              <Image>{JSON.stringify}</Image>
-                              <div>
-                                {/* {selectedPictogramsImg.img == null || ( */}
-                                <div
-                                  className="pictograms-cancel-icon show"
-                                  // onClick={pictogramImgDataCancel}
-                                  onClick={CancelPictogramImage}
-                                  aria-expanded={expanded}
+                    <div>
+                      <Container>
+                        {cancelPictogramsImage && (
+                          <StyledRnd
+                            className="d-flex"
+                            default={position}
+                            onResize={onResize}
+                            onDragStop={onDragStop}
+                            bounds="parent"
+                            lockAspectRatio={true}
+                          >
+                            <Image>{JSON.stringify}</Image>
+
+                            <div>
+                              <div
+                                className="pictograms-cancel-icon show"
+                                onClick={CancelPictogramImageFan}
+                                // aria-expanded={expanded}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-6 w-6"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
                                 >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-6 w-6"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M6 18L18 6M6 6l12 12"
-                                    />
-                                  </svg>
-                                </div>
-                                {/* )} */}
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                  />
+                                </svg>
                               </div>
-                            </StyledRnd>
-                          )}
-                        </Container>
-                      </div>
-                    )}
-                    {/* ---------- */}
-                    {imgState.file == null || (
-                      <div>
-                        <Container>
-                          {expanded && (
-                            <StyledRnd
-                              className="d-flex"
-                              default={position}
-                              onResize={onResize}
-                              onDragStop={onDragStop}
-                              bounds="parent"
-                              lockAspectRatio={true}
-                            >
-                              <ImageOne>{JSON.stringify}</ImageOne>
-                              <div>
-                                {imgState.file == null || (
-                                  <div
-                                    className="pictograms-cancel-icon show"
-                                    onClick={pictogramImgDataCancel}
-                                    aria-expanded={expanded}
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      class="h-6 w-6"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                      />
-                                    </svg>
-                                  </div>
-                                )}
+                              {/* )} */}
+                            </div>
+                          </StyledRnd>
+                        )}
+
+                        {imgState.file == null || (
+                          <StyledRnd
+                            className="d-flex"
+                            default={position}
+                            onResize={onResize}
+                            onDragStop={onDragStop}
+                            bounds="parent"
+                            lockAspectRatio={true}
+                          >
+                            <ImageOne>{JSON.stringify}</ImageOne>
+
+                            <div>
+                              <div
+                                className="pictograms-cancel-icon show"
+                                onClick={CancelLogoImageFan}
+                                // aria-expanded={expanded}
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="h-6 w-6"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"
+                                  />
+                                </svg>
                               </div>
-                            </StyledRnd>
-                          )}
-                        </Container>
-                      </div>
-                    )}
+                            </div>
+                          </StyledRnd>
+                        )}
+                      </Container>
+                    </div>
                   </div>
                 </div>
 
@@ -345,16 +339,6 @@ const MainBody = ({
                       />
                     </div>
                   )}
-
-                  {/* <div>
-                    <TestClass
-                      fontSizeName={fontSizeName}
-                      bgColor={bgColor}
-                      fontName={fontName}
-                      currentRadioFormatValue={currentRadioFormatValue}
-                      textColor={textColor}
-                    />
-                  </div> */}
                 </div>
               </div>
             </div>
@@ -445,92 +429,78 @@ const MainBody = ({
                   >
                     <div className="pictograms-img">
                       <div>
-                        {cancelImage && (
-                          <div>
-                            <Container>
-                              {expanded && (
-                                <StyledRnd
-                                  className="d-flex"
-                                  default={position}
-                                  onResize={onResize}
-                                  onDragStop={onDragStop}
-                                  bounds="parent"
-                                  lockAspectRatio={true}
-                                >
-                                  <Image>{JSON.stringify}</Image>
-                                  <div>
-                                    {/* {selectedPictogramsImg.img == null || ( */}
-                                    <div
-                                      className="pictograms-cancel-icon show"
-                                      // onClick={pictogramImgDataCancel}
-                                      onClick={CancelPictogramImage}
-                                      aria-expanded={expanded}
+                        <div>
+                          <Container>
+                            {cancelPictogramsImage && (
+                              <StyledRnd
+                                className="d-flex"
+                                default={position}
+                                onResize={onResize}
+                                onDragStop={onDragStop}
+                                bounds="parent"
+                                lockAspectRatio={true}
+                              >
+                                <Image>{JSON.stringify}</Image>
+                                <div>
+                                  <div
+                                    className="pictograms-cancel-icon show"
+                                    onClick={CancelPictogramImageFan}
+                                    // aria-expanded={expanded}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="h-6 w-6"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
                                     >
-                                      <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-6 w-6"
-                                        fill="none"
-                                        viewBox="0 0 24 24"
-                                        stroke="currentColor"
-                                      >
-                                        <path
-                                          stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M6 18L18 6M6 6l12 12"
-                                        />
-                                      </svg>
-                                    </div>
-                                    {/* )} */}
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                      />
+                                    </svg>
                                   </div>
-                                </StyledRnd>
-                              )}
-                            </Container>
-                          </div>
-                        )}
-                        {/* ---------- */}
-                        {imgState.file == null || (
-                          <div>
-                            <Container>
-                              {expanded && (
-                                <StyledRnd
-                                  className="d-flex"
-                                  default={position}
-                                  onResize={onResize}
-                                  onDragStop={onDragStop}
-                                  bounds="parent"
-                                  lockAspectRatio={true}
-                                >
-                                  <ImageOne>{JSON.stringify}</ImageOne>
-                                  <div>
-                                    {imgState.file == null || (
-                                      <div
-                                        className="pictograms-cancel-icon show"
-                                        onClick={pictogramImgDataCancel}
-                                        aria-expanded={expanded}
-                                      >
-                                        <svg
-                                          xmlns="http://www.w3.org/2000/svg"
-                                          class="h-6 w-6"
-                                          fill="none"
-                                          viewBox="0 0 24 24"
-                                          stroke="currentColor"
-                                        >
-                                          <path
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M6 18L18 6M6 6l12 12"
-                                          />
-                                        </svg>
-                                      </div>
-                                    )}
+                                </div>
+                              </StyledRnd>
+                            )}
+                            {imgState.file == null || (
+                              <StyledRnd
+                                className="d-flex"
+                                default={position}
+                                onResize={onResize}
+                                onDragStop={onDragStop}
+                                bounds="parent"
+                                lockAspectRatio={true}
+                              >
+                                <ImageOne>{JSON.stringify}</ImageOne>
+                                <div>
+                                  <div
+                                    className="pictograms-cancel-icon show"
+                                    onClick={CancelLogoImageFan}
+                                    // aria-expanded={expanded}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      class="h-6 w-6"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12"
+                                      />
+                                    </svg>
                                   </div>
-                                </StyledRnd>
-                              )}
-                            </Container>
-                          </div>
-                        )}
+                                </div>
+                              </StyledRnd>
+                            )}
+                          </Container>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -582,12 +552,6 @@ const MainBody = ({
                         </div>
                       )}
                     </div>
-                    {/* <Draggable>
-                      <h5>WRITE CONSEQUENCES OF NOT FOLLOWING </h5>
-                    </Draggable>
-                    <Draggable>
-                      <h6>WRITE PENALTY PROVISIONS</h6>
-                    </Draggable> */}
                   </div>
                 </div>
               </div>
