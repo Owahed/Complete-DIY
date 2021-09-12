@@ -14,10 +14,6 @@ import SubHeaderEditableText from "../EditableTextComponents/EditeText/SubHeader
 import BodyEditableText from "../EditableTextComponents/EditeText/BodyEditableText";
 
 const StyledRnd = styled(Rnd)`
-  .sc-bdfBQB {
-    width: 120px !important;
-    height: 200px !important;
-  }
   &:hover {
     border: 1px solid blue;
   }
@@ -57,21 +53,12 @@ const MainBody = ({
   disEnableSubHeaderText,
   disEnableBodyText,
   bodyText,
+  inputRef,
 }) => {
   let { id, item } = selectedImg;
 
   const idImage = id;
   const bgColor = color;
-
-  const inputRef = useRef(null);
-  const printDocument = () => {
-    html2canvas(inputRef.current).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF();
-      pdf.addImage(imgData, "JPEG", 0, 0);
-      pdf.save("download.pdf");
-    });
-  };
 
   // --------------------img-------------
   const [position, setPosition] = useState({
@@ -106,6 +93,7 @@ const MainBody = ({
 
     background-image: url(${selectedPictogramsImg.img});
     background-size: 100% 100%;
+    z-index: 5;
   `;
   const ImageOne = styled.div`
     width: 100%;
@@ -113,6 +101,7 @@ const MainBody = ({
 
     background-image: url(${imgState.file});
     background-size: 100% 100%;
+    z-index: 5;
   `;
 
   //------------cancelImg-------------
@@ -558,11 +547,6 @@ const MainBody = ({
             </div>
           )}
         </div>
-      </div>
-      <div className="mb5">
-        <button className="btn btn-success" onClick={printDocument}>
-          Print
-        </button>
       </div>
     </div>
   );

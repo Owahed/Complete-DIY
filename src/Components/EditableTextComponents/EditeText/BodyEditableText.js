@@ -167,6 +167,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
           textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}
+          setTextData={setTextData}
         />
       </Border>
     </div>

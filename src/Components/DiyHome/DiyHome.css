@@ -114,8 +114,40 @@
     cursor: pointer;
     align-items: flex-end;
   } */
+  .download-container{
+    width: 100%;
+    margin-bottom: 50px;
+  }
+  .download-container div{
+    position: absolute;
+  right: 150px;  
+  width: auto;
+  height: auto;
+  display: flex;
+  }
   .diy-sidebar-item{
     display: flex;
     justify-content: center;
   }
-  
+  .download-pdf-png{
+    width: 242px;
+    height: 60px;
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-left: 10px;
+  }
+  .place-order {
+    background-color: #003459;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 24px;
+    border: 2px solid #003459;
+  }
+  .place-order:hover{
+    color: #fff;
+  }
+  .arrow{
+    margin-left: 5px;
+    margin-top: -2px;
+  }

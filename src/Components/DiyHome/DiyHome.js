@@ -13,6 +13,10 @@ import "./DiyHome.css";
 import MainBody from "../MainBody/MainBody";
 import Test from "../TestSector/Test";
 import TestClass from "../TestSector/TestClass";
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
+import GetAppIcon from "@material-ui/icons/GetApp";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 // let useClickOutside = (handler) => {
 //   let domNode = useRef();
@@ -212,6 +216,25 @@ const DiyHomeOne = () => {
 
   // });
 
+  const inputRef = useRef(null);
+  const printDocumentPDF = () => {
+    html2canvas(inputRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF();
+      pdf.addImage(imgData, "JPEG", 30, 25);
+      pdf.save("download.pdf");
+    });
+  };
+  const printDocumentPNG = () => {
+    html2canvas(inputRef.current).then((canvas) => {
+      var image = canvas.toDataURL("png");
+      var a = document.createElement("a");
+      a.setAttribute("download", "myImage.png");
+      a.setAttribute("href", image);
+      a.click();
+    });
+  };
+
   return (
     <div>
       <div className="diy-header">
@@ -287,6 +310,7 @@ const DiyHomeOne = () => {
                 disEnableSubHeaderText={disEnableSubHeaderText}
                 bodyText={bodyText}
                 disEnableBodyText={disEnableBodyText}
+                inputRef={inputRef}
                 // domNode={domNode}
               />
               {/* <Test EditButton={EditButton} /> */}
@@ -769,6 +793,25 @@ const DiyHomeOne = () => {
               </svg>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="position-relative download-container py-5 ">
+        <div className="  ">
+          <button className="download-pdf-png btn" onClick={printDocumentPDF}>
+            <GetAppIcon />
+            Download PDF
+          </button>
+          <button className="download-pdf-png  btn" onClick={printDocumentPNG}>
+            <GetAppIcon />
+            Download PNG
+          </button>
+          <button
+            className="place-order download-pdf-png  btn"
+            onClick={printDocumentPNG}
+          >
+            Place order
+            <ArrowForwardIosIcon className="arrow" />
+          </button>
         </div>
       </div>
     </div>

@@ -1,23 +1,23 @@
 import React from "react";
 import * as MaterialUI from "@material-ui/core";
 
-const useStyles = MaterialUI.makeStyles(theme => {
+const useStyles = MaterialUI.makeStyles((theme) => {
   return {
     text: {
       outline: "none",
       display: "inline-block",
-      fontSize: props => props.fontSize,
-      fontFamily: props => props.fontFamily,
-      fontWeight: props => props.fontWeight,
-      fontStyle: props => props.fontStyle,
-      textDecoration: props => props.textDecoration,
-      textAlign: props => props.textAlign,
-      color: props => props.color,
+      fontSize: (props) => props.fontSize,
+      fontFamily: (props) => props.fontFamily,
+      fontWeight: (props) => props.fontWeight,
+      fontStyle: (props) => props.fontStyle,
+      textDecoration: (props) => props.textDecoration,
+      textAlign: (props) => props.textAlign,
+      color: (props) => props.color,
       cursor: "text",
       border: "none",
       resize: "none",
-      background: "transparent"
-    }
+      background: "transparent",
+    },
   };
 });
 
