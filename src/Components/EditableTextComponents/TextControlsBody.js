@@ -8,7 +8,6 @@ import FontColor from "./fontcolor";
 import ClearIcon from "@material-ui/icons/Clear";
 import AlignItems from "./AlignItems/AlignItems";
 import AlignItemsBody from "./AlignItems/AlignItemsBody";
-import AlignItemsSubBody from "./AlignItems/AlignItemsSubBody";
 
 const useStyles = MaterialUI.makeStyles((theme) => {
   return {
@@ -23,7 +22,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
   };
 });
 
-const TextControls = (props) => {
+const TextControlsBody = (props) => {
   const {
     textData,
     edit,
@@ -52,29 +51,14 @@ const TextControls = (props) => {
       )}
     >
       <FontStyles {...props} />
-      {textData.tag == "01" && (
-        <AlignItems
-          key={textData.tag}
-          handleFormatChange={handleFormatChange}
-        />
-      )}
-      {textData.tag == "02" && (
-        <AlignItemsBody
-          key={textData.tag}
-          handleFormatChange={handleFormatChange}
-        />
-      )}
-      {textData.tag == "03" && (
-        <AlignItemsSubBody
-          key={textData.tag}
-          handleFormatChange={handleFormatChange}
-        />
-      )}
 
+      <AlignItemsBody
+        key={textData.tag}
+        handleBodyFormatChange={handleBodyFormatChange}
+      />
       <FontSizeSelect {...props} />
       <FontFamilySelect {...props} />
       <FontColor {...props} />
-
       <div style={textCancel} onClick={disEnableHeaderText}>
         <ClearIcon />
       </div>
@@ -82,4 +66,4 @@ const TextControls = (props) => {
   );
 };
 
-export default TextControls;
+export default TextControlsBody;

@@ -103,3 +103,8 @@
   position: absolute;
   top: -36px;
 }
+
+/* text-align-icon */
+.align-icon button{
+  padding: .31em .625em .31em .625em;
+}

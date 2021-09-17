@@ -1,6 +1,7 @@
 import React from "react";
 import ContentEditable from "react-contenteditable";
 import sanitizeHtml from "sanitize-html";
+import BaseText from "../EditableTextComponents/basetext";
 
 class TextClass extends React.Component {
   constructor() {
@@ -23,9 +24,9 @@ class TextClass extends React.Component {
     this.setState({ html: sanitizeHtml(this.state.html, this.sanitizeConf) });
   };
 
-  toggleEditable = () => {
-    this.setState({ editable: !this.state.editable });
-  };
+  // toggleEditable = () => {
+  //   this.setState({ editable: !this.state.editable });
+  // };
   render() {
     return (
       <div>
@@ -42,6 +43,11 @@ class TextClass extends React.Component {
           onChange={this.handleChange} // handle innerHTML change
           onBlur={this.sanitize}
         />
+        {/* <BaseText
+          // sanitize={this.sanitize}
+          props={this.props}
+          // disabled={!this.state.editable}
+        /> */}
       </div>
     );
   }

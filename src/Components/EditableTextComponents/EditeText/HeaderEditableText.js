@@ -3,6 +3,7 @@ import BaseText from "../basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
+import * as TestClass from "../../TestSector/TestClass";
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
 };
@@ -35,14 +36,15 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     id: textData.id,
     x: textData.x || 0,
     y: textData.y || 0,
-    fontSize: textData.fontSize || 27,
+    fontSize: textData.fontSize || 28,
     fontFamily: textData.fontFamily || "sans-serif",
     fontWeight: textData.fontWeight || "normal",
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
-    // textAlign: textData.textData || "center",
+    textAlign: textData.textAlign || "start",
     text: textData.text || `Default Header Text`,
     color: textData.color || "black",
+    tag: "01",
   });
   const classes = useStyles(theTextData);
 
@@ -146,6 +148,12 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
           setTextData({
             ...theTextData,
             color: e.target.value,
+          });
+        }}
+        handleFormatChange={(e) => {
+          setTextData({
+            ...theTextData,
+            textAlign: e.target.value,
           });
         }}
         textData={theTextData}

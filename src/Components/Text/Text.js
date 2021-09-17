@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { CompactPicker } from "react-color";
+import { UserContext } from "../../App";
 import "./Text.css";
 
 const Text = ({
@@ -13,6 +14,8 @@ const Text = ({
   enableBodyText,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
+  const [textFieldData, setTextFieldData] = useContext(UserContext);
+  console.log("text", textFieldData);
   return (
     <div>
       <div className="mt-5 pb-2">
@@ -47,6 +50,7 @@ const Text = ({
       <div className="my-3 d-flex justify-content-center">
         <hr className="text-hr" />
       </div>
+
       <div className="d-flex justify-content-center text-white">
         <div>
           <label for="font">Font</label>
@@ -77,6 +81,7 @@ const Text = ({
           </select>
         </div>
       </div>
+
       <div className="mt-3 d-flex justify-content-center ">
         <div className=" d-flex justify-content-center">
           <div className=" btn-group text-btn-group pl-3">
@@ -106,10 +111,9 @@ const Text = ({
               id="btnradio1"
               autocomplete="off"
               value="start"
-              onChange={handleRadioFormatChange}
+              // onChange={handleRadioFormatChange}
             />
             <label class="btn btn-outline-primary" for="btnradio1">
-              {/* Radio 1 */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24.711"
@@ -133,10 +137,9 @@ const Text = ({
               id="btnradio2"
               autocomplete="off"
               value="center"
-              onChange={handleRadioFormatChange}
+              // onChange={handleRadioFormatChange}
             />
             <label class="btn btn-outline-primary" for="btnradio2">
-              {/* Radio 2 */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="22.891"
@@ -160,10 +163,9 @@ const Text = ({
               id="btnradio3"
               autocomplete="off"
               value="end"
-              onChange={handleRadioFormatChange}
+              // onChange={handleRadioFormatChange}
             />
             <label class="btn btn-outline-primary" for="btnradio3">
-              {/* Radio 3 */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24.796"

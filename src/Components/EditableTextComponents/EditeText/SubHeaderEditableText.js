@@ -42,9 +42,10 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
     display: textData.display || "flex",
-    // textAlign: textData.textData || `${currentRadioFormatValue}`,
+    textAlign: textData.textAlign || `start`,
     text: textData.text || `Default Sub Header`,
     color: textData.color || "black",
+    tag: "02",
   });
   const classes = useStyles(theTextData);
 
@@ -148,6 +149,12 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
           setTextData({
             ...theTextData,
             color: e.target.value,
+          });
+        }}
+        handleFormatChange={(e) => {
+          setTextData({
+            ...theTextData,
+            textAlign: e.target.value,
           });
         }}
         textData={theTextData}

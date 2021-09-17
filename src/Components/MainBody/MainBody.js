@@ -29,6 +29,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 `;
 
 const MainBody = ({
@@ -86,6 +87,7 @@ const MainBody = ({
       y,
     }));
   }
+  // image moveable
 
   const Image = styled.div`
     width: 100%;
@@ -93,7 +95,6 @@ const MainBody = ({
 
     background-image: url(${selectedPictogramsImg.img});
     background-size: 100% 100%;
-    z-index: 5;
   `;
   const ImageOne = styled.div`
     width: 100%;
@@ -101,7 +102,6 @@ const MainBody = ({
 
     background-image: url(${imgState.file});
     background-size: 100% 100%;
-    z-index: 5;
   `;
 
   //------------cancelImg-------------

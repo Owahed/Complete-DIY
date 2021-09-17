@@ -205,17 +205,18 @@ const DiyHomeOne = () => {
 
   // -------------------draguble click-------------------
 
-  const [isEditable, setIsEditable] = useState(true);
+  // const [isEditable, setIsEditable] = useState(true);
 
-  const handleOnDoubleDraggable = () => {
-    setIsEditable(false);
-  };
+  // const handleOnDoubleDraggable = () => {
+  //   setIsEditable(false);
+  // };
 
   // let domNode = useClickOutside(() => {
   //   setIsEditable(true);
 
   // });
 
+  // download pdf and png
   const inputRef = useRef(null);
   const printDocumentPDF = () => {
     html2canvas(inputRef.current).then((canvas) => {
@@ -302,8 +303,8 @@ const DiyHomeOne = () => {
                 fontSizeName={fontSizeName}
                 currentRadioFormatValue={currentRadioFormatValue}
                 textColor={textColor}
-                isEditable={isEditable}
-                handleOnDoubleDraggable={handleOnDoubleDraggable}
+                // isEditable={isEditable}
+                // handleOnDoubleDraggable={handleOnDoubleDraggable}
                 headerText={headerText}
                 disEnableHeaderText={disEnableHeaderText}
                 subHeaderText={subHeaderText}
@@ -313,7 +314,7 @@ const DiyHomeOne = () => {
                 inputRef={inputRef}
                 // domNode={domNode}
               />
-              {/* <Test EditButton={EditButton} /> */}
+              {/* <Test text="hello World" /> */}
               {/* <TestClass EditButton={EditButton} /> */}
             </div>
           </div>

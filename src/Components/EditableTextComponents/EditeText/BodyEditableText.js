@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import BaseText from "../basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
+import { UserContext } from "../../../App";
+import TextControlsBody from "../TextControlsBody";
 
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
@@ -32,7 +34,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     originalY: 0,
     status: "mouse-up",
   });
-  const [theTextData, setTextData] = React.useState({
+  const [theTextDataTwo, setTextDataTwo] = React.useState({
     id: textData.id,
     x: textData.x || 0,
     y: textData.y || 0,
@@ -41,14 +43,22 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     fontWeight: textData.fontWeight || "normal",
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
-    // textAlign: textData.textData || "center",
+    textAlign: textData.textAlign || "start",
     text: textData.text || `Default Body Text one`,
     color: textData.color || "black",
+    tag: "03",
   });
-  const classes = useStyles(theTextData);
+  const classes = useStyles(theTextDataTwo);
 
   const textRef = React.useRef();
   const borderRef = React.useRef();
+
+  // ----------------
+  // const [textFieldData, setTextFieldData] = useContext(UserContext);
+  // useEffect(() => {
+  //   console.log("theTextDataTwo", theTextDataTwo);
+  //   setTextFieldData(theTextDataTwo);
+  // }, [theTextDataTwo]);
 
   React.useEffect(() => {
     const onMouseDown = (e) => {
@@ -56,15 +66,15 @@ const BodyEditableText = React.forwardRef((props, ref) => {
         setEvent({
           x: e.clientX,
           y: e.clientY,
-          originalX: theTextData.x,
-          originalY: theTextData.y,
+          originalX: theTextDataTwo.x,
+          originalY: theTextDataTwo.y,
           status: "mouse-down",
         });
       }
     };
     const onMouseMove = (e) => {
       if (event.status === "mouse-down") {
-        setTextData((s) => ({
+        setTextDataTwo((s) => ({
           ...s,
           x: event.originalX + e.clientX - event.x,
           y: event.originalY + e.clientY - event.y,
@@ -98,8 +108,8 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     event.originalY,
     event.x,
     event.y,
-    theTextData.x,
-    theTextData.y,
+    theTextDataTwo.x,
+    theTextDataTwo.y,
   ]);
 
   React.useEffect(() => {
@@ -108,7 +118,14 @@ const BodyEditableText = React.forwardRef((props, ref) => {
       onUpdate();
     }
   });
-
+  console.log("body align", theTextDataTwo.textAlign);
+  // const handleFormatChange = (e) => {
+  //   console.log("e", e.target.value);
+  //   setTextDataTwo({
+  //     ...theTextDataTwo,
+  //     textAlign: e.target.value,
+  //   });
+  // };
   return (
     <div
       // style={{ textAlign: `${disEnableHeaderText}` }}
@@ -116,58 +133,69 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     >
       <TextControls
         onBoldClick={() => {
-          setTextData({
-            ...theTextData,
-            fontWeight: theTextData.fontWeight === "bold" ? "normal" : "bold",
+          setTextDataTwo({
+            ...theTextDataTwo,
+            fontWeight:
+              theTextDataTwo.fontWeight === "bold" ? "normal" : "bold",
           });
         }}
         onItalicClick={() => {
-          setTextData({
-            ...theTextData,
-            fontStyle: theTextData.fontStyle === "italic" ? "normal" : "italic",
+          setTextDataTwo({
+            ...theTextDataTwo,
+            fontStyle:
+              theTextDataTwo.fontStyle === "italic" ? "normal" : "italic",
           });
         }}
         onUnderlineClick={() => {
-          setTextData({
-            ...theTextData,
+          setTextDataTwo({
+            ...theTextDataTwo,
             textDecoration:
-              theTextData.textDecoration === "underline" ? "none" : "underline",
+              theTextDataTwo.textDecoration === "underline"
+                ? "none"
+                : "underline",
           });
         }}
         onFontSizeSelect={(e) => {
-          setTextData({
-            ...theTextData,
+          setTextDataTwo({
+            ...theTextDataTwo,
             fontSize: parseInt(e.target.value),
           });
         }}
         onFontFamilySelect={(e) => {
-          setTextData({
-            ...theTextData,
+          setTextDataTwo({
+            ...theTextDataTwo,
             fontFamily: e.target.value,
           });
         }}
         onFontColorChange={(e) => {
-          setTextData({
-            ...theTextData,
+          setTextDataTwo({
+            ...theTextDataTwo,
             color: e.target.value,
           });
         }}
-        textData={theTextData}
+        handleFormatChange={(e) => {
+          setTextDataTwo({
+            ...theTextDataTwo,
+            textAlign: e.target.value,
+          });
+        }}
+        // handleFormatChange={handleFormatChange}
+        textData={theTextDataTwo}
         edit={edit}
         disEnableHeaderText={disEnableHeaderText}
       />
+
       <Border
         edit={edit}
         ref={borderRef}
-        textData={theTextData}
+        textData={theTextDataTwo}
         color="lightgrey"
       >
         <BaseText
           ref={textRef}
-          textData={theTextData}
+          textData={theTextDataTwo}
           edit={edit}
           onClick={() => setEdit(true)}
-          setTextData={setTextData}
         />
       </Border>
     </div>

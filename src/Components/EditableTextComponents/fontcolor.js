@@ -2,23 +2,23 @@ import React from "react";
 import * as MaterialUI from "@material-ui/core";
 import clsx from "clsx";
 
-const useStyles = MaterialUI.makeStyles(theme => {
+const useStyles = MaterialUI.makeStyles((theme) => {
   return {
     fontColor: {
       display: "inline-block",
-      marginLeft: 3
+      marginLeft: 3,
     },
     input: {
       width: "2.0em",
       height: "2.2em",
       marginBottom: 3,
       borderRadius: 5,
-      outline: "none"
-    }
+      outline: "none",
+    },
   };
 });
 
-const FontColor = props => {
+const FontColor = (props) => {
   const classes = useStyles();
   const { onFontColorChange, textData } = props;
   return (
@@ -26,7 +26,7 @@ const FontColor = props => {
       <input
         className={clsx(classes.input, textData.id)}
         type="color"
-        defaultValue="#ffffff"
+        defaultValue="#000"
         onChange={onFontColorChange}
       />
     </div>
