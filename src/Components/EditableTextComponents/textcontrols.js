@@ -24,13 +24,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 });
 
 const TextControls = (props) => {
-  const {
-    textData,
-    edit,
-    disEnableHeaderText,
-    handleBodyFormatChange,
-    handleFormatChange,
-  } = props;
+  const { textData, edit, disEnableHeaderText, handleFormatChange } = props;
   console.log(props);
 
   const classes = useStyles({ textData });

@@ -3,21 +3,21 @@ import * as MaterialUI from "@material-ui/core";
 import clsx from "clsx";
 import Fonts from "./config.json";
 
-const useStyles = MaterialUI.makeStyles(theme => {
+const useStyles = MaterialUI.makeStyles((theme) => {
   return {
     fontSizeSelection: {
       display: "inline-block",
-      marginLeft: 3
+      marginLeft: 3,
     },
     select: {
       height: "1.7em",
       outline: "none",
-      marginBottom: 3
-    }
+      marginBottom: 3,
+    },
   };
 });
 
-const FontFamilySelect = props => {
+const FontFamilySelect = (props) => {
   const { textData, onFontFamilySelect } = props;
   const classes = useStyles();
   return (
@@ -41,6 +41,16 @@ const FontFamilySelect = props => {
             {font.name}
           </MaterialUI.MenuItem>
         ))}
+        {/* {Fonts.fonts.map((font, i) => (
+          <option
+            key={i}
+            selected={font.name === "Roboto"}
+            style={{ fontFamily: font.style }}
+            value={font.style}
+          >
+            {font.name}
+          </option>
+        ))} */}
       </MaterialUI.Select>
     </MaterialUI.FormControl>
   );

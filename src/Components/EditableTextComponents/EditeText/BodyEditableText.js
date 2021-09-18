@@ -118,19 +118,9 @@ const BodyEditableText = React.forwardRef((props, ref) => {
       onUpdate();
     }
   });
-  console.log("body align", theTextDataTwo.textAlign);
-  // const handleFormatChange = (e) => {
-  //   console.log("e", e.target.value);
-  //   setTextDataTwo({
-  //     ...theTextDataTwo,
-  //     textAlign: e.target.value,
-  //   });
-  // };
+
   return (
-    <div
-      // style={{ textAlign: `${disEnableHeaderText}` }}
-      className={classes.text}
-    >
+    <div className={classes.text}>
       <TextControls
         onBoldClick={() => {
           setTextDataTwo({

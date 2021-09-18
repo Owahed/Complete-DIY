@@ -8,6 +8,8 @@ const Test = () => {
     editable: true,
   });
 
+  const [ref, setRaf] = useState(null);
+  const innerRef = React.useRef(null);
   const handleChange = (evt) => {
     setStateTwo({ html: evt.target.value, editable: true });
   };
@@ -24,28 +26,28 @@ const Test = () => {
   //   allowedAttributes: { a: ["href"] },
   // };
 
-  const sanitize = () => {
-    setStateTwo({
-      html: sanitizeHtml(stateTwo.html, {
-        allowedTags: [
-          "b",
-          "i",
-          "em",
-          "strong",
-          "a",
-          "p",
-          "h4",
-          "h5",
-          "h6",
-          "u",
-        ],
-        allowedAttributes: {
-          a: ["href", "target"],
-        },
-      }),
-      editable: true,
-    });
-  };
+  // const sanitize = () => {
+  //   setStateTwo({
+  //     html: sanitizeHtml(stateTwo.html, {
+  //       allowedTags: [
+  //         "b",
+  //         "i",
+  //         "em",
+  //         "strong",
+  //         "a",
+  //         "p",
+  //         "h4",
+  //         "h5",
+  //         "h6",
+  //         "u",
+  //       ],
+  //       allowedAttributes: {
+  //         a: ["href", "target"],
+  //       },
+  //     }),
+  //     editable: true,
+  //   });
+  // };
 
   return (
     <div>
@@ -53,9 +55,10 @@ const Test = () => {
         className={`editable`}
         tagName="pre"
         html={stateTwo.html} // innerHTML of the editable div
-        disabled={!stateTwo.editable} // use true to disable edition
-        onChange={handleChange} // handle innerHTML change
-        onBlur={sanitize}
+        // disabled={!stateTwo.editable} // use true to disable edition
+        // onChange={handleChange} // handle innerHTML change
+        // onBlur={sanitize}
+        // innerRef={(elt) => setRaf((innerRef.current = elt))}
       />
     </div>
   );

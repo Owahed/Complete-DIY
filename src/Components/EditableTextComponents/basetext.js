@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import * as MaterialUI from "@material-ui/core";
+import ContentEditable from "react-contenteditable";
 
 const useStyles = MaterialUI.makeStyles((theme) => {
   return {
@@ -25,17 +26,41 @@ const BaseText = React.forwardRef((props, ref) => {
   const { textData, className, onClick, edit } = props;
   const classes = useStyles(textData);
 
+  const [stateTwo, setStateTwo] = useState({
+    html: `<p>${textData.text}</p>`,
+    editable: true,
+  });
+  const handleChange = (evt) => {
+    setStateTwo({ html: evt.target.value, editable: true });
+  };
+
   return (
-    <span
+    // <span
+    //   ref={ref}
+    //   id="text-draggable"
+    //   onClick={onClick}
+    //   className={`${textData.id} ${classes.text} ${className || ""}`}
+    //   contentEditable={edit}
+    //   suppressContentEditableWarning={true}
+    // >
+    //  // {textData.text}
+
+    // </span>
+    <ContentEditable
+      className={`editable`}
+      tagName="pre"
+      html={stateTwo.html} // innerHTML of the editable div
+      // disabled={!stateTwo.editable} // use true to disable edition
+      onChange={handleChange} // handle innerHTML change
+      // onBlur={sanitize}
+      // innerRef={(elt) => setRaf((innerRef.current = elt))}
       ref={ref}
       id="text-draggable"
-      onClick={onClick}
+      // onClick={onClick}
       className={`${textData.id} ${classes.text} ${className || ""}`}
       contentEditable={edit}
       suppressContentEditableWarning={true}
-    >
-      {textData.text}
-    </span>
+    />
   );
 });
 
