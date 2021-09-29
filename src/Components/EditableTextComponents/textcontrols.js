@@ -25,13 +25,12 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 
 const TextControls = (props) => {
   const { textData, edit, disEnableHeaderText, handleFormatChange } = props;
-  console.log(props);
+  console.log("props", props);
 
   const classes = useStyles({ textData });
 
   const textCancel = {
     cursor: "pointer",
-
     top: "10px",
   };
   return (
@@ -46,6 +45,7 @@ const TextControls = (props) => {
       )}
     >
       <FontStyles {...props} />
+
       {textData.tag == "01" && (
         <AlignItems
           key={textData.tag}

@@ -12,6 +12,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
       height: "2.5em",
       outline: "none",
       marginBottom: 3,
+      borderRadius: "4px",
     },
   };
 });

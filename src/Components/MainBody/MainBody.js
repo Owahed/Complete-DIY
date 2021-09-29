@@ -55,6 +55,26 @@ const MainBody = ({
   disEnableBodyText,
   bodyText,
   inputRef,
+  textRef,
+  texts,
+  textsTwo,
+  textsThree,
+  fontSizeValue,
+  colorValue,
+  fontSizeValueSubHeader,
+  fontNameSubHeader,
+  currentRadioFormatValueSubHeader,
+  textColorSubHeader,
+  fontNameBody,
+  fontSizeValueBody,
+  currentRadioFormatValueBody,
+  textColorBody,
+  editHeader,
+  setEditHeader,
+  editSubHeader,
+  setEditSubHeader,
+  editBody,
+  setEditBody,
 }) => {
   let { id, item } = selectedImg;
 
@@ -115,10 +135,10 @@ const MainBody = ({
   // const [expanded, setExpanded] = useState(true);
 
   // editAbleText------
-  let texts = { id: "unique-1" };
-  let textsTwo = { id: "unique-2" };
-  let textsThree = { id: "unique-3" };
-  const textRef = React.useRef();
+  // let texts = { id: "unique-1" };
+  // let textsTwo = { id: "unique-2" };
+  // let textsThree = { id: "unique-3" };
+  // const textRef = React.useRef();
 
   return (
     <div>
@@ -289,12 +309,21 @@ const MainBody = ({
 
                 <div className="templates-footer">
                   {headerText && (
-                    <div style={{ textAlign: `${currentRadioFormatValue}` }}>
+                    <div
+                    //  style={{ textAlign: `${currentRadioFormatValue}` }}
+                    >
                       <HeaderEditableText
                         textData={texts}
                         onUpdate={() => {}}
                         ref={textRef}
                         disEnableHeaderText={disEnableHeaderText}
+                        fontSizeValue={fontSizeValue}
+                        colorValue={colorValue}
+                        fontName={fontName}
+                        currentRadioFormatValue={currentRadioFormatValue}
+                        textColor={textColor}
+                        edit={editHeader}
+                        setEdit={setEditHeader}
                       />
                     </div>
                   )}
@@ -302,7 +331,7 @@ const MainBody = ({
                     <div
                       style={{
                         marginTop: "100px",
-                        textAlign: `${currentRadioFormatValue}`,
+                        // textAlign: `${currentRadioFormatValue}`,
                       }}
                     >
                       <SubHeaderEditableText
@@ -310,6 +339,14 @@ const MainBody = ({
                         onUpdate={() => {}}
                         ref={textRef}
                         disEnableHeaderText={disEnableSubHeaderText}
+                        fontNameSubHeader={fontNameSubHeader}
+                        fontSizeValueSubHeader={fontSizeValueSubHeader}
+                        currentRadioFormatValueSubHeader={
+                          currentRadioFormatValueSubHeader
+                        }
+                        textColorSubHeader={textColorSubHeader}
+                        edit={editSubHeader}
+                        setEdit={setEditSubHeader}
                       />
                     </div>
                   )}
@@ -317,7 +354,7 @@ const MainBody = ({
                     <div
                       style={{
                         marginTop: "170px",
-                        textAlign: `${currentRadioFormatValue}`,
+                        // textAlign: `${currentRadioFormatValue}`,
                       }}
                     >
                       <BodyEditableText
@@ -325,6 +362,14 @@ const MainBody = ({
                         onUpdate={() => {}}
                         ref={textRef}
                         disEnableHeaderText={disEnableBodyText}
+                        fontNameBody={fontNameBody}
+                        fontSizeValueBody={fontSizeValueBody}
+                        currentRadioFormatValueBody={
+                          currentRadioFormatValueBody
+                        }
+                        textColorBody={textColorBody}
+                        edit={editBody}
+                        setEdit={setEditBody}
                       />
                     </div>
                   )}
@@ -500,13 +545,20 @@ const MainBody = ({
                     <div>
                       {headerText && (
                         <div
-                          style={{ textAlign: `${currentRadioFormatValue}` }}
+                        // style={{ textAlign: `${currentRadioFormatValue}` }}
                         >
                           <HeaderEditableText
                             textData={texts}
                             onUpdate={() => {}}
                             ref={textRef}
                             disEnableHeaderText={disEnableHeaderText}
+                            fontSizeValue={fontSizeValue}
+                            colorValue={colorValue}
+                            fontName={fontName}
+                            currentRadioFormatValue={currentRadioFormatValue}
+                            textColor={textColor}
+                            edit={editHeader}
+                            setEdit={setEditHeader}
                           />
                         </div>
                       )}
@@ -514,7 +566,7 @@ const MainBody = ({
                         <div
                           style={{
                             paddingTop: "45px",
-                            textAlign: `${currentRadioFormatValue}`,
+                            // textAlign: `${currentRadioFormatValue}`,
                           }}
                         >
                           <SubHeaderEditableText
@@ -522,6 +574,14 @@ const MainBody = ({
                             onUpdate={() => {}}
                             ref={textRef}
                             disEnableHeaderText={disEnableSubHeaderText}
+                            fontNameSubHeader={fontNameSubHeader}
+                            fontSizeValueSubHeader={fontSizeValueSubHeader}
+                            currentRadioFormatValueSubHeader={
+                              currentRadioFormatValueSubHeader
+                            }
+                            textColorSubHeader={textColorSubHeader}
+                            edit={editSubHeader}
+                            setEdit={setEditSubHeader}
                           />
                         </div>
                       )}
@@ -529,7 +589,7 @@ const MainBody = ({
                         <div
                           style={{
                             paddingTop: "30px",
-                            textAlign: `${currentRadioFormatValue}`,
+                            // textAlign: `${currentRadioFormatValue}`,
                           }}
                         >
                           <BodyEditableText
@@ -537,6 +597,14 @@ const MainBody = ({
                             onUpdate={() => {}}
                             ref={textRef}
                             disEnableHeaderText={disEnableBodyText}
+                            fontNameBody={fontNameBody}
+                            fontSizeValueBody={fontSizeValueBody}
+                            currentRadioFormatValueBody={
+                              currentRadioFormatValueBody
+                            }
+                            textColorBody={textColorBody}
+                            edit={editBody}
+                            setEdit={setEditBody}
                           />
                         </div>
                       )}

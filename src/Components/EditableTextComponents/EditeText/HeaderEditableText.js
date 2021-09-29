@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import BaseText from "../basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
 import * as TestClass from "../../TestSector/TestClass";
+import { UserContext } from "../../../App";
+import ClearIcon from "@material-ui/icons/Clear";
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
 };
 
+const textCancel = {
+  cursor: "pointer",
+  top: "10px",
+};
 const useStyles = MaterialUI.makeStyles((theme) => {
   return {
     text: {
@@ -18,13 +24,24 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 });
 
 const HeaderEditableText = React.forwardRef((props, ref) => {
-  const { textData, onUpdate, disEnableHeaderText } = props;
+  const {
+    textData,
+    onUpdate,
+    disEnableHeaderText,
+    fontSizeValue,
+    colorValue,
+    fontName,
+    currentRadioFormatValue,
+    textColor,
+    edit,
+    setEdit,
+  } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
       "Text id is required. Please add a Text id i.e { id: unique-id, ...}"
     );
   }
-  const [edit, setEdit] = React.useState(false);
+  // const [edit , setEdit] = React.useState(false);
   const [event, setEvent] = React.useState({
     x: 0,
     y: 0,
@@ -46,11 +63,28 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     color: textData.color || "black",
     tag: "01",
   });
+
   const classes = useStyles(theTextData);
 
   const textRef = React.useRef();
   const borderRef = React.useRef();
 
+  // ----------------
+  // const [textFieldData, setTextFieldData] = useContext(UserContext);
+  // useEffect(() => {
+  //   setTextFieldData({
+  //     EditHeader: edit,
+  //     EditBody: false,
+  //     EditSubHeader: false,
+  //   });
+  // }, [theTextData, edit]);
+  // console.log("header text", textFieldData);
+  // useEffect(() => {
+  //   setTextData({
+  //     ...textFieldData,
+  //     fontSize: textFieldData.fontSize,
+  //   });
+  // }, [textFieldData.fontSize]);
   React.useEffect(() => {
     const onMouseDown = (e) => {
       if (e.target === borderRef.current && event.status === "mouse-up") {
@@ -110,9 +144,20 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     }
   });
 
+  useEffect(() => {
+    setTextData({
+      ...theTextData,
+      fontSize: fontSizeValue.fontSize,
+      // color: colorValue.color,
+      fontFamily: fontName,
+      textAlign: currentRadioFormatValue,
+      color: textColor,
+    });
+  }, [fontSizeValue, colorValue, fontName, currentRadioFormatValue, textColor]);
+  const displayHiddenHeader = edit == true ? "visible" : "hidden";
   return (
     <div className={classes.text}>
-      <TextControls
+      {/* <TextControls
         onBoldClick={() => {
           setTextData({
             ...theTextData,
@@ -159,7 +204,20 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
         textData={theTextData}
         edit={edit}
         disEnableHeaderText={disEnableHeaderText}
-      />
+      /> */}
+
+      <div
+        style={{
+          visibility: `${displayHiddenHeader}`,
+          cursor: "pointer",
+          top: "10px",
+        }}
+        // style={textCancel}
+        onClick={disEnableHeaderText}
+      >
+        <ClearIcon />
+      </div>
+      {/* )} */}
       <Border
         edit={edit}
         ref={borderRef}

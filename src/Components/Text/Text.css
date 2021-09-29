@@ -73,7 +73,7 @@
       background: #fff;
       /* border-color: none !important; */
       border-radius: 5px;
-      margin-right: 19px;
+      margin-left: 19px;
   }
   .btn-outline-primary {
     border-color: none !important;
@@ -100,10 +100,10 @@
 .text-btn-group-two{
     margin-left: 20px;
     background: #fff;
-    margin-top: 20px;
+    margin-top: 15px;
     border-radius: 5px;
-    width: 158px;
-    height: 39px;
+    width: auto;
+    height: auto;
     
 }
 .text-B-U{
@@ -129,3 +129,15 @@
     width: 135px;
     margin-left: 20px;
 } */
+.hidden{
+    visibility: hidden;
+    position: absolute;
+}
+.show{
+    visibility: visible;
+    position: absolute;
+}
+.text-font-size-name{
+    margin-bottom: 10px !important;
+    margin-left: 4px;
+}

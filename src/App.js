@@ -7,7 +7,7 @@ export const UserContext = createContext();
 
 function App() {
   const [textFieldData, setTextFieldData] = useState({});
-  console.log("textFieldData", textFieldData);
+  // console.log("APPtextFieldData", textFieldData);
   return (
     <UserContext.Provider value={[textFieldData, setTextFieldData]}>
       <Router>

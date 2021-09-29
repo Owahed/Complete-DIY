@@ -105,6 +105,33 @@
 }
 
 /* text-align-icon */
+.align-icon {
+  margin-left: 10px;
+}
 .align-icon button{
   padding: .31em .625em .31em .625em;
+  border-radius: 5px;
+    border: none;
+    margin: 2px;
 }
+pre {
+  margin-bottom: 0 !important;
+  
+}
+.icon-align> *{
+  pointer-events: none;
+}
+.makeStyles-select-12 {
+   width: 239px;
+   height: 40px !important;
+   background-color: white;
+   border: none;
+}
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  
+  border: none !important;
+}
+.MuiOutlinedInput-notchedOutline {
+  border-color: #003459 !important;
+}
+ 

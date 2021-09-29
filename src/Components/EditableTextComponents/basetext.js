@@ -27,13 +27,13 @@ const BaseText = React.forwardRef((props, ref) => {
   const classes = useStyles(textData);
 
   const [stateTwo, setStateTwo] = useState({
-    html: `<p>${textData.text}</p>`,
+    html: `${textData.text}`,
     editable: true,
   });
   const handleChange = (evt) => {
     setStateTwo({ html: evt.target.value, editable: true });
   };
-
+  console.log("fontSize", props.fontSize);
   return (
     // <span
     //   ref={ref}
@@ -43,8 +43,7 @@ const BaseText = React.forwardRef((props, ref) => {
     //   contentEditable={edit}
     //   suppressContentEditableWarning={true}
     // >
-    //  // {textData.text}
-
+    //   {textData.text}
     // </span>
     <ContentEditable
       className={`editable`}
@@ -56,7 +55,7 @@ const BaseText = React.forwardRef((props, ref) => {
       // innerRef={(elt) => setRaf((innerRef.current = elt))}
       ref={ref}
       id="text-draggable"
-      // onClick={onClick}
+      onClick={onClick}
       className={`${textData.id} ${classes.text} ${className || ""}`}
       contentEditable={edit}
       suppressContentEditableWarning={true}

@@ -4,7 +4,7 @@ import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
 import { UserContext } from "../../../App";
-import TextControlsBody from "../TextControlsBody";
+import ClearIcon from "@material-ui/icons/Clear";
 
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
@@ -20,13 +20,23 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 });
 
 const BodyEditableText = React.forwardRef((props, ref) => {
-  const { textData, onUpdate, disEnableHeaderText } = props;
+  const {
+    textData,
+    onUpdate,
+    disEnableHeaderText,
+    fontNameBody,
+    fontSizeValueBody,
+    currentRadioFormatValueBody,
+    textColorBody,
+    edit,
+    setEdit,
+  } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
       "Text id is required. Please add a Text id i.e { id: unique-id, ...}"
     );
   }
-  const [edit, setEdit] = React.useState(false);
+  // const [edit, setEdit] = React.useState(false);
   const [event, setEvent] = React.useState({
     x: 0,
     y: 0,
@@ -34,7 +44,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     originalY: 0,
     status: "mouse-up",
   });
-  const [theTextDataTwo, setTextDataTwo] = React.useState({
+  const [theTextData, setTextData] = React.useState({
     id: textData.id,
     x: textData.x || 0,
     y: textData.y || 0,
@@ -48,17 +58,29 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     color: textData.color || "black",
     tag: "03",
   });
-  const classes = useStyles(theTextDataTwo);
+  const classes = useStyles(theTextData);
 
   const textRef = React.useRef();
   const borderRef = React.useRef();
+  // console.log("textRef", textRef.current);
 
   // ----------------
   // const [textFieldData, setTextFieldData] = useContext(UserContext);
   // useEffect(() => {
-  //   console.log("theTextDataTwo", theTextDataTwo);
-  //   setTextFieldData(theTextDataTwo);
-  // }, [theTextDataTwo]);
+  //   setTextFieldData({
+  //     EditHeader: false,
+  //     EditBody: edit,
+  //     EditSubHeader: false,
+  //   });
+  // }, [theTextData, edit]);
+  // const textValue = textFieldData?.value;
+  // console.log("body text", textFieldData);
+  // useEffect(() => {
+  //   setTextDataTwo({
+  //     ...theTextDataTwo,
+  //     fontSize: textValue.fontSize,
+  //   });
+  // }, [theTextDataTwo, edit]);
 
   React.useEffect(() => {
     const onMouseDown = (e) => {
@@ -66,15 +88,15 @@ const BodyEditableText = React.forwardRef((props, ref) => {
         setEvent({
           x: e.clientX,
           y: e.clientY,
-          originalX: theTextDataTwo.x,
-          originalY: theTextDataTwo.y,
+          originalX: theTextData.x,
+          originalY: theTextData.y,
           status: "mouse-down",
         });
       }
     };
     const onMouseMove = (e) => {
       if (event.status === "mouse-down") {
-        setTextDataTwo((s) => ({
+        setTextData((s) => ({
           ...s,
           x: event.originalX + e.clientX - event.x,
           y: event.originalY + e.clientY - event.y,
@@ -108,8 +130,8 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     event.originalY,
     event.x,
     event.y,
-    theTextDataTwo.x,
-    theTextDataTwo.y,
+    theTextData.x,
+    theTextData.y,
   ]);
 
   React.useEffect(() => {
@@ -119,71 +141,43 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     }
   });
 
+  useEffect(() => {
+    setTextData({
+      ...theTextData,
+      fontSize: fontSizeValueBody.fontSize,
+      fontFamily: fontNameBody,
+      textAlign: currentRadioFormatValueBody,
+      color: textColorBody,
+    });
+  }, [
+    fontNameBody,
+    fontSizeValueBody,
+    currentRadioFormatValueBody,
+    textColorBody,
+  ]);
+  const displayHiddenHeader = edit == true ? "visible" : "hidden";
   return (
     <div className={classes.text}>
-      <TextControls
-        onBoldClick={() => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            fontWeight:
-              theTextDataTwo.fontWeight === "bold" ? "normal" : "bold",
-          });
+      <div
+        style={{
+          visibility: `${displayHiddenHeader}`,
+          cursor: "pointer",
+          top: "10px",
         }}
-        onItalicClick={() => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            fontStyle:
-              theTextDataTwo.fontStyle === "italic" ? "normal" : "italic",
-          });
-        }}
-        onUnderlineClick={() => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            textDecoration:
-              theTextDataTwo.textDecoration === "underline"
-                ? "none"
-                : "underline",
-          });
-        }}
-        onFontSizeSelect={(e) => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            fontSize: parseInt(e.target.value),
-          });
-        }}
-        onFontFamilySelect={(e) => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            fontFamily: e.target.value,
-          });
-        }}
-        onFontColorChange={(e) => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            color: e.target.value,
-          });
-        }}
-        handleFormatChange={(e) => {
-          setTextDataTwo({
-            ...theTextDataTwo,
-            textAlign: e.target.value,
-          });
-        }}
-        // handleFormatChange={handleFormatChange}
-        textData={theTextDataTwo}
-        edit={edit}
-        disEnableHeaderText={disEnableHeaderText}
-      />
-
+        // style={textCancel}
+        onClick={disEnableHeaderText}
+      >
+        <ClearIcon />
+      </div>
       <Border
         edit={edit}
         ref={borderRef}
-        textData={theTextDataTwo}
+        textData={theTextData}
         color="lightgrey"
       >
         <BaseText
           ref={textRef}
-          textData={theTextDataTwo}
+          textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}
         />

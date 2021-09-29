@@ -137,9 +137,12 @@ const DiyHomeOne = () => {
   //   }
   // }, [imgState]);
 
-  console.log(imgState);
-
   // --------------text
+
+  let texts = { id: "unique-1" };
+  let textsTwo = { id: "unique-2" };
+  let textsThree = { id: "unique-3" };
+  const textRef = React.useRef();
   function EditButton(props) {
     return (
       <button
@@ -181,24 +184,22 @@ const DiyHomeOne = () => {
   };
 
   // ----------------font text---------------------
-  const [fontName, setFontName] = useState("Open Sans");
-  const fontChange = (e) => {
-    setFontName(e.target.value);
-  };
+  // const [fontName, setFontName] = useState("Open Sans");
+  // const fontChange = (e) => {
+  //   setFontName(e.target.value);
+  // };
+  // console.log(fontName);
   // ----------------font size text---------------------
   const [fontSizeName, setFontSizeName] = useState(18);
   const fontSizeChange = (e) => {
     setFontSizeName(e.target.value);
   };
-  // ----------------font size text---------------------
-  const [currentRadioFormatValue, setCurrentRadioFormatValue] = useState("");
+  // ----------------format size text---------------------
+  // const [currentRadioFormatValue, setCurrentRadioFormatValue] = useState("");
 
-  const handleRadioFormatChange = (e) => {
-    setCurrentRadioFormatValue(e.target.value);
-  };
-
-  // color text
-  const [textColor, setTextColor] = useState("#000");
+  // const handleRadioFormatChange = (e) => {
+  //   setCurrentRadioFormatValue(e.target.value);
+  // };
 
   // color bg
   const [color, setColor] = useState("#fff");
@@ -236,6 +237,86 @@ const DiyHomeOne = () => {
     });
   };
 
+  // text part-----------------------------------
+  //text editable-----------------------
+  const [editHeader, setEditHeader] = React.useState(false);
+  const [editSubHeader, setEditSubHeader] = React.useState(false);
+  const [editBody, setEditBody] = React.useState(false);
+
+  // header components
+  //font name
+  const [fontName, setFontName] = useState("sans-serif");
+  const fontChange = (e) => {
+    setFontName(e.target.value);
+  };
+
+  // fontChange
+  const [fontSizeValue, setFontSizeValue] = useState(28);
+  const ChangeFontValue = (e) => {
+    setFontSizeValue({
+      ...fontSizeValue,
+      fontSize: parseInt(e.target.value),
+    });
+  };
+  //color change
+  // const [colorValueBody, setColorValueBody] = useState("#000");
+  // const onFontColorChangeBody = (e) => {
+  //   setColorValue({
+  //     ...colorValue,
+  //     color: e.target.value,
+  //   });
+  // };
+  const [currentRadioFormatValue, setCurrentRadioFormatValue] = useState("");
+
+  const handleRadioFormatChange = (e) => {
+    setCurrentRadioFormatValue(e.target.value);
+  };
+  // color text
+
+  const [textColor, setTextColor] = useState("#000");
+  //sub header
+  //font name
+  const [fontNameSubHeader, setFontNameSubHeader] = useState("sans-serif");
+  const fontChangeSubHeader = (e) => {
+    setFontNameSubHeader(e.target.value);
+  };
+  const [fontSizeValueSubHeader, setFontSizeValueSubHeader] = useState(28);
+  const ChangeFontValueSubHeader = (e) => {
+    setFontSizeValueSubHeader({
+      ...fontSizeValueSubHeader,
+      fontSize: parseInt(e.target.value),
+    });
+  };
+  const [
+    currentRadioFormatValueSubHeader,
+    setCurrentRadioFormatValueSubHeader,
+  ] = useState("");
+
+  const handleRadioFormatChangeSubHeader = (e) => {
+    setCurrentRadioFormatValueSubHeader(e.target.value);
+  };
+
+  const [textColorSubHeader, setTextColorSubHeader] = useState("#000");
+  //body text
+  //font name
+  const [fontNameBody, setFontNameBody] = useState("sans-serif");
+  const fontChangeBody = (e) => {
+    setFontNameBody(e.target.value);
+  };
+  const [fontSizeValueBody, setFontSizeValueBody] = useState(28);
+  const ChangeFontValueBody = (e) => {
+    setFontSizeValueBody({
+      ...fontSizeValueBody,
+      fontSize: parseInt(e.target.value),
+    });
+  };
+  const [currentRadioFormatValueBody, setCurrentRadioFormatValueBody] =
+    useState("");
+
+  const handleRadioFormatChangeBody = (e) => {
+    setCurrentRadioFormatValueBody(e.target.value);
+  };
+  const [textColorBody, setTextColorBody] = useState("#000");
   return (
     <div>
       <div className="diy-header">
@@ -263,6 +344,25 @@ const DiyHomeOne = () => {
                 EditButton={EditButton}
                 handleRadioFormatChange={handleRadioFormatChange}
                 setTextColor={setTextColor}
+                texts={texts}
+                textsTwo={textsTwo}
+                textsThree={textsThree}
+                textRef={textRef}
+                ChangeFontValue={ChangeFontValue}
+                // onFontColorChange={onFontColorChange}
+                ChangeFontValueSubHeader={ChangeFontValueSubHeader}
+                fontChangeSubHeader={fontChangeSubHeader}
+                handleRadioFormatChangeSubHeader={
+                  handleRadioFormatChangeSubHeader
+                }
+                setTextColorSubHeader={setTextColorSubHeader}
+                fontChangeBody={fontChangeBody}
+                ChangeFontValueBody={ChangeFontValueBody}
+                handleRadioFormatChangeBody={handleRadioFormatChangeBody}
+                setTextColorBody={setTextColorBody}
+                editHeader={editHeader}
+                editSubHeader={editSubHeader}
+                editBody={editBody}
               />
             )}
             {showUploadPanel && (
@@ -313,6 +413,28 @@ const DiyHomeOne = () => {
                 disEnableBodyText={disEnableBodyText}
                 inputRef={inputRef}
                 // domNode={domNode}
+                texts={texts}
+                textsTwo={textsTwo}
+                textsThree={textsThree}
+                textRef={textRef}
+                fontSizeValue={fontSizeValue}
+                // colorValue={colorValue}
+                fontSizeValueSubHeader={fontSizeValueSubHeader}
+                fontNameSubHeader={fontNameSubHeader}
+                currentRadioFormatValueSubHeader={
+                  currentRadioFormatValueSubHeader
+                }
+                textColorSubHeader={textColorSubHeader}
+                fontNameBody={fontNameBody}
+                fontSizeValueBody={fontSizeValueBody}
+                currentRadioFormatValueBody={currentRadioFormatValueBody}
+                textColorBody={textColorBody}
+                editHeader={editHeader}
+                setEditHeader={setEditHeader}
+                editSubHeader={editSubHeader}
+                setEditSubHeader={setEditSubHeader}
+                editBody={editBody}
+                setEditBody={setEditBody}
               />
               {/* <Test text="hello World" /> */}
               {/* <TestClass EditButton={EditButton} /> */}

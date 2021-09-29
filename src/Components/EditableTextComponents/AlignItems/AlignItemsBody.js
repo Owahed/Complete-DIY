@@ -7,24 +7,13 @@ import React from "react";
 const AlignItemsBody = ({ handleFormatChange, textData }) => {
   return (
     <div>
-      {/* <div
-        className=""
-        class="btn-group text-btn-group"
-        role="group"
-        aria-label="Basic checkbox radio toggle button group"
-      >
-        <input
-          defaultChecked
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio1"
-          autocomplete="off"
+      <div className="d-flex align-icon">
+        <button
+          className="icon-align"
           value="start"
-          //   onChange={handleBodyFormatChange}
-          onClick={(e) => handleBodyFormatChange(e)}
-        />
-        <label class="btn btn-outline-primary" for="btnradio1">
+          onClick={(e) => handleFormatChange(e)}
+        >
+          {/* <FormatAlignLeftIcon /> */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24.711"
@@ -39,19 +28,12 @@ const AlignItemsBody = ({ handleFormatChange, textData }) => {
               fill="#292929"
             />
           </svg>
-        </label>
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio2"
-          autocomplete="off"
+        </button>
+        <button
+          className="icon-align"
           value="center"
-          //   onChange={handleBodyFormatChange}
-          onClick={(e) => handleBodyFormatChange(e)}
-        />
-        <label class="btn btn-outline-primary" for="btnradio2">
+          onClick={(e) => handleFormatChange(e)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22.891"
@@ -66,19 +48,12 @@ const AlignItemsBody = ({ handleFormatChange, textData }) => {
               fill="#292929"
             />
           </svg>
-        </label>
-
-        <input
-          type="radio"
-          class="btn-check"
-          name="btnradio"
-          id="btnradio3"
-          autocomplete="off"
+        </button>
+        <button
+          className="icon-align"
           value="end"
-          //   onChange={handleBodyFormatChange}
-          onClick={(e) => handleBodyFormatChange(e)}
-        />
-        <label class="btn btn-outline-primary" for="btnradio3">
+          onClick={(e) => handleFormatChange(e)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24.796"
@@ -93,18 +68,6 @@ const AlignItemsBody = ({ handleFormatChange, textData }) => {
               fill="#292929"
             />
           </svg>
-        </label>
-      </div> */}
-
-      <div className="d-flex align-icon">
-        <button value="start" onClick={(e) => handleFormatChange(e)}>
-          1
-        </button>
-        <button value="center" onClick={(e) => handleFormatChange(e)}>
-          2
-        </button>
-        <button value="end" onClick={(e) => handleFormatChange(e)}>
-          3
         </button>
       </div>
     </div>
