@@ -10,10 +10,6 @@ const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
 };
 
-const textCancel = {
-  cursor: "pointer",
-  top: "10px",
-};
 const useStyles = MaterialUI.makeStyles((theme) => {
   return {
     text: {
@@ -69,22 +65,6 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
   const textRef = React.useRef();
   const borderRef = React.useRef();
 
-  // ----------------
-  // const [textFieldData, setTextFieldData] = useContext(UserContext);
-  // useEffect(() => {
-  //   setTextFieldData({
-  //     EditHeader: edit,
-  //     EditBody: false,
-  //     EditSubHeader: false,
-  //   });
-  // }, [theTextData, edit]);
-  // console.log("header text", textFieldData);
-  // useEffect(() => {
-  //   setTextData({
-  //     ...textFieldData,
-  //     fontSize: textFieldData.fontSize,
-  //   });
-  // }, [textFieldData.fontSize]);
   React.useEffect(() => {
     const onMouseDown = (e) => {
       if (e.target === borderRef.current && event.status === "mouse-up") {
@@ -137,6 +117,11 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     theTextData.y,
   ]);
 
+  // React.useEffect(() => {
+  //   if (ref) {
+  //     onUpdate();
+  //   }
+  // });
   React.useEffect(() => {
     if (textRef && ref) {
       ref.current = textRef.current;
@@ -148,7 +133,6 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     setTextData({
       ...theTextData,
       fontSize: fontSizeValue.fontSize,
-      // color: colorValue.color,
       fontFamily: fontName,
       textAlign: currentRadioFormatValue,
       color: textColor,
@@ -226,6 +210,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
       >
         <BaseText
           ref={textRef}
+          // ref={ref}
           textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}

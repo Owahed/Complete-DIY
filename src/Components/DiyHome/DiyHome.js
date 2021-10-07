@@ -167,7 +167,7 @@ const DiyHomeOne = () => {
     setHeaderText(false);
   };
   // ------
-  const [subHeaderText, setSubHeaderText] = useState(false);
+  const [subHeaderText, setSubHeaderText] = useState(true);
   const enableSubHeaderText = () => {
     setSubHeaderText(true);
   };
@@ -175,7 +175,7 @@ const DiyHomeOne = () => {
     setSubHeaderText(false);
   };
   // -------
-  const [bodyText, setBodyText] = useState(false);
+  const [bodyText, setBodyText] = useState(true);
   const enableBodyText = () => {
     setBodyText(true);
   };
@@ -347,7 +347,7 @@ const DiyHomeOne = () => {
                 texts={texts}
                 textsTwo={textsTwo}
                 textsThree={textsThree}
-                textRef={textRef}
+                // textRef={textRef}
                 ChangeFontValue={ChangeFontValue}
                 // onFontColorChange={onFontColorChange}
                 ChangeFontValueSubHeader={ChangeFontValueSubHeader}
@@ -361,8 +361,11 @@ const DiyHomeOne = () => {
                 handleRadioFormatChangeBody={handleRadioFormatChangeBody}
                 setTextColorBody={setTextColorBody}
                 editHeader={editHeader}
+                setEditHeader={setEditHeader}
                 editSubHeader={editSubHeader}
+                setEditSubHeader={setEditSubHeader}
                 editBody={editBody}
+                setEditBody={setEditBody}
               />
             )}
             {showUploadPanel && (

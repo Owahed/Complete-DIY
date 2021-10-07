@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { CompactPicker, GithubPicker } from "react-color";
 import { UserContext } from "../../App";
 import TextControls from "../EditableTextComponents/textcontrols";
@@ -7,6 +7,7 @@ import Fonts from "../EditableTextComponents/config.json";
 import FontFamilySelect from "../EditableTextComponents/fontfamilyselect";
 import FontSizeSelect from "../EditableTextComponents/fontsizeselect";
 import FontColor from "../EditableTextComponents/fontcolor";
+import OutsideClickHandler from "react-outside-click-handler";
 // import FontFamilySelect from "../";
 
 const Text = ({
@@ -34,8 +35,11 @@ const Text = ({
   handleRadioFormatChangeBody,
   setTextColorBody,
   editHeader,
+  setEditHeader,
   editSubHeader,
+  setEditSubHeader,
   editBody,
+  setEditBody,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
   const [textFieldData, setTextFieldData] = useContext(UserContext);
@@ -46,13 +50,186 @@ const Text = ({
   // let texts = { id: "unique-1" };
   // let textsTwo = { id: "unique-2" };
   // let textsThree = { id: "unique-3" };
-  // const textRef = React.useRef();
+  const textRefOne = React.useRef();
+  // console.log("textRefOne", textRefOne.current.focus());
   const [one, setOne] = useState({ id: "unique-1", tag: "01" });
   const [two, setTwo] = useState({ id: "unique-2", tag: "02" });
   const [three, setThree] = useState({ id: "unique-3", tag: "03" });
-  const displayHiddenHeader = editHeader == true ? "visible" : "hidden";
-  const displayHiddenSubHeader = editSubHeader == true ? "visible" : "hidden";
-  const displayHiddenBody = editBody == true ? "visible" : "hidden";
+  const [four, setFour] = useState({ id: "unique-4", tag: "04" });
+  // const displayHiddenHeader = editHeader == true ? "visible" : "hidden";
+  // const displayHiddenSubHeader = editSubHeader == true ? "visible" : "hidden";
+  // const displayHiddenBody = editBody == true ? "visible" : "hidden";
+  // const displayHiddenAll =
+  //   editBody == false && editSubHeader == false && editHeader == false
+  //     ? "visible"
+  //     : "hidden";
+
+  // const handelRefHeader = (e) => {
+  //   console.log(e);
+  //   setEditHeader(true);
+  // };
+  // useEffect(() => {
+  //   // console.log("textRefOne", textRefOne.current.focus());
+  //   const onClickHeader = (e) => {
+  //     setEditHeader((s) => e.target.classList.contains(one.id));
+  //   };
+  // }, [one.id]);
+
+  // -------------header-------------
+
+  // const [clickedOutsideHeader, setClickedOutsideHeader] = useState(false);
+
+  // const myRefHeader = useRef();
+  // console.log("clickedOutsideHeader", clickedOutsideHeader);
+  // console.log("myRefHeader", myRefHeader.current);
+  // const [clickedOutsideSubHeader, setClickedOutsideSubHeader] = useState(false);
+  // const myRefSubHeader = useRef();
+
+  // const handleClickOutsideHeader = (e) => {
+  //   if (myRefHeader.current.contains(e.target)) {
+  //     setClickedOutsideHeader(true);
+  //   }
+  //   console.log("ha", myRefHeader.current.contains(e.target));
+  // };
+
+  // const handleClickInsideHeader = () => {
+  //   setClickedOutsideHeader(false);
+  // };
+
+  // // ----------------------Sub header
+  // // const [clickedOutsideSubHeader, setClickedOutsideSubHeader] = useState(false);
+  // // const myRefSubHeader = useRef();
+  // // console.log("clickedOutsideSubHeader", clickedOutsideSubHeader);
+
+  // // const handleClickOutsideSubheader = (e) => {
+  // //   if (myRefSubHeader.current.contains(e.target)) {
+  // //     setClickedOutsideSubHeader(true);
+  // //   }
+  // // };
+
+  // const handleClickInsideSubHeader = () => setClickedOutsideSubHeader(false);
+
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutsideHeader);
+  //   // document.addEventListener("mousedown", handleClickOutsideSubheader);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutsideHeader);
+  //     // document.removeEventListener("mousedown", handleClickOutsideSubheader);
+  //   };
+  // });
+  // // ---------------sub header--------------
+  // // const [clickedOutsideSubHeader, setClickedOutsideSubHeader] = useState(false);
+  // // const myRefSubHeader = useRef();
+  // console.log("clickedOutsideSubHeader", clickedOutsideSubHeader.current);
+  // console.log("myRefSubHeader", myRefSubHeader.current);
+
+  // const handleClickOutsideSubheader = (e) => {
+  //   if (myRefSubHeader.current.contains(e.target)) {
+  //     setClickedOutsideSubHeader(true);
+  //   }
+  //   console.log("haears", myRefHeader.current.contains(e.target));
+  // };
+
+  // // const handleClickInsideSubHeader = () => setClickedOutsideSubHeader(false);
+
+  // useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutsideSubheader);
+  //   return () =>
+  //     document.removeEventListener("mousedown", handleClickOutsideSubheader);
+  // });
+  // // ---------------body --------------
+  // const [clickedOutsideBody, setClickedOutsideBody] = useState(false);
+  // const myRefBody = useRef();
+  // console.log("clickedOutsideBody", clickedOutsideBody);
+  // console.log("myRefBody", myRefBody.current);
+
+  // const handleClickOutsideBody = (e) => {
+  //   if (myRefBody.current.contains(e.target)) {
+  //     setClickedOutsideBody(true);
+  //   }
+  //   console.log("Body Ref", myRefHeader.current.contains(e.target));
+  // };
+
+  // const handleClickInsideBody = () => setClickedOutsideBody(false);
+
+  // useEffect(() => {
+  //   document.addEventListener("mouseup", handleClickOutsideBody);
+  //   return () =>
+  //     document.removeEventListener("mouseup", handleClickOutsideBody);
+  // });
+
+  // useEffect(() => {
+  //   if (clickedOutsideHeader == false) {
+  //     setEditHeader(true);
+  //   }
+  //   // if (clickedOutsideSubHeader == false) {
+  //   //   setEditSubHeader(true);
+  //   //   console.log("jksdfa");
+  //   // }
+  // }, [clickedOutsideHeader]);
+  // useEffect(() => {
+  //   if (clickedOutsideSubHeader == false) {
+  //     setEditSubHeader(true);
+  //     console.log("jksdfa");
+  //   }
+  // }, [clickedOutsideSubHeader]);
+  // // console.log("visible", clickedOutside);
+  // useEffect(() => {
+  //   if (clickedOutsideBody == false) {
+  //     setEditBody(true);
+  //     console.log("body");
+  //   }
+  // }, [clickedOutsideBody]);
+  // console.log("visible", clickedOutside);
+
+  // ----header-------
+  const [blurHeader, setBlurHeader] = useState(false);
+  const [blurSubHeader, setBlurSubHeader] = useState(false);
+  const [blurBody, setBlurBody] = useState(false);
+  console.log("blur", blurHeader);
+  const clickHeaderFun = () => {
+    setBlurHeader(false);
+  };
+  const blurHeaderFun = () => {
+    setBlurHeader(true);
+  };
+  // ----Subheader-------
+
+  console.log("blurSubHeader", blurSubHeader);
+  const clickSubHeaderFun = () => {
+    setBlurSubHeader(true);
+  };
+  const blurSubHeaderFun = () => {
+    setBlurSubHeader(false);
+  };
+  // ----blurBody-------
+  console.log("blurBody", blurBody);
+  const clickBodyFun = () => {
+    setBlurBody(false);
+  };
+  const blurBodyFun = () => {
+    setBlurBody(true);
+  };
+  // useEffect(() => {
+  //   if (blurHeader == true) {
+  //     setEditHeader(true);
+  //   }
+  //   if (blurSubHeader == true) {
+  //     setEditSubHeader(true);
+  //   }
+  //   if (blurBody == true) {
+  //     setEditBody(true);
+  //   }
+  // }, [blurHeader, blurSubHeader, blurBody]);
+  const displayHiddenHeader =
+    editHeader || blurHeader == true ? "visible" : "hidden";
+  const displayHiddenSubHeader =
+    editSubHeader || blurSubHeader == true ? "visible" : "hidden";
+  const displayHiddenBody = editBody || blurBody == true ? "visible" : "hidden";
+  const displayHiddenAll =
+    editBody == false && editSubHeader == false && editHeader == false
+      ? "hidden"
+      : "hidden";
   return (
     <div className="position-relative">
       <div className="mt-5 pb-2">
@@ -87,584 +264,280 @@ const Text = ({
       <div className=" d-flex justify-content-center">
         <hr className="text-hr" />
       </div>
-
-      <div
-        className="position-absolute"
-        style={{ visibility: `${displayHiddenHeader}` }}
-      >
-        <div className="d-flex justify-content-center text-white">
-          <div>
-            <p className="text-font-size-name">Font</p>
-
+      <OutsideClickHandler onOutsideClick={clickHeaderFun}>
+        <div
+          // onClick={() => setVisible(true)}
+          // onClick={() => setEdit(true)}
+          // ref={myRefHeader}
+          // onClick={handleClickInsideHeader}
+          onClick={blurHeaderFun}
+          className="position-absolute"
+          style={{
+            visibility: `${displayHiddenHeader}`,
+            border: "inline-block",
+          }}
+        >
+          <div className="d-flex justify-content-center text-white">
             <div>
-              <FontFamilySelect
-                className="option font-option"
-                onFontFamilySelect={(e) => fontChange(e)}
+              <p className="text-font-size-name">Font</p>
+
+              <div>
+                <FontFamilySelect
+                  className="option font-option"
+                  onFontFamilySelect={(e) => fontChange(e)}
+                  textData={one}
+                />
+              </div>
+            </div>
+            <div>
+              <p className="text-font-size-name">Size</p>
+
+              <FontSizeSelect
+                onFontSizeSelect={(e) => ChangeFontValue(e)}
+                className="option size-option"
                 textData={one}
               />
             </div>
           </div>
-          <div>
-            <p className="text-font-size-name">Size</p>
 
-            <FontSizeSelect
-              onFontSizeSelect={(e) => ChangeFontValue(e)}
-              className="option size-option"
-              textData={one}
+          <div className="mt-3 d-flex justify-content-center ">
+            <div className=" d-flex justify-content-center">
+              <div
+                // ref={textRefOne}
+                className=" btn-group text-btn-group pl-3"
+              >
+                <div className="btn-b">
+                  <EditButton cmd="bold" name="B" />
+                </div>
+
+                <div
+                  //  onClick={handelRefHeader}
+                  className="btn-b"
+                >
+                  <EditButton cmd="italic" name="𝒊" />
+                </div>
+                <div
+                  //  onClick={handelRefHeader}
+                  className="btn-b"
+                >
+                  <EditButton cmd="underline" name="U" />
+                </div>
+              </div>
+
+              <div className="d-flex align-icon">
+                <button
+                  className="icon-align"
+                  value="start"
+                  onClick={handleRadioFormatChange}
+                >
+                  {/* <FormatAlignLeftIcon /> */}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24.711"
+                    height="16.023"
+                    viewBox="0 0 24.711 16.023"
+                  >
+                    <path
+                      id="Path_9540"
+                      data-name="Path 9540"
+                      d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
+                      transform="translate(-0.5 -5.949)"
+                      fill="#292929"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className="icon-align"
+                  value="center"
+                  onClick={handleRadioFormatChange}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22.891"
+                    height="16.023"
+                    viewBox="0 0 22.891 16.023"
+                  >
+                    <path
+                      id="Path_9542"
+                      data-name="Path 9542"
+                      d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
+                      transform="translate(-8 -20)"
+                      fill="#292929"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className="icon-align"
+                  value="end"
+                  onClick={handleRadioFormatChange}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24.796"
+                    height="16.078"
+                    viewBox="0 0 24.796 16.078"
+                  >
+                    <path
+                      id="Path_9541"
+                      data-name="Path 9541"
+                      d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
+                      transform="translate(-0.5 -5.949)"
+                      fill="#292929"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            class="btn-group text-btn-group-two"
+            role="group"
+            aria-label="Basic checkbox toggle button group"
+          >
+            <CompactPicker
+              onChange={(updateTextColor) => setTextColor(updateTextColor.hex)}
             />
           </div>
         </div>
-
-        <div className="mt-3 d-flex justify-content-center ">
-          <div className=" d-flex justify-content-center">
-            <div className=" btn-group text-btn-group pl-3">
-              <div className="btn-b">
-                <EditButton cmd="bold" name="B" />
-              </div>
-
-              <div className="btn-b">
-                <EditButton cmd="italic" name="𝒊" />
-              </div>
-              <div className="btn-b">
-                <EditButton cmd="underline" name="U" />
-              </div>
-            </div>
-
-            <div className="d-flex align-icon">
-              <button
-                className="icon-align"
-                value="start"
-                onClick={handleRadioFormatChange}
-              >
-                {/* <FormatAlignLeftIcon /> */}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24.711"
-                  height="16.023"
-                  viewBox="0 0 24.711 16.023"
-                >
-                  <path
-                    id="Path_9540"
-                    data-name="Path 9540"
-                    d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
-                    transform="translate(-0.5 -5.949)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-              <button
-                className="icon-align"
-                value="center"
-                onClick={handleRadioFormatChange}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22.891"
-                  height="16.023"
-                  viewBox="0 0 22.891 16.023"
-                >
-                  <path
-                    id="Path_9542"
-                    data-name="Path 9542"
-                    d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
-                    transform="translate(-8 -20)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-              <button
-                className="icon-align"
-                value="end"
-                onClick={handleRadioFormatChange}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24.796"
-                  height="16.078"
-                  viewBox="0 0 24.796 16.078"
-                >
-                  <path
-                    id="Path_9541"
-                    data-name="Path 9541"
-                    d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
-                    transform="translate(-0.5 -5.949)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div
-          class="btn-group text-btn-group-two"
-          role="group"
-          aria-label="Basic checkbox toggle button group"
-        >
-          {/* <div className="btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25.05"
-              height="15.844"
-              viewBox="0 0 25.05 15.844"
-            >
-              <g
-                id="Group_291"
-                data-name="Group 291"
-                transform="translate(-276.054 -779.999)"
-              >
-                <path
-                  id="FontAwsome_align-justify_"
-                  data-name="FontAwsome (align-justify)"
-                  d="M15.278,45.58H.566A.566.566,0,0,0,0,46.146v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V46.146A.566.566,0,0,0,15.278,45.58Zm0-4.527H.566A.566.566,0,0,0,0,41.619v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V41.619A.566.566,0,0,0,15.278,41.053Zm0-4.527H.566A.566.566,0,0,0,0,37.093v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V37.093A.566.566,0,0,0,15.278,36.527Zm0-4.527H.566A.566.566,0,0,0,0,32.566V33.7a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V32.566A.566.566,0,0,0,15.278,32Z"
-                  transform="translate(285.26 748)"
-                  fill="#292929"
-                />
-                <g
-                  id="Group_290"
-                  data-name="Group 290"
-                  transform="translate(276.054 779.999)"
-                >
-                  <path
-                    id="FontAwsome_angle-up_"
-                    data-name="FontAwsome (angle-up)"
-                    d="M3.971,152.822l3.089,3.089a.543.543,0,0,1,0,.77l-.513.513a.543.543,0,0,1-.77,0l-2.192-2.187L1.4,157.2a.543.543,0,0,1-.77,0l-.516-.513a.543.543,0,0,1,0-.77L3.2,152.825A.544.544,0,0,1,3.971,152.822Z"
-                    transform="translate(0.05 -152.662)"
-                    fill="#292929"
-                  />
-                  <path
-                    id="FontAwsome_angle-down_"
-                    data-name="FontAwsome (angle-down)"
-                    d="M3.2,157.284l-3.09-3.09a.543.543,0,0,1,0-.77l.514-.514a.543.543,0,0,1,.77,0l2.19,2.19,2.19-2.19a.543.543,0,0,1,.77,0l.514.514a.543.543,0,0,1,0,.77l-3.09,3.09A.54.54,0,0,1,3.2,157.284Z"
-                    transform="translate(0.05 -141.601)"
-                    fill="#292929"
-                  />
-                  <line
-                    id="Line_30"
-                    data-name="Line 30"
-                    y2="13.272"
-                    transform="translate(3.634 1.244)"
-                    fill="none"
-                    stroke="#292929"
-                    stroke-width="2"
-                  />
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div className="btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15.844"
-              height="15.844"
-              viewBox="0 0 15.844 15.844"
-            >
-              <g
-                id="Group_293"
-                data-name="Group 293"
-                transform="translate(-2.5 -2.5)"
-              >
-                <rect
-                  id="Rectangle_105"
-                  data-name="Rectangle 105"
-                  width="4.532"
-                  height="4.532"
-                  transform="translate(8.148 8.148)"
-                  fill="#292929"
-                />
-                <path
-                  id="Path_9572"
-                  data-name="Path 9572"
-                  d="M2.5,3.183V17.661a.686.686,0,0,0,.683.683H17.661a.686.686,0,0,0,.683-.683V3.183a.686.686,0,0,0-.683-.683H3.183A.676.676,0,0,0,2.5,3.183Zm10.179,9.5v4.448H8.148V12.679H3.7V8.148H8.148V3.7h4.532V8.148h4.448v4.532Z"
-                  fill="#292929"
-                />
-              </g>
-            </svg>
-          </div>
-          <div
-            onClick={() =>
-              setTextColorPicker((showColorPicker) => !showColorPicker)
-            }
-            className="btn"
-          >
-            {showTextColorPicker ? (
-              <div style={{ width: "20px" }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-              >
-                <g
-                  id="Layer_2"
-                  data-name="Layer 2"
-                  transform="translate(0 0.014)"
-                >
-                  <g
-                    id="invisible_box"
-                    data-name="invisible box"
-                    transform="translate(0 -0.014)"
-                  >
-                    <rect
-                      id="Rectangle_107"
-                      data-name="Rectangle 107"
-                      width="20"
-                      height="20"
-                      fill="none"
-                    />
-                  </g>
-                  <g
-                    id="icons_Q2"
-                    data-name="icons Q2"
-                    transform="translate(1.665 1.666)"
-                  >
-                    <path
-                      id="Path_9576"
-                      data-name="Path 9576"
-                      d="M19.739,5.665H11.37A2.581,2.581,0,0,0,9,4,2.5,2.5,0,0,0,6.665,5.665H4.916A.874.874,0,0,0,4,6.5a.874.874,0,0,0,.916.833H6.665A2.5,2.5,0,0,0,9,9,2.581,2.581,0,0,0,11.37,7.331h8.369a.874.874,0,0,0,.916-.833.874.874,0,0,0-.916-.833ZM9,7.331A.833.833,0,1,1,9.829,6.5.833.833,0,0,1,9,7.331Z"
-                      transform="translate(-4 -4)"
-                      fill="#292929"
-                    />
-                    <path
-                      id="Path_9577"
-                      data-name="Path 9577"
-                      d="M19.855,19.665H18.148A2.581,2.581,0,0,0,15.775,18a2.5,2.5,0,0,0-2.332,1.665H5.033a.833.833,0,1,0,0,1.665h8.411A2.5,2.5,0,0,0,15.775,23a2.581,2.581,0,0,0,2.373-1.665h1.707a.833.833,0,1,0,0-1.665Zm-4.08,1.665a.833.833,0,1,1,.833-.833A.833.833,0,0,1,15.775,21.331Z"
-                      transform="translate(-4.117 -12.171)"
-                      fill="#292929"
-                    />
-                    <path
-                      id="Path_9578"
-                      data-name="Path 9578"
-                      d="M19.855,33.665h-7.12A2.581,2.581,0,0,0,10.362,32a2.5,2.5,0,0,0-2.332,1.665h-3a.833.833,0,1,0,0,1.665h3A2.5,2.5,0,0,0,10.362,37a2.581,2.581,0,0,0,2.373-1.665h7.12a.833.833,0,1,0,0-1.665Zm-9.493,1.665a.833.833,0,1,1,.833-.833A.833.833,0,0,1,10.362,35.331Z"
-                      transform="translate(-4.117 -20.342)"
-                      fill="#292929"
-                    />
-                  </g>
-                </g>
-              </svg>
-            )}
-            {showTextColorPicker && (
-              <GithubPicker
-                className="text-color-pic"
-                // color={color}
-                onChange={(updateTextColor) =>
-                  setTextColor(updateTextColor.hex)
-                }
-              />
-            )}
-          </div> */}
-          <CompactPicker
-            onChange={(updateTextColor) => setTextColor(updateTextColor.hex)}
-          />
-        </div>
-      </div>
-
+      </OutsideClickHandler>
       {/* ------------------------Sub header----------------------------------------- */}
       <div
-        className="position-absolute"
-        style={{ visibility: `${displayHiddenSubHeader}` }}
+      //
       >
-        <div className="d-flex justify-content-center text-white">
-          <div>
-            <p className="text-font-size-name">Font</p>
-
-            <div>
-              <FontFamilySelect
-                className="option font-option"
-                onFontFamilySelect={(e) => fontChangeSubHeader(e)}
-                textData={two}
-              />
-            </div>
-          </div>
-          <div>
-            <p className="text-font-size-name">Size</p>
-
-            <FontSizeSelect
-              onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
-              className="option size-option"
-              textData={two}
-            />
-          </div>
-        </div>
-
-        <div className="mt-3 d-flex justify-content-center ">
-          <div className=" d-flex justify-content-center">
-            <div className=" btn-group text-btn-group pl-3">
-              <div className="btn-b">
-                <EditButton cmd="bold" name="B" />
-              </div>
-
-              <div className="btn-b">
-                <EditButton cmd="italic" name="𝒊" />
-              </div>
-              <div className="btn-b">
-                <EditButton cmd="underline" name="U" />
-              </div>
-            </div>
-
-            <div className="d-flex align-icon">
-              <button
-                className="icon-align"
-                value="start"
-                onClick={handleRadioFormatChangeSubHeader}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24.711"
-                  height="16.023"
-                  viewBox="0 0 24.711 16.023"
-                >
-                  <path
-                    id="Path_9540"
-                    data-name="Path 9540"
-                    d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
-                    transform="translate(-0.5 -5.949)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-              <button
-                className="icon-align"
-                value="center"
-                onClick={handleRadioFormatChangeSubHeader}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22.891"
-                  height="16.023"
-                  viewBox="0 0 22.891 16.023"
-                >
-                  <path
-                    id="Path_9542"
-                    data-name="Path 9542"
-                    d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
-                    transform="translate(-8 -20)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-              <button
-                className="icon-align"
-                value="end"
-                onClick={handleRadioFormatChangeSubHeader}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24.796"
-                  height="16.078"
-                  viewBox="0 0 24.796 16.078"
-                >
-                  <path
-                    id="Path_9541"
-                    data-name="Path 9541"
-                    d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
-                    transform="translate(-0.5 -5.949)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div
-          class="btn-group text-btn-group-two"
-          role="group"
-          aria-label="Basic checkbox toggle button group"
-        >
-          {/* <div className="btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25.05"
-              height="15.844"
-              viewBox="0 0 25.05 15.844"
-            >
-              <g
-                id="Group_291"
-                data-name="Group 291"
-                transform="translate(-276.054 -779.999)"
-              >
-                <path
-                  id="FontAwsome_align-justify_"
-                  data-name="FontAwsome (align-justify)"
-                  d="M15.278,45.58H.566A.566.566,0,0,0,0,46.146v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V46.146A.566.566,0,0,0,15.278,45.58Zm0-4.527H.566A.566.566,0,0,0,0,41.619v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V41.619A.566.566,0,0,0,15.278,41.053Zm0-4.527H.566A.566.566,0,0,0,0,37.093v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V37.093A.566.566,0,0,0,15.278,36.527Zm0-4.527H.566A.566.566,0,0,0,0,32.566V33.7a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V32.566A.566.566,0,0,0,15.278,32Z"
-                  transform="translate(285.26 748)"
-                  fill="#292929"
-                />
-                <g
-                  id="Group_290"
-                  data-name="Group 290"
-                  transform="translate(276.054 779.999)"
-                >
-                  <path
-                    id="FontAwsome_angle-up_"
-                    data-name="FontAwsome (angle-up)"
-                    d="M3.971,152.822l3.089,3.089a.543.543,0,0,1,0,.77l-.513.513a.543.543,0,0,1-.77,0l-2.192-2.187L1.4,157.2a.543.543,0,0,1-.77,0l-.516-.513a.543.543,0,0,1,0-.77L3.2,152.825A.544.544,0,0,1,3.971,152.822Z"
-                    transform="translate(0.05 -152.662)"
-                    fill="#292929"
-                  />
-                  <path
-                    id="FontAwsome_angle-down_"
-                    data-name="FontAwsome (angle-down)"
-                    d="M3.2,157.284l-3.09-3.09a.543.543,0,0,1,0-.77l.514-.514a.543.543,0,0,1,.77,0l2.19,2.19,2.19-2.19a.543.543,0,0,1,.77,0l.514.514a.543.543,0,0,1,0,.77l-3.09,3.09A.54.54,0,0,1,3.2,157.284Z"
-                    transform="translate(0.05 -141.601)"
-                    fill="#292929"
-                  />
-                  <line
-                    id="Line_30"
-                    data-name="Line 30"
-                    y2="13.272"
-                    transform="translate(3.634 1.244)"
-                    fill="none"
-                    stroke="#292929"
-                    stroke-width="2"
-                  />
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div className="btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15.844"
-              height="15.844"
-              viewBox="0 0 15.844 15.844"
-            >
-              <g
-                id="Group_293"
-                data-name="Group 293"
-                transform="translate(-2.5 -2.5)"
-              >
-                <rect
-                  id="Rectangle_105"
-                  data-name="Rectangle 105"
-                  width="4.532"
-                  height="4.532"
-                  transform="translate(8.148 8.148)"
-                  fill="#292929"
-                />
-                <path
-                  id="Path_9572"
-                  data-name="Path 9572"
-                  d="M2.5,3.183V17.661a.686.686,0,0,0,.683.683H17.661a.686.686,0,0,0,.683-.683V3.183a.686.686,0,0,0-.683-.683H3.183A.676.676,0,0,0,2.5,3.183Zm10.179,9.5v4.448H8.148V12.679H3.7V8.148H8.148V3.7h4.532V8.148h4.448v4.532Z"
-                  fill="#292929"
-                />
-              </g>
-            </svg>
-          </div>
+        <OutsideClickHandler onOutsideClick={blurSubHeaderFun}>
           <div
-            onClick={() =>
-              setTextColorPicker((showColorPicker) => !showColorPicker)
-            }
-            className="btn"
+            // onClick={handleClickInsideSubHeader}
+            // ref={myRefSubHeader}
+            onClick={clickSubHeaderFun}
+            // onClick={() => setBlurSubHeader(true)}
+            className="position-absolute"
+            style={{
+              visibility: `${displayHiddenSubHeader}`,
+              border: "inline-block",
+            }}
           >
-            {showTextColorPicker ? (
-              <div style={{ width: "20px" }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+            <div className="d-flex justify-content-center text-white">
+              <div>
+                <p className="text-font-size-name">Font</p>
+
+                <div>
+                  <FontFamilySelect
+                    className="option font-option"
+                    onFontFamilySelect={(e) => fontChangeSubHeader(e)}
+                    textData={two}
                   />
-                </svg>
+                </div>
               </div>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-              >
-                <g
-                  id="Layer_2"
-                  data-name="Layer 2"
-                  transform="translate(0 0.014)"
-                >
-                  <g
-                    id="invisible_box"
-                    data-name="invisible box"
-                    transform="translate(0 -0.014)"
+              <div>
+                <p className="text-font-size-name">Size</p>
+
+                <FontSizeSelect
+                  onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
+                  className="option size-option"
+                  textData={two}
+                />
+              </div>
+            </div>
+
+            <div className="mt-3 d-flex justify-content-center ">
+              <div className=" d-flex justify-content-center">
+                <div className=" btn-group text-btn-group pl-3">
+                  <div className="btn-b">
+                    <EditButton cmd="bold" name="B" />
+                  </div>
+
+                  <div className="btn-b">
+                    <EditButton cmd="italic" name="𝒊" />
+                  </div>
+                  <div className="btn-b">
+                    <EditButton cmd="underline" name="U" />
+                  </div>
+                </div>
+
+                <div className="d-flex align-icon">
+                  <button
+                    className="icon-align"
+                    value="start"
+                    onClick={handleRadioFormatChangeSubHeader}
                   >
-                    <rect
-                      id="Rectangle_107"
-                      data-name="Rectangle 107"
-                      width="20"
-                      height="20"
-                      fill="none"
-                    />
-                  </g>
-                  <g
-                    id="icons_Q2"
-                    data-name="icons Q2"
-                    transform="translate(1.665 1.666)"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24.711"
+                      height="16.023"
+                      viewBox="0 0 24.711 16.023"
+                    >
+                      <path
+                        id="Path_9540"
+                        data-name="Path 9540"
+                        d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
+                        transform="translate(-0.5 -5.949)"
+                        fill="#292929"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="icon-align"
+                    value="center"
+                    onClick={handleRadioFormatChangeSubHeader}
                   >
-                    <path
-                      id="Path_9576"
-                      data-name="Path 9576"
-                      d="M19.739,5.665H11.37A2.581,2.581,0,0,0,9,4,2.5,2.5,0,0,0,6.665,5.665H4.916A.874.874,0,0,0,4,6.5a.874.874,0,0,0,.916.833H6.665A2.5,2.5,0,0,0,9,9,2.581,2.581,0,0,0,11.37,7.331h8.369a.874.874,0,0,0,.916-.833.874.874,0,0,0-.916-.833ZM9,7.331A.833.833,0,1,1,9.829,6.5.833.833,0,0,1,9,7.331Z"
-                      transform="translate(-4 -4)"
-                      fill="#292929"
-                    />
-                    <path
-                      id="Path_9577"
-                      data-name="Path 9577"
-                      d="M19.855,19.665H18.148A2.581,2.581,0,0,0,15.775,18a2.5,2.5,0,0,0-2.332,1.665H5.033a.833.833,0,1,0,0,1.665h8.411A2.5,2.5,0,0,0,15.775,23a2.581,2.581,0,0,0,2.373-1.665h1.707a.833.833,0,1,0,0-1.665Zm-4.08,1.665a.833.833,0,1,1,.833-.833A.833.833,0,0,1,15.775,21.331Z"
-                      transform="translate(-4.117 -12.171)"
-                      fill="#292929"
-                    />
-                    <path
-                      id="Path_9578"
-                      data-name="Path 9578"
-                      d="M19.855,33.665h-7.12A2.581,2.581,0,0,0,10.362,32a2.5,2.5,0,0,0-2.332,1.665h-3a.833.833,0,1,0,0,1.665h3A2.5,2.5,0,0,0,10.362,37a2.581,2.581,0,0,0,2.373-1.665h7.12a.833.833,0,1,0,0-1.665Zm-9.493,1.665a.833.833,0,1,1,.833-.833A.833.833,0,0,1,10.362,35.331Z"
-                      transform="translate(-4.117 -20.342)"
-                      fill="#292929"
-                    />
-                  </g>
-                </g>
-              </svg>
-            )}
-            {showTextColorPicker && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22.891"
+                      height="16.023"
+                      viewBox="0 0 22.891 16.023"
+                    >
+                      <path
+                        id="Path_9542"
+                        data-name="Path 9542"
+                        d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
+                        transform="translate(-8 -20)"
+                        fill="#292929"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    className="icon-align"
+                    value="end"
+                    onClick={handleRadioFormatChangeSubHeader}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24.796"
+                      height="16.078"
+                      viewBox="0 0 24.796 16.078"
+                    >
+                      <path
+                        id="Path_9541"
+                        data-name="Path 9541"
+                        d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
+                        transform="translate(-0.5 -5.949)"
+                        fill="#292929"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="btn-group text-btn-group-two"
+              role="group"
+              aria-label="Basic checkbox toggle button group"
+            >
               <CompactPicker
-                className="text-color-pic"
-                // color={color}
                 onChange={(updateTextColor) =>
                   setTextColorSubHeader(updateTextColor.hex)
                 }
               />
-            )}
-          </div> */}
-          <CompactPicker
-            onChange={(updateTextColor) =>
-              setTextColorSubHeader(updateTextColor.hex)
-            }
-          />
-        </div>
+            </div>
+          </div>{" "}
+        </OutsideClickHandler>
       </div>
-      {/* ---------------------body------------------------- */}
+
+      {/* ------------------------Default ----------------------------------------- */}
+
       <div
         className="position-absolute"
-        style={{ visibility: `${displayHiddenBody}` }}
+        style={{ visibility: `${displayHiddenAll}` }}
       >
         <div className="d-flex justify-content-center text-white">
           <div>
@@ -673,8 +546,8 @@ const Text = ({
             <div>
               <FontFamilySelect
                 className="option font-option"
-                onFontFamilySelect={(e) => fontChangeBody(e)}
-                textData={three}
+                // onFontFamilySelect={(e) => fontChangeSubHeader(e)}
+                textData={four}
               />
             </div>
           </div>
@@ -682,9 +555,9 @@ const Text = ({
             <p className="text-font-size-name">Size</p>
 
             <FontSizeSelect
-              onFontSizeSelect={(e) => ChangeFontValueBody(e)}
+              // onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
               className="option size-option"
-              textData={three}
+              textData={four}
             />
           </div>
         </div>
@@ -708,7 +581,7 @@ const Text = ({
               <button
                 className="icon-align"
                 value="start"
-                onClick={handleRadioFormatChangeBody}
+                // onClick={handleRadioFormatChangeSubHeader}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -728,7 +601,7 @@ const Text = ({
               <button
                 className="icon-align"
                 value="center"
-                onClick={handleRadioFormatChangeBody}
+                // onClick={handleRadioFormatChangeSubHeader}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -748,7 +621,7 @@ const Text = ({
               <button
                 className="icon-align"
                 value="end"
-                onClick={handleRadioFormatChangeBody}
+                // onClick={handleRadioFormatChangeSubHeader}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -768,187 +641,137 @@ const Text = ({
             </div>
           </div>
         </div>
-
         <div
           class="btn-group text-btn-group-two"
           role="group"
           aria-label="Basic checkbox toggle button group"
-        >
-          {/* <div className="btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="25.05"
-              height="15.844"
-              viewBox="0 0 25.05 15.844"
-            >
-              <g
-                id="Group_291"
-                data-name="Group 291"
-                transform="translate(-276.054 -779.999)"
-              >
-                <path
-                  id="FontAwsome_align-justify_"
-                  data-name="FontAwsome (align-justify)"
-                  d="M15.278,45.58H.566A.566.566,0,0,0,0,46.146v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V46.146A.566.566,0,0,0,15.278,45.58Zm0-4.527H.566A.566.566,0,0,0,0,41.619v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V41.619A.566.566,0,0,0,15.278,41.053Zm0-4.527H.566A.566.566,0,0,0,0,37.093v1.132a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V37.093A.566.566,0,0,0,15.278,36.527Zm0-4.527H.566A.566.566,0,0,0,0,32.566V33.7a.566.566,0,0,0,.566.566H15.278a.566.566,0,0,0,.566-.566V32.566A.566.566,0,0,0,15.278,32Z"
-                  transform="translate(285.26 748)"
-                  fill="#292929"
-                />
-                <g
-                  id="Group_290"
-                  data-name="Group 290"
-                  transform="translate(276.054 779.999)"
-                >
-                  <path
-                    id="FontAwsome_angle-up_"
-                    data-name="FontAwsome (angle-up)"
-                    d="M3.971,152.822l3.089,3.089a.543.543,0,0,1,0,.77l-.513.513a.543.543,0,0,1-.77,0l-2.192-2.187L1.4,157.2a.543.543,0,0,1-.77,0l-.516-.513a.543.543,0,0,1,0-.77L3.2,152.825A.544.544,0,0,1,3.971,152.822Z"
-                    transform="translate(0.05 -152.662)"
-                    fill="#292929"
-                  />
-                  <path
-                    id="FontAwsome_angle-down_"
-                    data-name="FontAwsome (angle-down)"
-                    d="M3.2,157.284l-3.09-3.09a.543.543,0,0,1,0-.77l.514-.514a.543.543,0,0,1,.77,0l2.19,2.19,2.19-2.19a.543.543,0,0,1,.77,0l.514.514a.543.543,0,0,1,0,.77l-3.09,3.09A.54.54,0,0,1,3.2,157.284Z"
-                    transform="translate(0.05 -141.601)"
-                    fill="#292929"
-                  />
-                  <line
-                    id="Line_30"
-                    data-name="Line 30"
-                    y2="13.272"
-                    transform="translate(3.634 1.244)"
-                    fill="none"
-                    stroke="#292929"
-                    stroke-width="2"
-                  />
-                </g>
-              </g>
-            </svg>
-          </div>
-          <div className="btn">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15.844"
-              height="15.844"
-              viewBox="0 0 15.844 15.844"
-            >
-              <g
-                id="Group_293"
-                data-name="Group 293"
-                transform="translate(-2.5 -2.5)"
-              >
-                <rect
-                  id="Rectangle_105"
-                  data-name="Rectangle 105"
-                  width="4.532"
-                  height="4.532"
-                  transform="translate(8.148 8.148)"
-                  fill="#292929"
-                />
-                <path
-                  id="Path_9572"
-                  data-name="Path 9572"
-                  d="M2.5,3.183V17.661a.686.686,0,0,0,.683.683H17.661a.686.686,0,0,0,.683-.683V3.183a.686.686,0,0,0-.683-.683H3.183A.676.676,0,0,0,2.5,3.183Zm10.179,9.5v4.448H8.148V12.679H3.7V8.148H8.148V3.7h4.532V8.148h4.448v4.532Z"
-                  fill="#292929"
-                />
-              </g>
-            </svg>
-          </div>
-          <div
-            onClick={() =>
-              setTextColorPicker((showColorPicker) => !showColorPicker)
-            }
-            className="btn"
-          >
-            {showTextColorPicker ? (
-              <div style={{ width: "20px" }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-              >
-                <g
-                  id="Layer_2"
-                  data-name="Layer 2"
-                  transform="translate(0 0.014)"
-                >
-                  <g
-                    id="invisible_box"
-                    data-name="invisible box"
-                    transform="translate(0 -0.014)"
-                  >
-                    <rect
-                      id="Rectangle_107"
-                      data-name="Rectangle 107"
-                      width="20"
-                      height="20"
-                      fill="none"
-                    />
-                  </g>
-                  <g
-                    id="icons_Q2"
-                    data-name="icons Q2"
-                    transform="translate(1.665 1.666)"
-                  >
-                    <path
-                      id="Path_9576"
-                      data-name="Path 9576"
-                      d="M19.739,5.665H11.37A2.581,2.581,0,0,0,9,4,2.5,2.5,0,0,0,6.665,5.665H4.916A.874.874,0,0,0,4,6.5a.874.874,0,0,0,.916.833H6.665A2.5,2.5,0,0,0,9,9,2.581,2.581,0,0,0,11.37,7.331h8.369a.874.874,0,0,0,.916-.833.874.874,0,0,0-.916-.833ZM9,7.331A.833.833,0,1,1,9.829,6.5.833.833,0,0,1,9,7.331Z"
-                      transform="translate(-4 -4)"
-                      fill="#292929"
-                    />
-                    <path
-                      id="Path_9577"
-                      data-name="Path 9577"
-                      d="M19.855,19.665H18.148A2.581,2.581,0,0,0,15.775,18a2.5,2.5,0,0,0-2.332,1.665H5.033a.833.833,0,1,0,0,1.665h8.411A2.5,2.5,0,0,0,15.775,23a2.581,2.581,0,0,0,2.373-1.665h1.707a.833.833,0,1,0,0-1.665Zm-4.08,1.665a.833.833,0,1,1,.833-.833A.833.833,0,0,1,15.775,21.331Z"
-                      transform="translate(-4.117 -12.171)"
-                      fill="#292929"
-                    />
-                    <path
-                      id="Path_9578"
-                      data-name="Path 9578"
-                      d="M19.855,33.665h-7.12A2.581,2.581,0,0,0,10.362,32a2.5,2.5,0,0,0-2.332,1.665h-3a.833.833,0,1,0,0,1.665h3A2.5,2.5,0,0,0,10.362,37a2.581,2.581,0,0,0,2.373-1.665h7.12a.833.833,0,1,0,0-1.665Zm-9.493,1.665a.833.833,0,1,1,.833-.833A.833.833,0,0,1,10.362,35.331Z"
-                      transform="translate(-4.117 -20.342)"
-                      fill="#292929"
-                    />
-                  </g>
-                </g>
-              </svg>
-            )}
-            {showTextColorPicker && (
-              <CompactPicker
-                className="text-color-pic"
-                // color={color}
-                onChange={(updateTextColor) =>
-                  setTextColorBody(updateTextColor.hex)
-                }
-              />
-            )}
-          </div> */}
-          <CompactPicker
-            onChange={(updateTextColor) =>
-              setTextColorBody(updateTextColor.hex)
-            }
-          />
-        </div>
+        ></div>
       </div>
+      {/* ---------------------body------------------------- */}
+      <OutsideClickHandler onOutsideClick={clickBodyFun}>
+        <div
+          // ref={myRefBody}
+          // onClick={handleClickInsideBody}
+          onClick={blurBodyFun}
+          className="position-absolute"
+          style={{ visibility: `${displayHiddenBody}`, border: "inline-block" }}
+        >
+          <div className="d-flex justify-content-center text-white">
+            <div>
+              <p className="text-font-size-name">Font</p>
+
+              <div>
+                <FontFamilySelect
+                  className="option font-option"
+                  onFontFamilySelect={(e) => fontChangeBody(e)}
+                  textData={three}
+                />
+              </div>
+            </div>
+            <div>
+              <p className="text-font-size-name">Size</p>
+
+              <FontSizeSelect
+                onFontSizeSelect={(e) => ChangeFontValueBody(e)}
+                className="option size-option"
+                textData={three}
+              />
+            </div>
+          </div>
+
+          <div className="mt-3 d-flex justify-content-center ">
+            <div className=" d-flex justify-content-center">
+              <div className=" btn-group text-btn-group pl-3">
+                <div className="btn-b">
+                  <EditButton cmd="bold" name="B" />
+                </div>
+
+                <div className="btn-b">
+                  <EditButton cmd="italic" name="𝒊" />
+                </div>
+                <div className="btn-b">
+                  <EditButton cmd="underline" name="U" />
+                </div>
+              </div>
+
+              <div className="d-flex align-icon">
+                <button
+                  className="icon-align"
+                  value="start"
+                  onClick={handleRadioFormatChangeBody}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24.711"
+                    height="16.023"
+                    viewBox="0 0 24.711 16.023"
+                  >
+                    <path
+                      id="Path_9540"
+                      data-name="Path 9540"
+                      d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
+                      transform="translate(-0.5 -5.949)"
+                      fill="#292929"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className="icon-align"
+                  value="center"
+                  onClick={handleRadioFormatChangeBody}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="22.891"
+                    height="16.023"
+                    viewBox="0 0 22.891 16.023"
+                  >
+                    <path
+                      id="Path_9542"
+                      data-name="Path 9542"
+                      d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
+                      transform="translate(-8 -20)"
+                      fill="#292929"
+                    />
+                  </svg>
+                </button>
+                <button
+                  className="icon-align"
+                  value="end"
+                  onClick={handleRadioFormatChangeBody}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24.796"
+                    height="16.078"
+                    viewBox="0 0 24.796 16.078"
+                  >
+                    <path
+                      id="Path_9541"
+                      data-name="Path 9541"
+                      d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
+                      transform="translate(-0.5 -5.949)"
+                      fill="#292929"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="btn-group text-btn-group-two"
+            role="group"
+            aria-label="Basic checkbox toggle button group"
+          >
+            <CompactPicker
+              onChange={(updateTextColor) =>
+                setTextColorBody(updateTextColor.hex)
+              }
+            />
+          </div>
+        </div>
+      </OutsideClickHandler>
     </div>
   );
 };

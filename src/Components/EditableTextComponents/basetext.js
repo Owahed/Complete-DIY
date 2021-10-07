@@ -33,7 +33,6 @@ const BaseText = React.forwardRef((props, ref) => {
   const handleChange = (evt) => {
     setStateTwo({ html: evt.target.value, editable: true });
   };
-  console.log("fontSize", props.fontSize);
   return (
     // <span
     //   ref={ref}
