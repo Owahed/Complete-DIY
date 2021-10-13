@@ -158,31 +158,6 @@ const DiyHomeOne = () => {
     );
   }
 
-  //-------------------- Headers text----------------
-  const [headerText, setHeaderText] = useState(true);
-  const enableHeaderText = () => {
-    setHeaderText(true);
-  };
-  const disEnableHeaderText = () => {
-    setHeaderText(false);
-  };
-  // ------
-  const [subHeaderText, setSubHeaderText] = useState(true);
-  const enableSubHeaderText = () => {
-    setSubHeaderText(true);
-  };
-  const disEnableSubHeaderText = () => {
-    setSubHeaderText(false);
-  };
-  // -------
-  const [bodyText, setBodyText] = useState(true);
-  const enableBodyText = () => {
-    setBodyText(true);
-  };
-  const disEnableBodyText = () => {
-    setBodyText(false);
-  };
-
   // ----------------font text---------------------
   // const [fontName, setFontName] = useState("Open Sans");
   // const fontChange = (e) => {
@@ -317,6 +292,35 @@ const DiyHomeOne = () => {
     setCurrentRadioFormatValueBody(e.target.value);
   };
   const [textColorBody, setTextColorBody] = useState("#000");
+
+  //-------------------- Headers text----------------
+  const [headerText, setHeaderText] = useState(true);
+  const enableHeaderText = () => {
+    setHeaderText(true);
+  };
+  const disEnableHeaderText = () => {
+    setHeaderText(false);
+    setEditHeader(false);
+  };
+  // ------
+  const [subHeaderText, setSubHeaderText] = useState(true);
+  const enableSubHeaderText = () => {
+    setSubHeaderText(true);
+  };
+  const disEnableSubHeaderText = () => {
+    setSubHeaderText(false);
+    setEditSubHeader(false);
+  };
+  // -------
+  const [bodyText, setBodyText] = useState(true);
+  const enableBodyText = () => {
+    setBodyText(true);
+  };
+  const disEnableBodyText = () => {
+    setBodyText(false);
+    setEditBody(false);
+  };
+
   return (
     <div>
       <div className="diy-header">
