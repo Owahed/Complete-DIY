@@ -75,6 +75,7 @@ const MainBody = ({
   setEditSubHeader,
   editBody,
   setEditBody,
+  headerLanguage,
 }) => {
   let { id, item } = selectedImg;
 
@@ -324,6 +325,7 @@ const MainBody = ({
                         textColor={textColor}
                         edit={editHeader}
                         setEdit={setEditHeader}
+                        headerLanguage={headerLanguage}
                       />
                     </div>
                   )}

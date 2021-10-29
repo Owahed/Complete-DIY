@@ -163,6 +163,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
           visibility: `${displayHiddenHeader}`,
           cursor: "pointer",
           top: "10px",
+          display: "table-footer-group",
         }}
         // style={textCancel}
         onClick={disEnableHeaderText}

@@ -10,6 +10,7 @@ import FakeData from "../../FakeData/FakeData";
 import PictogramsAllData from "../../FakeData/PictogramsAllData";
 import img00101 from "../../Image/Mandatory/M0001.jpg";
 import "./DiyHome.css";
+
 import MainBody from "../MainBody/MainBody";
 import Test from "../TestSector/Test";
 import TestClass from "../TestSector/TestClass";
@@ -17,6 +18,8 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import Transliterate from "../TestSector/Transliterate";
+import TextAreaHeight from "../TestSector/TextAreaHeight";
 
 // let useClickOutside = (handler) => {
 //   let domNode = useRef();
@@ -320,6 +323,10 @@ const DiyHomeOne = () => {
     setBodyText(false);
     setEditBody(false);
   };
+  const [headerLanguage, setHeaderLanguage] = useState("en");
+  const handelLanguageChange = (e) => {
+    setHeaderLanguage(e.target.value);
+  };
 
   return (
     <div>
@@ -370,6 +377,7 @@ const DiyHomeOne = () => {
                 setEditSubHeader={setEditSubHeader}
                 editBody={editBody}
                 setEditBody={setEditBody}
+                handelLanguageChange={handelLanguageChange}
               />
             )}
             {showUploadPanel && (
@@ -442,9 +450,12 @@ const DiyHomeOne = () => {
                 setEditSubHeader={setEditSubHeader}
                 editBody={editBody}
                 setEditBody={setEditBody}
+                headerLanguage={headerLanguage}
               />
               {/* <Test text="hello World" /> */}
               {/* <TestClass EditButton={EditButton} /> */}
+              {/* <Transliterate /> */}
+              {/* <TextAreaHeight /> */}
             </div>
           </div>
         </div>

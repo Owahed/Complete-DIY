@@ -12,6 +12,7 @@
     { "name": "Raleway", "style": "'Raleway', sans-serif" },
     { "name": "Roboto", "style": "'Roboto', sans-serif" },
     { "name": "Shadows Into Light", "style": "'Shadows Into Light', cursive" },
+    { "name": "Hindi", "style": "'Hind', sans-serif" },
     { "name": "Yeon Sung", "style": "'Yeon Sung', cursive" }
   ]
 }

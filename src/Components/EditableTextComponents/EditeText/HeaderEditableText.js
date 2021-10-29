@@ -31,6 +31,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     textColor,
     edit,
     setEdit,
+    headerLanguage,
   } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
@@ -195,6 +196,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
           visibility: `${displayHiddenHeader}`,
           cursor: "pointer",
           top: "10px",
+          display: "table-footer-group",
         }}
         // style={textCancel}
         onClick={disEnableHeaderText}
@@ -214,6 +216,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
           textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}
+          headerLanguage={headerLanguage}
         />
       </Border>
     </div>

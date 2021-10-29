@@ -40,6 +40,7 @@ const Text = ({
   setEditSubHeader,
   editBody,
   setEditBody,
+  handelLanguageChange,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
   const [textFieldData, setTextFieldData] = useContext(UserContext);
@@ -230,6 +231,7 @@ const Text = ({
     editBody == false && editSubHeader == false && editHeader == false
       ? "hidden"
       : "hidden";
+
   return (
     <div className="position-relative">
       <div className="mt-5 pb-2">
@@ -389,14 +391,34 @@ const Text = ({
               </div>
             </div>
           </div>
-          <div
-            class="btn-group text-btn-group-two"
-            role="group"
-            aria-label="Basic checkbox toggle button group"
-          >
-            <CompactPicker
-              onChange={(updateTextColor) => setTextColor(updateTextColor.hex)}
-            />
+          <div className="d-flex align-items-center">
+            <div
+              class="btn-group text-btn-group-two"
+              role="group"
+              aria-label="Basic checkbox toggle button group"
+            >
+              <CompactPicker
+                onChange={(updateTextColor) =>
+                  setTextColor(updateTextColor.hex)
+                }
+              />
+            </div>
+            <div className="p-2">
+              <select onChange={(e) => handelLanguageChange(e)}>
+                <option value="bn">Select</option>
+                <option value="bn">Bangla</option>
+                <option value="gu">Gujarati</option>
+                <option value="hi">Hindi</option>
+                <option value="kn">Kannada</option>
+                <option value="ml">Malayalam</option>
+                <option value="mr">Marathi</option>
+                <option value="pa">Punjabi</option>
+                <option value="sa">Sanskrit</option>
+                <option value="ta">Tamil</option>
+                <option value="te">Telugu</option>
+                <option value="ur">Urdu</option>
+              </select>
+            </div>
           </div>
         </div>
       </OutsideClickHandler>
