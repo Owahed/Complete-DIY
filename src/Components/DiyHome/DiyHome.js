@@ -15,6 +15,7 @@ import MainBody from "../MainBody/MainBody";
 import Test from "../TestSector/Test";
 import TestClass from "../TestSector/TestClass";
 import html2canvas from "html2canvas";
+// import html2canvas from "@nidi/html2canvas";
 import { jsPDF } from "jspdf";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
@@ -141,8 +142,13 @@ const DiyHomeOne = () => {
   // }, [imgState]);
 
   // --------------text
+  const [texts, setTexts] = useState({
+    id: "unique-1",
+    text: "Default Header Text ",
+  });
+  console.log(texts.text);
 
-  let texts = { id: "unique-1" };
+  // let texts = { id: "unique-1", text: "" };
   let textsTwo = { id: "unique-2" };
   let textsThree = { id: "unique-3" };
   const textRef = React.useRef();
@@ -323,10 +329,10 @@ const DiyHomeOne = () => {
     setBodyText(false);
     setEditBody(false);
   };
-  const [headerLanguage, setHeaderLanguage] = useState("en");
-  const handelLanguageChange = (e) => {
-    setHeaderLanguage(e.target.value);
-  };
+  // const [headerLanguage, setHeaderLanguage] = useState("en");
+  // const handelLanguageChange = (e) => {
+  //   setHeaderLanguage(e.target.value);
+  // };
 
   return (
     <div>
@@ -355,7 +361,7 @@ const DiyHomeOne = () => {
                 EditButton={EditButton}
                 handleRadioFormatChange={handleRadioFormatChange}
                 setTextColor={setTextColor}
-                texts={texts}
+                // texts={texts}
                 textsTwo={textsTwo}
                 textsThree={textsThree}
                 // textRef={textRef}
@@ -377,7 +383,9 @@ const DiyHomeOne = () => {
                 setEditSubHeader={setEditSubHeader}
                 editBody={editBody}
                 setEditBody={setEditBody}
-                handelLanguageChange={handelLanguageChange}
+                texts={texts}
+                setTexts={setTexts}
+                // handelLanguageChange={handelLanguageChange}
               />
             )}
             {showUploadPanel && (
@@ -450,7 +458,7 @@ const DiyHomeOne = () => {
                 setEditSubHeader={setEditSubHeader}
                 editBody={editBody}
                 setEditBody={setEditBody}
-                headerLanguage={headerLanguage}
+                // headerLanguage={headerLanguage}
               />
               {/* <Test text="hello World" /> */}
               {/* <TestClass EditButton={EditButton} /> */}

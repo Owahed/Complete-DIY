@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import BaseText from "../basetext";
+import BaseText from "../Basetext/basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
 import { UserContext } from "../../../App";
 import ClearIcon from "@material-ui/icons/Clear";
+import BasetextSubHeader from "../Basetext/BasetextSubHeader";
 
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
@@ -216,7 +217,13 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
         textData={theTextData}
         color="lightgrey"
       >
-        <BaseText
+        {/* <BaseText
+          ref={textRef}
+          textData={theTextData}
+          edit={edit}
+          onClick={() => setEdit(true)}
+        /> */}
+        <BasetextSubHeader
           ref={textRef}
           textData={theTextData}
           edit={edit}

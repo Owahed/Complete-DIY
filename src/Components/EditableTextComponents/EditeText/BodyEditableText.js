@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import BaseText from "../basetext";
+import BaseText from "../Basetext/basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
 import { UserContext } from "../../../App";
 import ClearIcon from "@material-ui/icons/Clear";
+import BasetextBody from "../Basetext/BasetextBody";
 
 const translate = (x, y) => {
   return `translate(${x}px, ${y}px)`;
@@ -176,12 +177,18 @@ const BodyEditableText = React.forwardRef((props, ref) => {
         textData={theTextData}
         color="lightgrey"
       >
-        <BaseText
+        <BasetextBody
           ref={textRef}
           textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}
         />
+        {/* <BaseText
+          ref={textRef}
+          textData={theTextData}
+          edit={edit}
+          onClick={() => setEdit(true)}
+        /> */}
       </Border>
     </div>
   );

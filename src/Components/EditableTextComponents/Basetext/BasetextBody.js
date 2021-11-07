@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as MaterialUI from "@material-ui/core";
 import ContentEditable from "react-contenteditable";
 
@@ -27,7 +27,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
   };
 });
 
-const BaseText = React.forwardRef((props, ref) => {
+const BasetextBody = React.forwardRef((props, ref) => {
   const { textData, className, onClick, edit, headerLanguage } = props;
   const classes = useStyles(textData);
   const [stateTwo, setStateTwo] = useState({
@@ -37,6 +37,14 @@ const BaseText = React.forwardRef((props, ref) => {
   const handleChange = (evt) => {
     setStateTwo({ html: evt.target.value, editable: true });
   };
+  console.log(textData.text);
+  //   useEffect(() => {
+  //     // setStateTwo({ html: textData });
+  //     const handleChange = (evt) => {
+  //       setStateTwo({ html: evt.target.value || textData.text, editable: true });
+  //     };
+  //     document.addEventListener("mousedown", handleChange);
+  //   }, [textData]);
   // function auto_grow(element) {
   //   element.style.height = "5px";
   //   element.style.height = element.scrollHeight + "px";
@@ -81,7 +89,6 @@ const BaseText = React.forwardRef((props, ref) => {
     //
 
     <ContentEditable
-      style={{ fontFamily: "font-family: 'Hind', sans-serif;" }}
       className={`editable`}
       tagName="pre"
       html={stateTwo.html} // innerHTML of the editable div
@@ -95,11 +102,11 @@ const BaseText = React.forwardRef((props, ref) => {
       className={`${textData.id} ${classes.text} ${className || ""}`}
       contentEditable={edit}
       suppressContentEditableWarning={true}
-    ></ContentEditable>
+    />
 
     //
     // </div>
   );
 });
 
-export default BaseText;
+export default BasetextBody;

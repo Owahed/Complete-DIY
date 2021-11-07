@@ -10,6 +10,9 @@ import FontColor from "../EditableTextComponents/fontcolor";
 import OutsideClickHandler from "react-outside-click-handler";
 // import FontFamilySelect from "../";
 
+import { ReactTransliterate } from "react-transliterate";
+import "react-transliterate/dist/index.css";
+
 const Text = ({
   EditButton,
   fontChange,
@@ -20,7 +23,7 @@ const Text = ({
   enableSubHeaderText,
   enableBodyText,
   textRef,
-  texts,
+  // texts,
   textsTwo,
   textsThree,
   ChangeFontValue,
@@ -40,7 +43,9 @@ const Text = ({
   setEditSubHeader,
   editBody,
   setEditBody,
-  handelLanguageChange,
+  setTexts,
+  texts,
+  // handelLanguageChange,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
   const [textFieldData, setTextFieldData] = useContext(UserContext);
@@ -232,211 +237,383 @@ const Text = ({
       ? "hidden"
       : "hidden";
 
+  const [languageOption, setLanguageOption] = useState(true);
+  const handelLanguageOption = () => {
+    setLanguageOption(!languageOption);
+  };
+
+  const [headerLanguage, setHeaderLanguage] = useState("en");
+  const handelLanguageChange = (e) => {
+    setHeaderLanguage(e.target.value);
+  };
+  const [text, setText] = useState("");
   return (
     <div className="position-relative">
       <div className="mt-5 pb-2">
         <h4 className="pictograms-h4">Text</h4>
       </div>
-      <div className="text-container-body">
-        <div className=" ">
-          <button
-            className="btn text-header-title text-h4"
-            onClick={enableHeaderText}
-          >
-            <h2> Add a Heading</h2>
-          </button>
-        </div>
-        <div className="">
-          <button
-            className="btn text-header-title text-h5"
-            onClick={enableSubHeaderText}
-          >
-            <h5> Add a Sub-Heading</h5>
-          </button>
-        </div>
-        <div className="">
-          <button
-            className="btn text-header-title text-h6"
-            onClick={enableBodyText}
-          >
-            <p> Add Body Text</p>
-          </button>
-        </div>
-      </div>
-      <div className=" d-flex justify-content-center">
-        <hr className="text-hr" />
-      </div>
-      <OutsideClickHandler onOutsideClick={clickHeaderFun}>
+      {/* <div>
         <div
-          // onClick={() => setVisible(true)}
-          // onClick={() => setEdit(true)}
-          // ref={myRefHeader}
-          // onClick={handleClickInsideHeader}
-          onClick={blurHeaderFun}
-          className="position-absolute"
-          style={{
-            visibility: `${displayHiddenHeader}`,
-            border: "inline-block",
-          }}
+          onChange={handelLanguageOption}
+          class="custom-control custom-switch"
         >
-          <div className="d-flex justify-content-center text-white">
-            <div>
-              <p className="text-font-size-name">Font</p>
-
-              <div>
-                <FontFamilySelect
-                  className="option font-option"
-                  onFontFamilySelect={(e) => fontChange(e)}
-                  textData={one}
-                />
-              </div>
-            </div>
-            <div>
-              <p className="text-font-size-name">Size</p>
-
-              <FontSizeSelect
-                onFontSizeSelect={(e) => ChangeFontValue(e)}
-                className="option size-option"
-                textData={one}
-              />
-            </div>
-          </div>
-
-          <div className="mt-3 d-flex justify-content-center ">
-            <div className=" d-flex justify-content-center">
-              <div
-                // ref={textRefOne}
-                className=" btn-group text-btn-group pl-3"
-              >
-                <div className="btn-b">
-                  <EditButton cmd="bold" name="B" />
-                </div>
-
-                <div
-                  //  onClick={handelRefHeader}
-                  className="btn-b"
-                >
-                  <EditButton cmd="italic" name="𝒊" />
-                </div>
-                <div
-                  //  onClick={handelRefHeader}
-                  className="btn-b"
-                >
-                  <EditButton cmd="underline" name="U" />
-                </div>
-              </div>
-
-              <div className="d-flex align-icon">
-                <button
-                  className="icon-align"
-                  value="start"
-                  onClick={handleRadioFormatChange}
-                >
-                  {/* <FormatAlignLeftIcon /> */}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24.711"
-                    height="16.023"
-                    viewBox="0 0 24.711 16.023"
-                  >
-                    <path
-                      id="Path_9540"
-                      data-name="Path 9540"
-                      d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
-                      transform="translate(-0.5 -5.949)"
-                      fill="#292929"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="icon-align"
-                  value="center"
-                  onClick={handleRadioFormatChange}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22.891"
-                    height="16.023"
-                    viewBox="0 0 22.891 16.023"
-                  >
-                    <path
-                      id="Path_9542"
-                      data-name="Path 9542"
-                      d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
-                      transform="translate(-8 -20)"
-                      fill="#292929"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="icon-align"
-                  value="end"
-                  onClick={handleRadioFormatChange}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24.796"
-                    height="16.078"
-                    viewBox="0 0 24.796 16.078"
-                  >
-                    <path
-                      id="Path_9541"
-                      data-name="Path 9541"
-                      d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
-                      transform="translate(-0.5 -5.949)"
-                      fill="#292929"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="d-flex align-items-center">
-            <div
-              class="btn-group text-btn-group-two"
-              role="group"
-              aria-label="Basic checkbox toggle button group"
-            >
-              <CompactPicker
-                onChange={(updateTextColor) =>
-                  setTextColor(updateTextColor.hex)
-                }
-              />
-            </div>
-            <div className="p-2">
-              <select onChange={(e) => handelLanguageChange(e)}>
-                <option value="bn">Select</option>
-                <option value="bn">Bangla</option>
-                <option value="gu">Gujarati</option>
-                <option value="hi">Hindi</option>
-                <option value="kn">Kannada</option>
-                <option value="ml">Malayalam</option>
-                <option value="mr">Marathi</option>
-                <option value="pa">Punjabi</option>
-                <option value="sa">Sanskrit</option>
-                <option value="ta">Tamil</option>
-                <option value="te">Telugu</option>
-                <option value="ur">Urdu</option>
-              </select>
-            </div>
-          </div>
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customSwitch1"
+          />
+          <label class="custom-control-label" for="customSwitch1">
+            Change Language
+          </label>
         </div>
-      </OutsideClickHandler>
-      {/* ------------------------Sub header----------------------------------------- */}
-      <div
-      //
-      >
-        <OutsideClickHandler onOutsideClick={blurSubHeaderFun}>
+      </div> */}
+      {languageOption && (
+        <div>
+          <div className="text-container-body">
+            <div className=" ">
+              <button
+                className="btn text-header-title text-h4"
+                onClick={enableHeaderText}
+              >
+                <h2> Add a Heading</h2>
+              </button>
+            </div>
+            <div className="">
+              <button
+                className="btn text-header-title text-h5"
+                onClick={enableSubHeaderText}
+              >
+                <h5> Add a Sub-Heading</h5>
+              </button>
+            </div>
+            <div className="">
+              <button
+                className="btn text-header-title text-h6"
+                onClick={enableBodyText}
+              >
+                <p> Add Body Text</p>
+              </button>
+            </div>
+          </div>
+          <div className=" d-flex justify-content-center">
+            <hr className="text-hr" />
+          </div>
+          <OutsideClickHandler onOutsideClick={clickHeaderFun}>
+            <div
+              // onClick={() => setVisible(true)}
+              // onClick={() => setEdit(true)}
+              // ref={myRefHeader}
+              // onClick={handleClickInsideHeader}
+              onClick={blurHeaderFun}
+              className="position-absolute"
+              style={{
+                visibility: `${displayHiddenHeader}`,
+                border: "inline-block",
+              }}
+            >
+              <div className="d-flex justify-content-center text-white">
+                <div>
+                  <p className="text-font-size-name">Font</p>
+
+                  <div>
+                    <FontFamilySelect
+                      className="option font-option"
+                      onFontFamilySelect={(e) => fontChange(e)}
+                      textData={one}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-font-size-name">Size</p>
+
+                  <FontSizeSelect
+                    onFontSizeSelect={(e) => ChangeFontValue(e)}
+                    className="option size-option"
+                    textData={one}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-3 d-flex justify-content-center ">
+                <div className=" d-flex justify-content-center">
+                  <div
+                    // ref={textRefOne}
+                    className=" btn-group text-btn-group pl-3"
+                  >
+                    <div className="btn-b">
+                      <EditButton cmd="bold" name="B" />
+                    </div>
+
+                    <div
+                      //  onClick={handelRefHeader}
+                      className="btn-b"
+                    >
+                      <EditButton cmd="italic" name="𝒊" />
+                    </div>
+                    <div
+                      //  onClick={handelRefHeader}
+                      className="btn-b"
+                    >
+                      <EditButton cmd="underline" name="U" />
+                    </div>
+                  </div>
+
+                  <div className="d-flex align-icon">
+                    <button
+                      className="icon-align"
+                      value="start"
+                      onClick={handleRadioFormatChange}
+                    >
+                      {/* <FormatAlignLeftIcon /> */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24.711"
+                        height="16.023"
+                        viewBox="0 0 24.711 16.023"
+                      >
+                        <path
+                          id="Path_9540"
+                          data-name="Path 9540"
+                          d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
+                          transform="translate(-0.5 -5.949)"
+                          fill="#292929"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      className="icon-align"
+                      value="center"
+                      onClick={handleRadioFormatChange}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22.891"
+                        height="16.023"
+                        viewBox="0 0 22.891 16.023"
+                      >
+                        <path
+                          id="Path_9542"
+                          data-name="Path 9542"
+                          d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
+                          transform="translate(-8 -20)"
+                          fill="#292929"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      className="icon-align"
+                      value="end"
+                      onClick={handleRadioFormatChange}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24.796"
+                        height="16.078"
+                        viewBox="0 0 24.796 16.078"
+                      >
+                        <path
+                          id="Path_9541"
+                          data-name="Path 9541"
+                          d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
+                          transform="translate(-0.5 -5.949)"
+                          fill="#292929"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="d-flex align-items-center">
+                <div
+                  class="btn-group text-btn-group-two"
+                  role="group"
+                  aria-label="Basic checkbox toggle button group"
+                >
+                  <CompactPicker
+                    onChange={(updateTextColor) =>
+                      setTextColor(updateTextColor.hex)
+                    }
+                  />
+                  <div className="position-relative">
+                    <select
+                      className="position-absolute"
+                      onChange={(e) => handelLanguageChange(e)}
+                    >
+                      <option value="bn">Select</option>
+                      <option value="bn">Bangla</option>
+                      <option value="gu">Gujarati</option>
+                      <option value="hi">Hindi</option>
+                      <option value="kn">Kannada</option>
+                      <option value="ml">Malayalam</option>
+                      <option value="mr">Marathi</option>
+                      <option value="pa">Punjabi</option>
+                      <option value="sa">Sanskrit</option>
+                      <option value="ta">Tamil</option>
+                      <option value="te">Telugu</option>
+                      <option value="ur">Urdu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </OutsideClickHandler>
+          {/* ------------------------Sub header----------------------------------------- */}
           <div
-            // onClick={handleClickInsideSubHeader}
-            // ref={myRefSubHeader}
-            onClick={clickSubHeaderFun}
-            // onClick={() => setBlurSubHeader(true)}
+          //
+          >
+            <OutsideClickHandler onOutsideClick={blurSubHeaderFun}>
+              <div
+                // onClick={handleClickInsideSubHeader}
+                // ref={myRefSubHeader}
+                onClick={clickSubHeaderFun}
+                // onClick={() => setBlurSubHeader(true)}
+                className="position-absolute"
+                style={{
+                  visibility: `${displayHiddenSubHeader}`,
+                  border: "inline-block",
+                }}
+              >
+                <div className="d-flex justify-content-center text-white">
+                  <div>
+                    <p className="text-font-size-name">Font</p>
+
+                    <div>
+                      <FontFamilySelect
+                        className="option font-option"
+                        onFontFamilySelect={(e) => fontChangeSubHeader(e)}
+                        textData={two}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-font-size-name">Size</p>
+
+                    <FontSizeSelect
+                      onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
+                      className="option size-option"
+                      textData={two}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-3 d-flex justify-content-center ">
+                  <div className=" d-flex justify-content-center">
+                    <div className=" btn-group text-btn-group pl-3">
+                      <div className="btn-b">
+                        <EditButton cmd="bold" name="B" />
+                      </div>
+
+                      <div className="btn-b">
+                        <EditButton cmd="italic" name="𝒊" />
+                      </div>
+                      <div className="btn-b">
+                        <EditButton cmd="underline" name="U" />
+                      </div>
+                    </div>
+
+                    <div className="d-flex align-icon">
+                      <button
+                        className="icon-align"
+                        value="start"
+                        onClick={handleRadioFormatChangeSubHeader}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24.711"
+                          height="16.023"
+                          viewBox="0 0 24.711 16.023"
+                        >
+                          <path
+                            id="Path_9540"
+                            data-name="Path 9540"
+                            d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
+                            transform="translate(-0.5 -5.949)"
+                            fill="#292929"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        className="icon-align"
+                        value="center"
+                        onClick={handleRadioFormatChangeSubHeader}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="22.891"
+                          height="16.023"
+                          viewBox="0 0 22.891 16.023"
+                        >
+                          <path
+                            id="Path_9542"
+                            data-name="Path 9542"
+                            d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
+                            transform="translate(-8 -20)"
+                            fill="#292929"
+                          />
+                        </svg>
+                      </button>
+                      <button
+                        className="icon-align"
+                        value="end"
+                        onClick={handleRadioFormatChangeSubHeader}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24.796"
+                          height="16.078"
+                          viewBox="0 0 24.796 16.078"
+                        >
+                          <path
+                            id="Path_9541"
+                            data-name="Path 9541"
+                            d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
+                            transform="translate(-0.5 -5.949)"
+                            fill="#292929"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="btn-group text-btn-group-two"
+                  role="group"
+                  aria-label="Basic checkbox toggle button group"
+                >
+                  <CompactPicker
+                    onChange={(updateTextColor) =>
+                      setTextColorSubHeader(updateTextColor.hex)
+                    }
+                  />
+                  <div className="position-relative">
+                    <select
+                      className="position-absolute"
+                      onChange={(e) => handelLanguageChange(e)}
+                    >
+                      <option value="bn">Select</option>
+                      <option value="bn">Bangla</option>
+                      <option value="gu">Gujarati</option>
+                      <option value="hi">Hindi</option>
+                      <option value="kn">Kannada</option>
+                      <option value="ml">Malayalam</option>
+                      <option value="mr">Marathi</option>
+                      <option value="pa">Punjabi</option>
+                      <option value="sa">Sanskrit</option>
+                      <option value="ta">Tamil</option>
+                      <option value="te">Telugu</option>
+                      <option value="ur">Urdu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>{" "}
+            </OutsideClickHandler>
+          </div>
+
+          {/* ------------------------Default ----------------------------------------- */}
+
+          <div
             className="position-absolute"
-            style={{
-              visibility: `${displayHiddenSubHeader}`,
-              border: "inline-block",
-            }}
+            style={{ visibility: `${displayHiddenAll}` }}
           >
             <div className="d-flex justify-content-center text-white">
               <div>
@@ -445,8 +622,8 @@ const Text = ({
                 <div>
                   <FontFamilySelect
                     className="option font-option"
-                    onFontFamilySelect={(e) => fontChangeSubHeader(e)}
-                    textData={two}
+                    // onFontFamilySelect={(e) => fontChangeSubHeader(e)}
+                    textData={four}
                   />
                 </div>
               </div>
@@ -454,9 +631,9 @@ const Text = ({
                 <p className="text-font-size-name">Size</p>
 
                 <FontSizeSelect
-                  onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
+                  // onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
                   className="option size-option"
-                  textData={two}
+                  textData={four}
                 />
               </div>
             </div>
@@ -480,7 +657,7 @@ const Text = ({
                   <button
                     className="icon-align"
                     value="start"
-                    onClick={handleRadioFormatChangeSubHeader}
+                    // onClick={handleRadioFormatChangeSubHeader}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -500,7 +677,7 @@ const Text = ({
                   <button
                     className="icon-align"
                     value="center"
-                    onClick={handleRadioFormatChangeSubHeader}
+                    // onClick={handleRadioFormatChangeSubHeader}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -520,7 +697,7 @@ const Text = ({
                   <button
                     className="icon-align"
                     value="end"
-                    onClick={handleRadioFormatChangeSubHeader}
+                    // onClick={handleRadioFormatChangeSubHeader}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -544,256 +721,192 @@ const Text = ({
               class="btn-group text-btn-group-two"
               role="group"
               aria-label="Basic checkbox toggle button group"
+            ></div>
+          </div>
+          {/* ---------------------body------------------------- */}
+          <OutsideClickHandler onOutsideClick={clickBodyFun}>
+            <div
+              // ref={myRefBody}
+              // onClick={handleClickInsideBody}
+              onClick={blurBodyFun}
+              className="position-absolute"
+              style={{
+                visibility: `${displayHiddenBody}`,
+                border: "inline-block",
+              }}
             >
-              <CompactPicker
-                onChange={(updateTextColor) =>
-                  setTextColorSubHeader(updateTextColor.hex)
-                }
-              />
-            </div>
-          </div>{" "}
-        </OutsideClickHandler>
-      </div>
+              <div className="d-flex justify-content-center text-white">
+                <div>
+                  <p className="text-font-size-name">Font</p>
 
-      {/* ------------------------Default ----------------------------------------- */}
+                  <div>
+                    <FontFamilySelect
+                      className="option font-option"
+                      onFontFamilySelect={(e) => fontChangeBody(e)}
+                      textData={three}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-font-size-name">Size</p>
 
-      <div
-        className="position-absolute"
-        style={{ visibility: `${displayHiddenAll}` }}
-      >
-        <div className="d-flex justify-content-center text-white">
-          <div>
-            <p className="text-font-size-name">Font</p>
-
-            <div>
-              <FontFamilySelect
-                className="option font-option"
-                // onFontFamilySelect={(e) => fontChangeSubHeader(e)}
-                textData={four}
-              />
-            </div>
-          </div>
-          <div>
-            <p className="text-font-size-name">Size</p>
-
-            <FontSizeSelect
-              // onFontSizeSelect={(e) => ChangeFontValueSubHeader(e)}
-              className="option size-option"
-              textData={four}
-            />
-          </div>
-        </div>
-
-        <div className="mt-3 d-flex justify-content-center ">
-          <div className=" d-flex justify-content-center">
-            <div className=" btn-group text-btn-group pl-3">
-              <div className="btn-b">
-                <EditButton cmd="bold" name="B" />
+                  <FontSizeSelect
+                    onFontSizeSelect={(e) => ChangeFontValueBody(e)}
+                    className="option size-option"
+                    textData={three}
+                  />
+                </div>
               </div>
 
-              <div className="btn-b">
-                <EditButton cmd="italic" name="𝒊" />
-              </div>
-              <div className="btn-b">
-                <EditButton cmd="underline" name="U" />
-              </div>
-            </div>
+              <div className="mt-3 d-flex justify-content-center ">
+                <div className=" d-flex justify-content-center">
+                  <div className=" btn-group text-btn-group pl-3">
+                    <div className="btn-b">
+                      <EditButton cmd="bold" name="B" />
+                    </div>
 
-            <div className="d-flex align-icon">
-              <button
-                className="icon-align"
-                value="start"
-                // onClick={handleRadioFormatChangeSubHeader}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24.711"
-                  height="16.023"
-                  viewBox="0 0 24.711 16.023"
-                >
-                  <path
-                    id="Path_9540"
-                    data-name="Path 9540"
-                    d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
-                    transform="translate(-0.5 -5.949)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-              <button
-                className="icon-align"
-                value="center"
-                // onClick={handleRadioFormatChangeSubHeader}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22.891"
-                  height="16.023"
-                  viewBox="0 0 22.891 16.023"
-                >
-                  <path
-                    id="Path_9542"
-                    data-name="Path 9542"
-                    d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
-                    transform="translate(-8 -20)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-              <button
-                className="icon-align"
-                value="end"
-                // onClick={handleRadioFormatChangeSubHeader}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24.796"
-                  height="16.078"
-                  viewBox="0 0 24.796 16.078"
-                >
-                  <path
-                    id="Path_9541"
-                    data-name="Path 9541"
-                    d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
-                    transform="translate(-0.5 -5.949)"
-                    fill="#292929"
-                  />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div
-          class="btn-group text-btn-group-two"
-          role="group"
-          aria-label="Basic checkbox toggle button group"
-        ></div>
-      </div>
-      {/* ---------------------body------------------------- */}
-      <OutsideClickHandler onOutsideClick={clickBodyFun}>
-        <div
-          // ref={myRefBody}
-          // onClick={handleClickInsideBody}
-          onClick={blurBodyFun}
-          className="position-absolute"
-          style={{ visibility: `${displayHiddenBody}`, border: "inline-block" }}
-        >
-          <div className="d-flex justify-content-center text-white">
-            <div>
-              <p className="text-font-size-name">Font</p>
+                    <div className="btn-b">
+                      <EditButton cmd="italic" name="𝒊" />
+                    </div>
+                    <div className="btn-b">
+                      <EditButton cmd="underline" name="U" />
+                    </div>
+                  </div>
 
-              <div>
-                <FontFamilySelect
-                  className="option font-option"
-                  onFontFamilySelect={(e) => fontChangeBody(e)}
-                  textData={three}
+                  <div className="d-flex align-icon">
+                    <button
+                      className="icon-align"
+                      value="start"
+                      onClick={handleRadioFormatChangeBody}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24.711"
+                        height="16.023"
+                        viewBox="0 0 24.711 16.023"
+                      >
+                        <path
+                          id="Path_9540"
+                          data-name="Path 9540"
+                          d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
+                          transform="translate(-0.5 -5.949)"
+                          fill="#292929"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      className="icon-align"
+                      value="center"
+                      onClick={handleRadioFormatChangeBody}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22.891"
+                        height="16.023"
+                        viewBox="0 0 22.891 16.023"
+                      >
+                        <path
+                          id="Path_9542"
+                          data-name="Path 9542"
+                          d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
+                          transform="translate(-8 -20)"
+                          fill="#292929"
+                        />
+                      </svg>
+                    </button>
+                    <button
+                      className="icon-align"
+                      value="end"
+                      onClick={handleRadioFormatChangeBody}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24.796"
+                        height="16.078"
+                        viewBox="0 0 24.796 16.078"
+                      >
+                        <path
+                          id="Path_9541"
+                          data-name="Path 9541"
+                          d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
+                          transform="translate(-0.5 -5.949)"
+                          fill="#292929"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="btn-group text-btn-group-two"
+                role="group"
+                aria-label="Basic checkbox toggle button group"
+              >
+                <CompactPicker
+                  onChange={(updateTextColor) =>
+                    setTextColorBody(updateTextColor.hex)
+                  }
                 />
+                <div className="position-relative">
+                  <select
+                    className="position-absolute"
+                    onChange={(e) => handelLanguageChange(e)}
+                  >
+                    <option value="bn">Select</option>
+                    <option value="bn">Bangla</option>
+                    <option value="gu">Gujarati</option>
+                    <option value="hi">Hindi</option>
+                    <option value="kn">Kannada</option>
+                    <option value="ml">Malayalam</option>
+                    <option value="mr">Marathi</option>
+                    <option value="pa">Punjabi</option>
+                    <option value="sa">Sanskrit</option>
+                    <option value="ta">Tamil</option>
+                    <option value="te">Telugu</option>
+                    <option value="ur">Urdu</option>
+                  </select>
+                </div>
               </div>
             </div>
-            <div>
-              <p className="text-font-size-name">Size</p>
-
-              <FontSizeSelect
-                onFontSizeSelect={(e) => ChangeFontValueBody(e)}
-                className="option size-option"
-                textData={three}
-              />
-            </div>
+          </OutsideClickHandler>
+        </div>
+      )}
+      {languageOption || (
+        <div>
+          {" "}
+          <div className="p-2">
+            <select onChange={(e) => handelLanguageChange(e)}>
+              <option value="bn">Select</option>
+              <option value="bn">Bangla</option>
+              <option value="gu">Gujarati</option>
+              <option value="hi">Hindi</option>
+              <option value="kn">Kannada</option>
+              <option value="ml">Malayalam</option>
+              <option value="mr">Marathi</option>
+              <option value="pa">Punjabi</option>
+              <option value="sa">Sanskrit</option>
+              <option value="ta">Tamil</option>
+              <option value="te">Telugu</option>
+              <option value="ur">Urdu</option>
+            </select>
           </div>
-
-          <div className="mt-3 d-flex justify-content-center ">
-            <div className=" d-flex justify-content-center">
-              <div className=" btn-group text-btn-group pl-3">
-                <div className="btn-b">
-                  <EditButton cmd="bold" name="B" />
-                </div>
-
-                <div className="btn-b">
-                  <EditButton cmd="italic" name="𝒊" />
-                </div>
-                <div className="btn-b">
-                  <EditButton cmd="underline" name="U" />
-                </div>
-              </div>
-
-              <div className="d-flex align-icon">
-                <button
-                  className="icon-align"
-                  value="start"
-                  onClick={handleRadioFormatChangeBody}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24.711"
-                    height="16.023"
-                    viewBox="0 0 24.711 16.023"
-                  >
-                    <path
-                      id="Path_9540"
-                      data-name="Path 9540"
-                      d="M24.015,19.581H1.7a1.2,1.2,0,0,0,0,2.391H24.015a1.2,1.2,0,0,0,0-2.391ZM1.927,15.038a1.2,1.2,0,0,0,0,2.391H19.465a1.2,1.2,0,0,0,0-2.391ZM1.7,12.884H24.015a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Zm0-4.544H19.465a1.2,1.2,0,0,0,0-2.391H1.7a1.2,1.2,0,0,0,0,2.391Z"
-                      transform="translate(-0.5 -5.949)"
-                      fill="#292929"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="icon-align"
-                  value="center"
-                  onClick={handleRadioFormatChangeBody}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22.891"
-                    height="16.023"
-                    viewBox="0 0 22.891 16.023"
-                  >
-                    <path
-                      id="Path_9542"
-                      data-name="Path 9542"
-                      d="M9.145,22.289h20.6a1.145,1.145,0,0,0,0-2.289H9.145a1.145,1.145,0,0,0,0,2.289Zm2.289,2.289a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Zm18.312,4.578H9.145a1.145,1.145,0,0,0,0,2.289h20.6a1.145,1.145,0,0,0,0-2.289Zm-2.289,4.578H11.434a1.145,1.145,0,0,0,0,2.289H27.457a1.145,1.145,0,0,0,0-2.289Z"
-                      transform="translate(-8 -20)"
-                      fill="#292929"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="icon-align"
-                  value="end"
-                  onClick={handleRadioFormatChangeBody}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24.796"
-                    height="16.078"
-                    viewBox="0 0 24.796 16.078"
-                  >
-                    <path
-                      id="Path_9541"
-                      data-name="Path 9541"
-                      d="M1.7,8.349H24.1a1.2,1.2,0,0,0,0-2.4H1.7a1.2,1.2,0,0,0,0,2.4Zm22.164,2.16H6.266a1.2,1.2,0,0,0,0,2.4h17.6a1.2,1.2,0,0,0,0-2.4Zm.232,4.56H1.7a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Zm0,4.559H6.266a1.2,1.2,0,0,0,0,2.4H24.1a1.2,1.2,0,0,0,0-2.4Z"
-                      transform="translate(-0.5 -5.949)"
-                      fill="#292929"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="btn-group text-btn-group-two"
-            role="group"
-            aria-label="Basic checkbox toggle button group"
-          >
-            <CompactPicker
-              onChange={(updateTextColor) =>
-                setTextColorBody(updateTextColor.hex)
-              }
+          <div>
+            <ReactTransliterate
+              renderComponent={(props) => <textarea {...props} />}
+              value={texts.text}
+              onChangeText={(text) => {
+                setTexts({
+                  ...texts,
+                  text: (texts.text = text),
+                });
+              }}
+              lang={headerLanguage}
             />
+            {/* <button onClick={handeLanguageText}></button> */}
           </div>
         </div>
-      </OutsideClickHandler>
+      )}
     </div>
   );
 };

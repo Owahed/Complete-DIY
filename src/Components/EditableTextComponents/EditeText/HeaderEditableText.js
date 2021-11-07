@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import BaseText from "../basetext";
+import React, { useContext, useEffect, useState } from "react";
+import BaseText from "../Basetext/basetext";
 import Border from "../border";
 import TextControls from "../textcontrols";
 import * as MaterialUI from "@material-ui/core";
@@ -56,11 +56,11 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     fontStyle: textData.fontStyle || "normal",
     textDecoration: textData.textDecoration || "none",
     textAlign: textData.textAlign || "start",
-    text: textData.text || `Default Header Text`,
+    text: textData.text,
     color: textData.color || "black",
     tag: "01",
   });
-
+  console.log(textData.text);
   const classes = useStyles(theTextData);
 
   const textRef = React.useRef();
@@ -140,6 +140,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     });
   }, [fontSizeValue, colorValue, fontName, currentRadioFormatValue, textColor]);
   const displayHiddenHeader = edit == true ? "visible" : "hidden";
+
   return (
     <div className={classes.text}>
       {/* <TextControls

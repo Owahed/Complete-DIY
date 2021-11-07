@@ -1,7 +1,7 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box
+  box-sizing: border-box;
 }
 
 /* -----------------------DIY**TWO------------------------------ */
@@ -121,7 +121,7 @@ pre {
 .icon-align> *{
   pointer-events: none;
 }
-.makeStyles-select-26 {
+.makeStyles-select-26 ,.makeStyles-select-28 {
    width: 239px;
    height: 40px !important;
    background-color: white;

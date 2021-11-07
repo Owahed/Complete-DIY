@@ -1,7 +1,7 @@
 import React from "react";
 import ContentEditable from "react-contenteditable";
 import sanitizeHtml from "sanitize-html";
-import BaseText from "../EditableTextComponents/basetext";
+import BaseText from "../EditableTextComponents/Basetext/basetext";
 
 class TextClass extends React.Component {
   constructor() {
