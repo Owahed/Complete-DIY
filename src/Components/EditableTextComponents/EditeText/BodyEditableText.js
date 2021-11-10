@@ -31,6 +31,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
     textColorBody,
     edit,
     setEdit,
+    bodyLanguage,
   } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
@@ -182,6 +183,7 @@ const BodyEditableText = React.forwardRef((props, ref) => {
           textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}
+          bodyLanguage={bodyLanguage}
         />
         {/* <BaseText
           ref={textRef}

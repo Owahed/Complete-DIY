@@ -31,6 +31,7 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
     textColorSubHeader,
     edit,
     setEdit,
+    headerSubLanguage,
   } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
@@ -228,6 +229,7 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
           textData={theTextData}
           edit={edit}
           onClick={() => setEdit(true)}
+          headerSubLanguage={headerSubLanguage}
         />
       </Border>
     </div>

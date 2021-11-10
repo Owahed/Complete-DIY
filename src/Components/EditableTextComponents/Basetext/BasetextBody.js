@@ -28,7 +28,8 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 });
 
 const BasetextBody = React.forwardRef((props, ref) => {
-  const { textData, className, onClick, edit, headerLanguage } = props;
+  const { textData, className, onClick, edit, bodyLanguage } = props;
+  console.log("bodyLanguage", bodyLanguage);
   const classes = useStyles(textData);
   const [stateTwo, setStateTwo] = useState({
     html: `${textData.text}`,
@@ -37,7 +38,7 @@ const BasetextBody = React.forwardRef((props, ref) => {
   const handleChange = (evt) => {
     setStateTwo({ html: evt.target.value, editable: true });
   };
-  console.log(textData.text);
+  const zIndex = edit === true ? "100" : "0";
   //   useEffect(() => {
   //     // setStateTwo({ html: textData });
   //     const handleChange = (evt) => {
@@ -50,21 +51,26 @@ const BasetextBody = React.forwardRef((props, ref) => {
   //   element.style.height = element.scrollHeight + "px";
   // }
   return (
-    // <ReactTransliterate
-    //   ref={ref}
-    //   id="text-draggable"
-    //   onClick={onClick}
-    //   className={`${textData.id} ${classes.text} ${className || ""}`}
-    //   contentEditable={edit}
-    //   suppressContentEditableWarning={true}
-    //   lang={headerLanguage}
-    //   renderComponent={(props) => <TextareaAutosize {...props} />}
-    //   onChange={handleChange}
-    //   // oninput={auto_grow(this)}
-    //   value={stateTwo.html}
-    // >
-    //   {/* {textData.text} */}
-    // </ReactTransliterate>
+    <ReactTransliterate
+      ref={ref}
+      id="text-draggable"
+      onClick={onClick}
+      className={`${textData.id} ${classes.text} ${className || ""}`}
+      contentEditable={edit}
+      suppressContentEditableWarning={true}
+      lang={bodyLanguage}
+      renderComponent={(props) => (
+        <TextareaAutosize
+          style={{ width: "280px", zIndex: `${zIndex}` }}
+          {...props}
+        />
+      )}
+      onChange={handleChange}
+      // oninput={auto_grow(this)}
+      value={stateTwo.html}
+    >
+      {/* {textData.text} */}
+    </ReactTransliterate>
 
     // <div>
     // <ReactTransliterate
@@ -88,21 +94,21 @@ const BasetextBody = React.forwardRef((props, ref) => {
     // />
     //
 
-    <ContentEditable
-      className={`editable`}
-      tagName="pre"
-      html={stateTwo.html} // innerHTML of the editable div
-      // disabled={!stateTwo.editable} // use true to disable edition
-      onChange={handleChange} // handle innerHTML change
-      // onBlur={sanitize}
-      // innerRef={(elt) => setRaf((innerRef.current = elt))}
-      ref={ref}
-      id="text-draggable"
-      onClick={onClick}
-      className={`${textData.id} ${classes.text} ${className || ""}`}
-      contentEditable={edit}
-      suppressContentEditableWarning={true}
-    />
+    // <ContentEditable
+    //   className={`editable`}
+    //   tagName="pre"
+    //   html={stateTwo.html} // innerHTML of the editable div
+    //   // disabled={!stateTwo.editable} // use true to disable edition
+    //   onChange={handleChange} // handle innerHTML change
+    //   // onBlur={sanitize}
+    //   // innerRef={(elt) => setRaf((innerRef.current = elt))}
+    //   ref={ref}
+    //   id="text-draggable"
+    //   onClick={onClick}
+    //   className={`${textData.id} ${classes.text} ${className || ""}`}
+    //   contentEditable={edit}
+    //   suppressContentEditableWarning={true}
+    // />
 
     //
     // </div>

@@ -49,22 +49,25 @@ const BaseText = React.forwardRef((props, ref) => {
   //   element.style.height = "5px";
   //   element.style.height = element.scrollHeight + "px";
   // }
+  const zIndex = edit === true ? "100" : "0";
   return (
-    // <ReactTransliterate
-    //   ref={ref}
-    //   id="text-draggable"
-    //   onClick={onClick}
-    //   className={`${textData.id} ${classes.text} ${className || ""}`}
-    //   contentEditable={edit}
-    //   suppressContentEditableWarning={true}
-    //   lang="hi"
-    //   renderComponent={(props) => <TextareaAutosize {...props} />}
-    //   onChange={handleChange}
-    //   // oninput={auto_grow(this)}
-    //   value={stateTwo.html}
-    // >
-    //   {/* {textData.text} */}
-    // </ReactTransliterate>
+    <ReactTransliterate
+      ref={ref}
+      id="text-draggable"
+      onClick={onClick}
+      className={`${textData.id} ${classes.text} ${className || ""}`}
+      contentEditable={edit}
+      suppressContentEditableWarning={true}
+      lang={headerLanguage}
+      renderComponent={(props) => (
+        <TextareaAutosize style={{ zIndex: `${zIndex}` }} {...props} />
+      )}
+      onChange={handleChange}
+      // oninput={auto_grow(this)}
+      value={stateTwo.html}
+    >
+      {/* {textData.text} */}
+    </ReactTransliterate>
 
     // <div>
     // <ReactTransliterate
@@ -88,21 +91,21 @@ const BaseText = React.forwardRef((props, ref) => {
     // />
     //
 
-    <ContentEditable
-      className={`editable`}
-      tagName="pre"
-      html={stateTwo.html} // innerHTML of the editable div
-      // disabled={!stateTwo.editable} // use true to disable edition
-      onChange={handleChange} // handle innerHTML change
-      // onBlur={sanitize}
-      // innerRef={(elt) => setRaf((innerRef.current = elt))}
-      ref={ref}
-      id="text-draggable"
-      onClick={onClick}
-      className={`${textData.id} ${classes.text} ${className || ""}`}
-      contentEditable={edit}
-      suppressContentEditableWarning={true}
-    />
+    // <ContentEditable
+    //   className={`editable`}
+    //   tagName="pre"
+    //   html={stateTwo.html} // innerHTML of the editable div
+    //   // disabled={!stateTwo.editable} // use true to disable edition
+    //   onChange={handleChange} // handle innerHTML change
+    //   // onBlur={sanitize}
+    //   // innerRef={(elt) => setRaf((innerRef.current = elt))}
+    //   ref={ref}
+    //   id="text-draggable"
+    //   onClick={onClick}
+    //   className={`${textData.id} ${classes.text} ${className || ""}`}
+    //   contentEditable={edit}
+    //   suppressContentEditableWarning={true}
+    // />
 
     //
     // </div>

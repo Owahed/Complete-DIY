@@ -76,6 +76,8 @@ const MainBody = ({
   editBody,
   setEditBody,
   headerLanguage,
+  headerSubLanguage,
+  bodyLanguage,
 }) => {
   let { id, item } = selectedImg;
 
@@ -349,6 +351,7 @@ const MainBody = ({
                         textColorSubHeader={textColorSubHeader}
                         edit={editSubHeader}
                         setEdit={setEditSubHeader}
+                        headerSubLanguage={headerSubLanguage}
                       />
                     </div>
                   )}
@@ -372,6 +375,7 @@ const MainBody = ({
                         textColorBody={textColorBody}
                         edit={editBody}
                         setEdit={setEditBody}
+                        bodyLanguage={bodyLanguage}
                       />
                     </div>
                   )}
@@ -561,6 +565,7 @@ const MainBody = ({
                             textColor={textColor}
                             edit={editHeader}
                             setEdit={setEditHeader}
+                            headerLanguage={headerLanguage}
                           />
                         </div>
                       )}
@@ -584,6 +589,7 @@ const MainBody = ({
                             textColorSubHeader={textColorSubHeader}
                             edit={editSubHeader}
                             setEdit={setEditSubHeader}
+                            headerSubLanguage={headerSubLanguage}
                           />
                         </div>
                       )}
@@ -607,6 +613,7 @@ const MainBody = ({
                             textColorBody={textColorBody}
                             edit={editBody}
                             setEdit={setEditBody}
+                            bodyLanguage={bodyLanguage}
                           />
                         </div>
                       )}

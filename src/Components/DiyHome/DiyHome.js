@@ -21,6 +21,7 @@ import GetAppIcon from "@material-ui/icons/GetApp";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import Transliterate from "../TestSector/Transliterate";
 import TextAreaHeight from "../TestSector/TextAreaHeight";
+import Html2canvase from "../TestSector/Html2canvase";
 
 // let useClickOutside = (handler) => {
 //   let domNode = useRef();
@@ -329,11 +330,19 @@ const DiyHomeOne = () => {
     setBodyText(false);
     setEditBody(false);
   };
-  // const [headerLanguage, setHeaderLanguage] = useState("en");
-  // const handelLanguageChange = (e) => {
-  //   setHeaderLanguage(e.target.value);
-  // };
-
+  const [headerLanguage, setHeaderLanguage] = useState("en");
+  const handelLanguageChange = (e) => {
+    setHeaderLanguage(e.target.value);
+  };
+  const [headerSubLanguage, setHeaderSubLanguage] = useState("en");
+  const handelSubLanguageChange = (e) => {
+    setHeaderSubLanguage(e.target.value);
+  };
+  const [bodyLanguage, setBodyLanguage] = useState("en");
+  const bodyLanguageChange = (e) => {
+    setBodyLanguage(e.target.value);
+  };
+  console.log("object", headerSubLanguage, bodyLanguage);
   return (
     <div>
       <div className="diy-header">
@@ -385,7 +394,9 @@ const DiyHomeOne = () => {
                 setEditBody={setEditBody}
                 texts={texts}
                 setTexts={setTexts}
-                // handelLanguageChange={handelLanguageChange}
+                handelLanguageChange={handelLanguageChange}
+                handelSubLanguageChange={handelSubLanguageChange}
+                bodyLanguageChange={bodyLanguageChange}
               />
             )}
             {showUploadPanel && (
@@ -458,12 +469,15 @@ const DiyHomeOne = () => {
                 setEditSubHeader={setEditSubHeader}
                 editBody={editBody}
                 setEditBody={setEditBody}
-                // headerLanguage={headerLanguage}
+                headerLanguage={headerLanguage}
+                headerSubLanguage={headerSubLanguage}
+                bodyLanguage={bodyLanguage}
               />
               {/* <Test text="hello World" /> */}
               {/* <TestClass EditButton={EditButton} /> */}
               {/* <Transliterate /> */}
               {/* <TextAreaHeight /> */}
+              {/* <Html2canvase /> */}
             </div>
           </div>
         </div>

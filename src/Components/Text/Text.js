@@ -45,7 +45,9 @@ const Text = ({
   setEditBody,
   setTexts,
   texts,
-  // handelLanguageChange,
+  handelLanguageChange,
+  handelSubLanguageChange,
+  bodyLanguageChange,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
   const [textFieldData, setTextFieldData] = useContext(UserContext);
@@ -243,9 +245,9 @@ const Text = ({
   };
 
   const [headerLanguage, setHeaderLanguage] = useState("en");
-  const handelLanguageChange = (e) => {
-    setHeaderLanguage(e.target.value);
-  };
+  // const handelLanguageChange = (e) => {
+  //   setHeaderLanguage(e.target.value);
+  // };
   const [text, setText] = useState("");
   return (
     <div className="position-relative">
@@ -588,7 +590,7 @@ const Text = ({
                   <div className="position-relative">
                     <select
                       className="position-absolute"
-                      onChange={(e) => handelLanguageChange(e)}
+                      onChange={(e) => handelSubLanguageChange(e)}
                     >
                       <option value="bn">Select</option>
                       <option value="bn">Bangla</option>
@@ -851,7 +853,7 @@ const Text = ({
                 <div className="position-relative">
                   <select
                     className="position-absolute"
-                    onChange={(e) => handelLanguageChange(e)}
+                    onChange={(e) => bodyLanguageChange(e)}
                   >
                     <option value="bn">Select</option>
                     <option value="bn">Bangla</option>
@@ -876,7 +878,9 @@ const Text = ({
         <div>
           {" "}
           <div className="p-2">
-            <select onChange={(e) => handelLanguageChange(e)}>
+            <select
+            //  onChange={(e) => handelLanguageChange(e)}
+            >
               <option value="bn">Select</option>
               <option value="bn">Bangla</option>
               <option value="gu">Gujarati</option>
