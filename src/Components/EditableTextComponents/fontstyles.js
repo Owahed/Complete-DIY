@@ -43,6 +43,7 @@ const FontStyles = (props) => {
         B
       </span>
       <span
+        style={{ fontWeight: "bold" }}
         onClick={onItalicClick}
         className={clsx(classes.weight, classes.italic, textData.id, {
           [classes.selected]: textData.fontStyle === "italic",
@@ -51,6 +52,7 @@ const FontStyles = (props) => {
         I
       </span>
       <span
+        style={{ fontWeight: "bold" }}
         onClick={onUnderlineClick}
         className={clsx(classes.weight, classes.underline, textData.id, {
           [classes.selected]: textData.textDecoration === "underline",
