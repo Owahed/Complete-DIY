@@ -78,6 +78,7 @@ const MainBody = ({
   headerLanguage,
   headerSubLanguage,
   bodyLanguage,
+  headerTextStyle,
 }) => {
   let { id, item } = selectedImg;
 
@@ -328,6 +329,7 @@ const MainBody = ({
                         edit={editHeader}
                         setEdit={setEditHeader}
                         headerLanguage={headerLanguage}
+                        headerTextStyle={headerTextStyle}
                       />
                     </div>
                   )}
@@ -566,6 +568,7 @@ const MainBody = ({
                             edit={editHeader}
                             setEdit={setEditHeader}
                             headerLanguage={headerLanguage}
+                            // textData={headerTextStyle}
                           />
                         </div>
                       )}

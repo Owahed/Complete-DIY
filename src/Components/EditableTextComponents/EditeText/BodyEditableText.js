@@ -150,12 +150,16 @@ const BodyEditableText = React.forwardRef((props, ref) => {
       fontFamily: fontNameBody,
       textAlign: currentRadioFormatValueBody,
       color: textColorBody,
+      fontWeight: textData.fontWeight,
+      fontStyle: textData.fontStyle,
+      textDecoration: textData.textDecoration,
     });
   }, [
     fontNameBody,
     fontSizeValueBody,
     currentRadioFormatValueBody,
     textColorBody,
+    textData,
   ]);
   const displayHiddenHeader = edit == true ? "visible" : "hidden";
   return (

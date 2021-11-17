@@ -37,7 +37,7 @@ const BaseText = React.forwardRef((props, ref) => {
   const handleChange = (evt) => {
     setStateTwo({ html: evt.target.value, editable: true });
   };
-  console.log(textData.text);
+
   useEffect(() => {
     // setStateTwo({ html: textData });
     const handleChange = (evt) => {
@@ -50,6 +50,7 @@ const BaseText = React.forwardRef((props, ref) => {
   //   element.style.height = element.scrollHeight + "px";
   // }
   const zIndex = edit === true ? "100" : "0";
+  console.log("textData0", textData);
   return (
     <ReactTransliterate
       ref={ref}
@@ -60,7 +61,10 @@ const BaseText = React.forwardRef((props, ref) => {
       suppressContentEditableWarning={true}
       lang={headerLanguage}
       renderComponent={(props) => (
-        <TextareaAutosize style={{ zIndex: `${zIndex}` }} {...props} />
+        <TextareaAutosize
+          style={{ zIndex: `${zIndex}`, fontWeight: `${textData.fontWeight}` }}
+          {...props}
+        />
       )}
       onChange={handleChange}
       // oninput={auto_grow(this)}

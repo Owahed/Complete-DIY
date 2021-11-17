@@ -134,4 +134,12 @@ pre {
 .MuiOutlinedInput-notchedOutline {
   border-color: #003459 !important;
 }
+.makeStyles-weight-35{
+  width: 30px;
+  height: 28px;
+  border: none !important;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+} 
  

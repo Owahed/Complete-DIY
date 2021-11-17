@@ -32,6 +32,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     edit,
     setEdit,
     headerLanguage,
+    headerBold,
   } = props;
   if (typeof textData.id === "undefined") {
     throw Error(
@@ -60,7 +61,7 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
     color: textData.color || "black",
     tag: "01",
   });
-  console.log(textData.text);
+
   const classes = useStyles(theTextData);
 
   const textRef = React.useRef();
@@ -137,9 +138,22 @@ const HeaderEditableText = React.forwardRef((props, ref) => {
       fontFamily: fontName,
       textAlign: currentRadioFormatValue,
       color: textColor,
+      fontWeight: textData.fontWeight,
+      fontStyle: textData.fontStyle,
+      textDecoration: textData.textDecoration,
     });
-  }, [fontSizeValue, colorValue, fontName, currentRadioFormatValue, textColor]);
+  }, [
+    fontSizeValue,
+    colorValue,
+    fontName,
+    currentRadioFormatValue,
+    textColor,
+    headerBold,
+    textData,
+  ]);
   const displayHiddenHeader = edit == true ? "visible" : "hidden";
+
+  console.log("textData1", textData);
 
   return (
     <div className={classes.text}>

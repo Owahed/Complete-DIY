@@ -147,7 +147,6 @@ const DiyHomeOne = () => {
     id: "unique-1",
     text: "Default Header Text ",
   });
-  console.log(texts.text);
 
   // let texts = { id: "unique-1", text: "" };
   let textsTwo = { id: "unique-2" };
@@ -256,6 +255,48 @@ const DiyHomeOne = () => {
   const handleRadioFormatChange = (e) => {
     setCurrentRadioFormatValue(e.target.value);
   };
+
+  // btn fun
+  const [headerTextStyle, setHeaderTextStyle] = useState({
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textDecoration: "none",
+    id: "unique-1",
+    text: "Default Header Text ",
+  });
+  const [subHeaderTextStyle, setSubHeaderTextStyle] = useState({
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textDecoration: "none",
+    id: "unique-2",
+    text: "Default Sub Header Text ",
+  });
+  const [bodyTextStyle, setBodyTextStyle] = useState({
+    fontWeight: "normal",
+    fontStyle: "normal",
+    textDecoration: "none",
+    id: "unique-3",
+    text: "Default Body Text ",
+  });
+  console.log("bodyTextStyle", bodyTextStyle);
+  // const [headerItalic, setHeaderItalic] = useState("");
+  // const [headerUnderline, setHeaderUnderline] = useState("");
+
+  // const handleBoldFun = (e) => {
+  //   // setHeaderBold(e.target.value);
+  //   console.log("object");
+  //   setHeaderBold({
+  //     ...headerBold,
+  //     fontWeight: headerBold === "Bold" ? "normal" : "bold",
+  //   });
+  // };
+  // const handleItalicFun = (e) => {
+  //   setHeaderItalic(e.target.value);
+  // };
+  // const headerUnderlineFun = (e) => {
+  //   setHeaderUnderline(e.target.value);
+  // };
+  // console.log(headerTextStyle, headerItalic, headerUnderline);
   // color text
 
   const [textColor, setTextColor] = useState("#000");
@@ -342,7 +383,7 @@ const DiyHomeOne = () => {
   const bodyLanguageChange = (e) => {
     setBodyLanguage(e.target.value);
   };
-  console.log("object", headerSubLanguage, bodyLanguage);
+
   return (
     <div>
       <div className="diy-header">
@@ -397,6 +438,15 @@ const DiyHomeOne = () => {
                 handelLanguageChange={handelLanguageChange}
                 handelSubLanguageChange={handelSubLanguageChange}
                 bodyLanguageChange={bodyLanguageChange}
+                // handleBoldFun={handleBoldFun}
+                // handleItalicFun={handleItalicFun}
+                // headerUnderlineFun={headerUnderlineFun}
+                headerTextStyle={headerTextStyle}
+                setTextData={setHeaderTextStyle}
+                subHeaderTextStyle={subHeaderTextStyle}
+                setSubHeaderTextData={setSubHeaderTextStyle}
+                bodyTextStyle={bodyTextStyle}
+                setBodyTextStyle={setBodyTextStyle}
               />
             )}
             {showUploadPanel && (
@@ -447,9 +497,9 @@ const DiyHomeOne = () => {
                 disEnableBodyText={disEnableBodyText}
                 inputRef={inputRef}
                 // domNode={domNode}
-                texts={texts}
-                textsTwo={textsTwo}
-                textsThree={textsThree}
+                texts={headerTextStyle}
+                textsTwo={subHeaderTextStyle}
+                textsThree={bodyTextStyle}
                 textRef={textRef}
                 fontSizeValue={fontSizeValue}
                 // colorValue={colorValue}
@@ -472,6 +522,8 @@ const DiyHomeOne = () => {
                 headerLanguage={headerLanguage}
                 headerSubLanguage={headerSubLanguage}
                 bodyLanguage={bodyLanguage}
+
+                // headerTextStyle={headerTextStyle}
               />
               {/* <Test text="hello World" /> */}
               {/* <TestClass EditButton={EditButton} /> */}

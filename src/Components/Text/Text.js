@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { CompactPicker, GithubPicker } from "react-color";
+import React, { useContext, useState } from "react";
+import { CompactPicker } from "react-color";
 import { UserContext } from "../../App";
 import TextControls from "../EditableTextComponents/textcontrols";
 import "./Text.css";
@@ -12,6 +12,7 @@ import OutsideClickHandler from "react-outside-click-handler";
 
 import { ReactTransliterate } from "react-transliterate";
 import "react-transliterate/dist/index.css";
+import FontStyles from "../EditableTextComponents/fontstyles";
 
 const Text = ({
   EditButton,
@@ -48,6 +49,15 @@ const Text = ({
   handelLanguageChange,
   handelSubLanguageChange,
   bodyLanguageChange,
+  handleBoldFun,
+  handleItalicFun,
+  headerUnderlineFun,
+  headerTextStyle,
+  setTextData,
+  subHeaderTextStyle,
+  setSubHeaderTextData,
+  setBodyTextStyle,
+  bodyTextStyle,
 }) => {
   const [showTextColorPicker, setTextColorPicker] = useState(false);
   const [textFieldData, setTextFieldData] = useContext(UserContext);
@@ -194,7 +204,6 @@ const Text = ({
   const [blurHeader, setBlurHeader] = useState(false);
   const [blurSubHeader, setBlurSubHeader] = useState(false);
   const [blurBody, setBlurBody] = useState(false);
-  console.log("blur", blurHeader);
   const clickHeaderFun = () => {
     setBlurHeader(false);
   };
@@ -203,7 +212,6 @@ const Text = ({
   };
   // ----Subheader-------
 
-  console.log("blurSubHeader", blurSubHeader);
   const clickSubHeaderFun = () => {
     setBlurSubHeader(true);
   };
@@ -211,7 +219,6 @@ const Text = ({
     setBlurSubHeader(false);
   };
   // ----blurBody-------
-  console.log("blurBody", blurBody);
   const clickBodyFun = () => {
     setBlurBody(false);
   };
@@ -249,6 +256,7 @@ const Text = ({
   //   setHeaderLanguage(e.target.value);
   // };
   const [text, setText] = useState("");
+
   return (
     <div className="position-relative">
       <div className="mt-5 pb-2">
@@ -313,8 +321,34 @@ const Text = ({
                 border: "inline-block",
               }}
             >
+              <div>
+                <div className="language-select d-flex justify-content-between ">
+                  <div className=" text-white">
+                    <p>Language</p>
+                  </div>
+                  <div>
+                    <select
+                      className="p-1"
+                      onChange={(e) => handelLanguageChange(e)}
+                    >
+                      <option value="bn">Select</option>
+                      <option value="bn">Bangla</option>
+                      <option value="gu">Gujarati</option>
+                      <option value="hi">Hindi</option>
+                      <option value="kn">Kannada</option>
+                      <option value="ml">Malayalam</option>
+                      <option value="mr">Marathi</option>
+                      <option value="pa">Punjabi</option>
+                      <option value="sa">Sanskrit</option>
+                      <option value="ta">Tamil</option>
+                      <option value="te">Telugu</option>
+                      <option value="ur">Urdu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div className="d-flex justify-content-center text-white">
-                <div>
+                <div className="text-font">
                   <p className="text-font-size-name">Font</p>
 
                   <div>
@@ -325,7 +359,7 @@ const Text = ({
                     />
                   </div>
                 </div>
-                <div>
+                <div className="text-size">
                   <p className="text-font-size-name">Size</p>
 
                   <FontSizeSelect
@@ -338,26 +372,37 @@ const Text = ({
 
               <div className="mt-3 d-flex justify-content-center ">
                 <div className=" d-flex justify-content-center">
-                  <div
-                    // ref={textRefOne}
-                    className=" btn-group text-btn-group pl-3"
-                  >
-                    <div className="btn-b">
-                      <EditButton cmd="bold" name="B" />
-                    </div>
-
-                    <div
-                      //  onClick={handelRefHeader}
-                      className="btn-b"
-                    >
-                      <EditButton cmd="italic" name="𝒊" />
-                    </div>
-                    <div
-                      //  onClick={handelRefHeader}
-                      className="btn-b"
-                    >
-                      <EditButton cmd="underline" name="U" />
-                    </div>
+                  <div className=" btn-group text-btn-group pl-3">
+                    <FontStyles
+                      onBoldClick={() => {
+                        setTextData({
+                          ...headerTextStyle,
+                          fontWeight:
+                            headerTextStyle.fontWeight === "bold"
+                              ? "normal"
+                              : "bold",
+                        });
+                      }}
+                      onItalicClick={() => {
+                        setTextData({
+                          ...headerTextStyle,
+                          fontStyle:
+                            headerTextStyle.fontStyle === "italic"
+                              ? "normal"
+                              : "italic",
+                        });
+                      }}
+                      onUnderlineClick={() => {
+                        setTextData({
+                          ...headerTextStyle,
+                          textDecoration:
+                            headerTextStyle.textDecoration === "underline"
+                              ? "none"
+                              : "underline",
+                        });
+                      }}
+                      textData={one}
+                    />
                   </div>
 
                   <div className="d-flex align-icon">
@@ -436,25 +481,30 @@ const Text = ({
                       setTextColor(updateTextColor.hex)
                     }
                   />
-                  <div className="position-relative">
-                    <select
-                      className="position-absolute"
-                      onChange={(e) => handelLanguageChange(e)}
-                    >
-                      <option value="bn">Select</option>
-                      <option value="bn">Bangla</option>
-                      <option value="gu">Gujarati</option>
-                      <option value="hi">Hindi</option>
-                      <option value="kn">Kannada</option>
-                      <option value="ml">Malayalam</option>
-                      <option value="mr">Marathi</option>
-                      <option value="pa">Punjabi</option>
-                      <option value="sa">Sanskrit</option>
-                      <option value="ta">Tamil</option>
-                      <option value="te">Telugu</option>
-                      <option value="ur">Urdu</option>
-                    </select>
-                  </div>
+                  {/* <div>
+                    <div className="position-relative ml-1">
+                      <div className="position-absolute text-white">
+                        <p>Language</p>
+                      </div>
+                      <select
+                        className="position-absolute mt-4"
+                        onChange={(e) => handelLanguageChange(e)}
+                      >
+                        <option value="bn">Select</option>
+                        <option value="bn">Bangla</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="hi">Hindi</option>
+                        <option value="kn">Kannada</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mr">Marathi</option>
+                        <option value="pa">Punjabi</option>
+                        <option value="sa">Sanskrit</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="ur">Urdu</option>
+                      </select>
+                    </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -475,8 +525,34 @@ const Text = ({
                   border: "inline-block",
                 }}
               >
+                <div>
+                  <div className="language-select d-flex justify-content-between ">
+                    <div className=" text-white">
+                      <p>Language</p>
+                    </div>
+                    <div>
+                      <select
+                        className="p-1"
+                        onChange={(e) => handelSubLanguageChange(e)}
+                      >
+                        <option value="bn">Select</option>
+                        <option value="bn">Bangla</option>
+                        <option value="gu">Gujarati</option>
+                        <option value="hi">Hindi</option>
+                        <option value="kn">Kannada</option>
+                        <option value="ml">Malayalam</option>
+                        <option value="mr">Marathi</option>
+                        <option value="pa">Punjabi</option>
+                        <option value="sa">Sanskrit</option>
+                        <option value="ta">Tamil</option>
+                        <option value="te">Telugu</option>
+                        <option value="ur">Urdu</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
                 <div className="d-flex justify-content-center text-white">
-                  <div>
+                  <div className="text-font">
                     <p className="text-font-size-name">Font</p>
 
                     <div>
@@ -487,7 +563,7 @@ const Text = ({
                       />
                     </div>
                   </div>
-                  <div>
+                  <div className="text-size">
                     <p className="text-font-size-name">Size</p>
 
                     <FontSizeSelect
@@ -501,16 +577,36 @@ const Text = ({
                 <div className="mt-3 d-flex justify-content-center ">
                   <div className=" d-flex justify-content-center">
                     <div className=" btn-group text-btn-group pl-3">
-                      <div className="btn-b">
-                        <EditButton cmd="bold" name="B" />
-                      </div>
-
-                      <div className="btn-b">
-                        <EditButton cmd="italic" name="𝒊" />
-                      </div>
-                      <div className="btn-b">
-                        <EditButton cmd="underline" name="U" />
-                      </div>
+                      <FontStyles
+                        onBoldClick={() => {
+                          setSubHeaderTextData({
+                            ...subHeaderTextStyle,
+                            fontWeight:
+                              subHeaderTextStyle.fontWeight === "bold"
+                                ? "normal"
+                                : "bold",
+                          });
+                        }}
+                        onItalicClick={() => {
+                          setSubHeaderTextData({
+                            ...subHeaderTextStyle,
+                            fontStyle:
+                              subHeaderTextStyle.fontStyle === "italic"
+                                ? "normal"
+                                : "italic",
+                          });
+                        }}
+                        onUnderlineClick={() => {
+                          setSubHeaderTextData({
+                            ...subHeaderTextStyle,
+                            textDecoration:
+                              subHeaderTextStyle.textDecoration === "underline"
+                                ? "none"
+                                : "underline",
+                          });
+                        }}
+                        textData={two}
+                      />
                     </div>
 
                     <div className="d-flex align-icon">
@@ -587,25 +683,6 @@ const Text = ({
                       setTextColorSubHeader(updateTextColor.hex)
                     }
                   />
-                  <div className="position-relative">
-                    <select
-                      className="position-absolute"
-                      onChange={(e) => handelSubLanguageChange(e)}
-                    >
-                      <option value="bn">Select</option>
-                      <option value="bn">Bangla</option>
-                      <option value="gu">Gujarati</option>
-                      <option value="hi">Hindi</option>
-                      <option value="kn">Kannada</option>
-                      <option value="ml">Malayalam</option>
-                      <option value="mr">Marathi</option>
-                      <option value="pa">Punjabi</option>
-                      <option value="sa">Sanskrit</option>
-                      <option value="ta">Tamil</option>
-                      <option value="te">Telugu</option>
-                      <option value="ur">Urdu</option>
-                    </select>
-                  </div>
                 </div>
               </div>{" "}
             </OutsideClickHandler>
@@ -737,8 +814,34 @@ const Text = ({
                 border: "inline-block",
               }}
             >
+              <div>
+                <div className="language-select d-flex justify-content-between ">
+                  <div className=" text-white">
+                    <p>Language</p>
+                  </div>
+                  <div>
+                    <select
+                      className="p-1"
+                      onChange={(e) => bodyLanguageChange(e)}
+                    >
+                      <option value="bn">Select</option>
+                      <option value="bn">Bangla</option>
+                      <option value="gu">Gujarati</option>
+                      <option value="hi">Hindi</option>
+                      <option value="kn">Kannada</option>
+                      <option value="ml">Malayalam</option>
+                      <option value="mr">Marathi</option>
+                      <option value="pa">Punjabi</option>
+                      <option value="sa">Sanskrit</option>
+                      <option value="ta">Tamil</option>
+                      <option value="te">Telugu</option>
+                      <option value="ur">Urdu</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
               <div className="d-flex justify-content-center text-white">
-                <div>
+                <div className="text-font">
                   <p className="text-font-size-name">Font</p>
 
                   <div>
@@ -749,7 +852,7 @@ const Text = ({
                     />
                   </div>
                 </div>
-                <div>
+                <div className="text-size">
                   <p className="text-font-size-name">Size</p>
 
                   <FontSizeSelect
@@ -763,16 +866,36 @@ const Text = ({
               <div className="mt-3 d-flex justify-content-center ">
                 <div className=" d-flex justify-content-center">
                   <div className=" btn-group text-btn-group pl-3">
-                    <div className="btn-b">
-                      <EditButton cmd="bold" name="B" />
-                    </div>
-
-                    <div className="btn-b">
-                      <EditButton cmd="italic" name="𝒊" />
-                    </div>
-                    <div className="btn-b">
-                      <EditButton cmd="underline" name="U" />
-                    </div>
+                    <FontStyles
+                      onBoldClick={() => {
+                        setBodyTextStyle({
+                          ...bodyTextStyle,
+                          fontWeight:
+                            bodyTextStyle.fontWeight === "bold"
+                              ? "normal"
+                              : "bold",
+                        });
+                      }}
+                      onItalicClick={() => {
+                        setBodyTextStyle({
+                          ...bodyTextStyle,
+                          fontStyle:
+                            bodyTextStyle.fontStyle === "italic"
+                              ? "normal"
+                              : "italic",
+                        });
+                      }}
+                      onUnderlineClick={() => {
+                        setBodyTextStyle({
+                          ...bodyTextStyle,
+                          textDecoration:
+                            bodyTextStyle.textDecoration === "underline"
+                              ? "none"
+                              : "underline",
+                        });
+                      }}
+                      textData={three}
+                    />
                   </div>
 
                   <div className="d-flex align-icon">
@@ -850,25 +973,6 @@ const Text = ({
                     setTextColorBody(updateTextColor.hex)
                   }
                 />
-                <div className="position-relative">
-                  <select
-                    className="position-absolute"
-                    onChange={(e) => bodyLanguageChange(e)}
-                  >
-                    <option value="bn">Select</option>
-                    <option value="bn">Bangla</option>
-                    <option value="gu">Gujarati</option>
-                    <option value="hi">Hindi</option>
-                    <option value="kn">Kannada</option>
-                    <option value="ml">Malayalam</option>
-                    <option value="mr">Marathi</option>
-                    <option value="pa">Punjabi</option>
-                    <option value="sa">Sanskrit</option>
-                    <option value="ta">Tamil</option>
-                    <option value="te">Telugu</option>
-                    <option value="ur">Urdu</option>
-                  </select>
-                </div>
               </div>
             </div>
           </OutsideClickHandler>

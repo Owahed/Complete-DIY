@@ -142,12 +142,16 @@ const SubHeaderEditableText = React.forwardRef((props, ref) => {
       fontFamily: fontNameSubHeader,
       textAlign: currentRadioFormatValueSubHeader,
       color: textColorSubHeader,
+      fontWeight: textData.fontWeight,
+      fontStyle: textData.fontStyle,
+      textDecoration: textData.textDecoration,
     });
   }, [
     fontNameSubHeader,
     fontSizeValueSubHeader,
     currentRadioFormatValueSubHeader,
     textColorSubHeader,
+    textData,
   ]);
   const displayHiddenHeader = edit == true ? "visible" : "hidden";
   return (

@@ -29,7 +29,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 
 const BasetextBody = React.forwardRef((props, ref) => {
   const { textData, className, onClick, edit, bodyLanguage } = props;
-  console.log("bodyLanguage", bodyLanguage);
+  console.log("textData vc", textData);
   const classes = useStyles(textData);
   const [stateTwo, setStateTwo] = useState({
     html: `${textData.text}`,

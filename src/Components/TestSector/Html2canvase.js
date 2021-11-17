@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 
-// import html2canvas from "@nidi/html2canvas";
-import html2canvas from "html2canvas";
+import html2canvas from "@nidi/html2canvas";
+// import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 const Html2canvase = () => {
   window.scrollTo(0, 0);

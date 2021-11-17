@@ -19,6 +19,7 @@ const useStyles = MaterialUI.makeStyles((theme) => {
 
 const FontFamilySelect = (props) => {
   const { textData, onFontFamilySelect } = props;
+
   const classes = useStyles();
   return (
     <MaterialUI.FormControl

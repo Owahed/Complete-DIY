@@ -24,7 +24,7 @@
 
 
 .text-h4{
-    height: 84px;
+    height: 60px;
 }
 .text-h4 button{
     font-size: 35px; 
@@ -45,10 +45,10 @@
   line-height: 1.2;
 }
 .text-h5{
-    height: 64px;
+    height: 50px;
 }
 .text-h6{
-    height: 48px;
+    height: 42px;
 }
 .text-hr{
     color: #fff;
@@ -140,4 +140,17 @@
 .text-font-size-name{
     margin-bottom: 10px !important;
     margin-left: 4px;
+}
+.language-select {
+    padding: 4px 0px 10px 23px;
+}
+.language-select select{
+    border-radius: 4px;
+    height: 32px;
+}
+.text-size{
+margin-left: 28px;
+}
+.text-font{
+    margin-left: 18px;
 }
