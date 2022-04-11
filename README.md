@@ -7,7 +7,7 @@ Free printable, customizable safety poster templates
 
 
 
-### Tools: React, Bootstra.
+### Tools: React, Bootstrap.
 
 
 
